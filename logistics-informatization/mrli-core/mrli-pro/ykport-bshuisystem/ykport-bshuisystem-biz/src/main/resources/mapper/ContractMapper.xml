@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.ContractMapper">
+
+	<resultMap id="contract" type="com.newweb.mrli.ykport.baoshuisystem.entity.Contract">
+		<id property="fId" column="F_ID"/>
+		<result property="contNam" column="CONT_NAM"/>
+		<result property="contNo" column="CONT_NO"/>
+		<result property="firstNam" column="FIRST_NAM"/>
+		<result property="dept" column="DEPT"/>
+		<result property="operator" column="OPERATOR"/>
+		<result property="secondNam" column="SECOND_NAM"/>
+		<result property="contractType" column="CONTRACT_TYPE"/>
+		<result property="cargoNam" column="CARGO_NAM"/>
+		<result property="cargoNum" column="CARGO_NUM"/>
+		<result property="cargoFee" column="CARGO_FEE"/>
+		<result property="startDte" column="START_DTE"/>
+		<result property="endDte" column="END_DTE"/>
+		<result property="conDte" column="CON_DTE"/>
+		<result property="settlementBasis" column="SETTLEMENT_BASIS"/>
+		<result property="clearingForm" column="CLEARING_FORM"/>
+		<result property="contact" column="CONTACT"/>
+		<result property="phone" column="PHONE"/>
+		<result property="markTxt" column="MARK_TXT"/>
+		<result property="urlFile" column="URL_FILE"/>
+		<result property="isCancel" column="IS_CANCEL"/>
+		<result property="times" column="TIMES"/>
+		<result property="contractStatus" column="CONTRACT_STATUS"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM"/>
+		<result property="updateNam" column="UPDATE_NAM"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+		<result property="firstCod" column="FIRST_COD"/>
+		<result property="secondCod" column="SECOND_COD"/>
+		<result property="format" column="FORMAT"/>
+		<result property="shipNam" column="SHIP_NAM"/>
+		<result property="contNoMaster" column="CONT_NO_MASTER"/>
+		<result property="cargoCod" column="CARGO_COD"/>
+		<result property="pkgKindNam" column="PKG_KIND_NAM"/>
+		<result property="cargoKindCod" column="CARGO_KIND_COD"/>
+		<result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+		<result property="deptNo" column="DEPT_NO"/>
+		<result property="conFile" column="CON_FILE"/>
+		<result property="locate" column="LOCATE"/>
+		<result property="tradeId" column="TRADE_ID"/>
+		<result property="inoutId" column="INOUT_ID"/>
+		<result property="cargoNumUnit" column="CARGO_NUM_UNIT"/>
+		<result property="cargoFeeUnit" column="CARGO_FEE_UNIT"/>
+	</resultMap>
+
+	<resultMap id="contractFileMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.ContractFileVo">
+		<id property="fId" column="F_ID"/>
+		<result property="contNam" column="CONT_NAM"/>
+		<result property="contNo" column="CONT_NO"/>
+		<result property="firstNam" column="FIRST_NAM"/>
+		<result property="dept" column="DEPT"/>
+		<result property="operator" column="OPERATOR"/>
+		<result property="secondNam" column="SECOND_NAM"/>
+		<result property="contractType" column="CONTRACT_TYPE"/>
+		<result property="cargoNam" column="CARGO_NAM"/>
+		<result property="cargoNum" column="CARGO_NUM"/>
+		<result property="cargoFee" column="CARGO_FEE"/>
+		<result property="startDte" column="START_DTE"/>
+		<result property="endDte" column="END_DTE"/>
+		<result property="conDte" column="CON_DTE"/>
+		<result property="settlementBasis" column="SETTLEMENT_BASIS"/>
+		<result property="clearingForm" column="CLEARING_FORM"/>
+		<result property="contact" column="CONTACT"/>
+		<result property="phone" column="PHONE"/>
+		<result property="markTxt" column="MARK_TXT"/>
+		<result property="urlFile" column="URL_FILE"/>
+		<result property="isCancel" column="IS_CANCEL"/>
+		<result property="times" column="TIMES"/>
+		<result property="contractStatus" column="CONTRACT_STATUS"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM"/>
+		<result property="updateNam" column="UPDATE_NAM"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+		<result property="firstCod" column="FIRST_COD"/>
+		<result property="secondCod" column="SECOND_COD"/>
+		<result property="format" column="FORMAT"/>
+		<result property="shipNam" column="SHIP_NAM"/>
+		<result property="contNoMaster" column="CONT_NO_MASTER"/>
+		<result property="cargoCod" column="CARGO_COD"/>
+		<result property="pkgKindNam" column="PKG_KIND_NAM"/>
+		<result property="cargoKindCod" column="CARGO_KIND_COD"/>
+		<result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+		<result property="pFid" column="P_FID"/>
+		<result property="rFid" column="R_FID"/>
+		<result property="opinion" column="OPINION"/>
+		<result property="opinionExplain" column="OPINION_EXPLAIN"/>
+		<result property="isAgree" column="IS_AGREE"/>
+		<result property="deptNo" column="DEPT_NO"/>
+		<result property="conFile" column="CON_FILE"/>
+		<result property="locate" column="LOCATE"/>
+		<result property="tradeId" column="TRADE_ID"/>
+		<result property="inoutId" column="INOUT_ID"/>
+		<result property="cargoNumUnit" column="CARGO_NUM_UNIT"/>
+		<result property="cargoFeeUnit" column="CARGO_FEE_UNIT"/>
+		<result property="completeApprovalFlag" column="COMPLETE_APPROVAL_FLAG"/>
+		<collection property="sysFileList" ofType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile"
+					select="getFiles"
+					column="{fId=F_ID}">
+			<!-- property 表示com.domain.Class中的属性； column 表示表中的列名 -->
+			<result property="id" column="ID"/>
+			<result property="fileName" column="FILE_NAME"/>
+			<result property="original" column="ORIGINAL"/>
+			<result property="bucketName" column="BUCKET_NAME"/>
+			<result property="type" column="TYPE"/>
+			<result property="fileSize" column="FILE_SIZE"/>
+			<result property="delFlag" column="DEL_FLAG"/>
+			<result property="tableName" column="TABLE_NAME"/>
+			<result property="tableFid" column="TABLE_FID"/>
+			<result property="url" column="URL"/>
+		</collection>
+		<collection property="contractRateList" ofType="com.newweb.mrli.ykport.baoshuisystem.entity.ContractRate"
+					select="getContractRates"
+					column="{fId=F_ID}">
+		</collection>
+	</resultMap>
+
+	<resultMap id="sysFileMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile">
+		<result property="id" column="ID"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="original" column="ORIGINAL"/>
+		<result property="bucketName" column="BUCKET_NAME"/>
+		<result property="type" column="TYPE"/>
+		<result property="fileSize" column="FILE_SIZE"/>
+		<result property="delFlag" column="DEL_FLAG"/>
+		<result property="tableName" column="TABLE_NAME"/>
+		<result property="tableFid" column="TABLE_FID"/>
+		<result property="url" column="URL"/>
+	</resultMap>
+
+
+	<select id="selectPageVo" resultMap="contractFileMap"
+			parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ContractFileVo">
+		select * from BSWL.CONTRACT
+		where 1=1
+
+		<if test="contractFileVo.fId != null and contractFileVo.fId != ''">and f_id = #{contractFileVo.fId}</if>
+		<if test="contractFileVo.contNam != null and contractFileVo.contNam != ''">and CONT_NAM like concat(concat('%',
+			#{contractFileVo.contNam}),'%')
+		</if>
+		<if test="contractFileVo.contNo != null and contractFileVo.contNo != ''">and CONT_NO like concat(concat('%',
+			UPPER(#{contractFileVo.contNo}) ),'%')
+		</if>
+		<if test="contractFileVo.dept != null and contractFileVo.dept != ''">and DEPT = #{contractFileVo.dept}</if>
+		<if test="contractFileVo.contractType != null and contractFileVo.contractType != ''">and CONTRACT_TYPE like
+			concat(concat('%', #{contractFileVo.contractType}),'%')
+		</if>
+		<if test="contractFileVo.cargoNam != null and contractFileVo.cargoNam != ''">and CARGO_NAM like
+			concat(concat('%', #{contractFileVo.cargoNam}),'%')
+		</if>
+		<if test="contractFileVo.settlementBasis != null and contractFileVo.settlementBasis != ''">
+			and SETTLEMENT_BASIS =#{contractFileVo.settlementBasis}
+		</if>
+		<if test="contractFileVo.firstNam != null and contractFileVo.firstNam != ''">
+			and FIRST_NAM =#{contractFileVo.firstNam}
+		</if>
+		<if test="contractFileVo.operator != null and contractFileVo.operator != ''">and operator like
+			concat(concat('%', #{contractFileVo.operator}),'%')
+		</if>
+		<if test="contractFileVo.cargoKindNam != null and contractFileVo.cargoKindNam != ''">and CARGO_KIND_NAM like
+			concat(concat('%', #{contractFileVo.cargoKindNam}),'%')
+		</if>
+		<if test="contractFileVo.contractStatus != null and contractFileVo.contractStatus != ''">and contract_Status
+			like
+			concat(concat('%', #{contractFileVo.contractStatus}),'%')
+		</if>
+		<if test="contractFileVo.contNoMaster != null and contractFileVo.contNoMaster != ''">and cont_No_Master like
+			concat(concat('%', #{contractFileVo.contNoMaster}),'%')
+		</if>
+		<if test="contractFileVo.conFile != null and contractFileVo.conFile != ''">and con_File =
+			#{contractFileVo.conFile}
+		</if>
+		<if test="contractFileVo.secondNam != null and contractFileVo.secondNam != ''">and second_Nam =
+			#{contractFileVo.secondNam}
+		</if>
+		<if test="contractFileVo.operNam != null and contractFileVo.operNam != ''">and oper_Nam =
+			#{contractFileVo.operNam}
+		</if>
+		<if test="contractFileVo.userSubDeptId != null and contractFileVo.userSubDeptId != ''">and user_Sub_Dept_Id =
+			#{contractFileVo.userSubDeptId}
+		</if>
+		<if test="contractFileVo.params != null ">and START_DTE &gt;= to_date(#{contractFileVo.params[0]},'yyyy-MM-dd
+			HH24:mi:ss') and START_DTE &lt;= to_date(#{contractFileVo.params[1]},'yyyy-MM-dd HH24:mi:ss')
+		</if>
+		<if test="contractFileVo.conDteParams != null ">and CON_DTE &gt;=
+			to_date(#{contractFileVo.conDteParams[0]},'yyyy-MM-dd HH24:mi:ss') and CON_DTE &lt;=
+			to_date(#{contractFileVo.conDteParams[1]},'yyyy-MM-dd HH24:mi:ss')
+		</if>
+
+		<choose>
+			<when test="contractFileVo.isCancel != null and contractFileVo.isCancel != ''">
+				and IS_CANCEL = #{contractFileVo.isCancel}
+			</when>
+			<otherwise>
+				and IS_CANCEL is null
+			</otherwise>
+		</choose>
+		<if test="contractFileVo.shipNam != null and contractFileVo.shipNam != ''">and SHIP_NAM like concat(concat('%',
+			#{contractFileVo.shipNam}),'%')
+		</if>
+		<if test="contractFileVo.operator != null and contractFileVo.operator != ''">and operator like
+			concat(concat('%', #{contractFileVo.operator}),'%')
+		</if>
+		order by RECORD_TIM desc
+	</select>
+
+	<select id="selectPageVoJoinApprovalRecord" resultMap="contractFileMap"
+			parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ContractFileVo">
+		<choose>
+			<when test="contractFileVo.approvalProcess != null and contractFileVo.approvalProcess.size() != 0">
+				select * from (
+				<foreach collection="contractFileVo.approvalProcess" item="linkNamItem" separator="union">
+
+					select c.*,a.process_fid processFid,a.f_id rFid,a.opinion opinion,a.opinion_Explain
+					opinionExplain,a.is_Agree,a.link_Nam linkNam,a.record_tim tim from BSWL.CONTRACT c
+					left join BSWL.APPROVAL_PROCESS_SET a on c.f_id = a.bill_fid
+					<if test="linkNamItem.orderBy != null and linkNamItem.orderBy != '1'.toString() ">left join (select
+						bill_fid, min(is_agree) is_agree,order_by from BSWL.APPROVAL_PROCESS_SET
+						where 1=1
+						group by order_by,bill_fid) r2 on a.bill_fid = r2.bill_fid
+					</if>
+					where 1=1
+					<if test="contractFileVo.fId != null and contractFileVo.fId != ''">and c.f_id =
+						#{contractFileVo.fId}
+					</if>
+					<if test="contractFileVo.contNam != null and contractFileVo.contNam != ''">and c.CONT_NAM like
+						concat(concat('%', #{contractFileVo.contNam}),'%')
+					</if>
+
+					<if test="contractFileVo.contNo != null and contractFileVo.contNo != ''">and c.CONT_NO like
+						concat(concat('%', UPPER(#{contractFileVo.contNo}) ),'%')
+					</if>
+					<if test="contractFileVo.dept != null and contractFileVo.dept != ''">and c.DEPT =
+						#{contractFileVo.dept}
+					</if>
+					<if test="contractFileVo.contractType != null and contractFileVo.contractType != ''">and
+						c.CONTRACT_TYPE like concat(concat('%', #{contractFileVo.contractType}),'%')
+					</if>
+					<if test="contractFileVo.cargoNam != null and contractFileVo.cargoNam != ''">and c.CARGO_NAM like
+						concat(concat('%', #{contractFileVo.cargoNam}),'%')
+					</if>
+
+					<if test="contractFileVo.params != null ">and c.START_DTE &gt;=
+						to_date(#{contractFileVo.params[0]},'yyyy-MM-dd HH24:mi:ss') and c.START_DTE &lt;=
+						to_date(#{contractFileVo.params[1]},'yyyy-MM-dd HH24:mi:ss')
+					</if>
+					<if test="contractFileVo.linkNamArray != null ">
+						and c.FIRST_NAM in
+						<foreach item="item" collection="contractFileVo.linkNamArray" open="(" separator="," close=")">
+							#{item}
+						</foreach>
+					</if>
+					<choose>
+						<when test="contractFileVo.isCancel != null and contractFileVo.isCancel != ''">
+							and c.IS_CANCEL = #{contractFileVo.isCancel}
+						</when>
+						<otherwise>
+							and c.IS_CANCEL is null
+						</otherwise>
+					</choose>
+					<if test="contractFileVo.shipNam != null and contractFileVo.shipNam != ''">and c.SHIP_NAM like
+						concat(concat('%', #{contractFileVo.shipNam}),'%')
+					</if>
+
+
+					<if test="contractFileVo.pFid != null and contractFileVo.pFid != ''">and a.process_Fid =
+						#{contractFileVo.pFid}
+					</if>
+					<if test="contractFileVo.processNo != null and contractFileVo.processNo != ''">
+						and a.PROCESS_NO = #{contractFileVo.processNo}
+					</if>
+					<!--					<if test="linkNamItem.linkCode != null and linkNamItem.linkCode != ''">and a.link_CODE =-->
+					<!--						#{linkNamItem.linkCode}-->
+					<!--					</if>-->
+
+					<if test="contractFileVo.isAgree != null and contractFileVo.isAgree != ''">and a.IS_AGREE =
+						#{contractFileVo.isAgree}
+					</if>
+					<if test="contractFileVo.operator != null and contractFileVo.operator != ''">and a.username =
+						#{contractFileVo.operator}
+					</if>
+					<if test="linkNamItem.orderBy != null and linkNamItem.orderBy != ''">and a.ORDER_BY =
+						#{linkNamItem.orderBy}
+					</if>
+					<if test="linkNamItem.orderBy != null and linkNamItem.orderBy != '1'.toString() ">and r2.ORDER_BY =
+						to_number(#{linkNamItem.orderBy})-1
+					</if>
+					<if test="linkNamItem.orderBy != null and linkNamItem.orderBy != '1'.toString() ">and r2.is_agree =
+						'1'
+					</if>
+					<!--					<choose>-->
+					<!--						<when test="contractFileVo.recIsCancel != null and contractFileVo.recIsCancel != ''">-->
+					<!--							and a.IS_CANCEL = #{contractFileVo.recIsCancel}-->
+					<!--						</when>-->
+					<!--						<otherwise>-->
+					<!--							and a.IS_CANCEL is null-->
+					<!--						</otherwise>-->
+					<!--					</choose>-->
+
+				</foreach>
+				) x
+				order by x.tim desc
+			</when>
+			<otherwise>
+				<!--				select c.*,a.p_Fid pFid,a.f_id rFid,a.opinion opinion,a.opinion_Explain-->
+				<!--				opinionExplain,a.is_Agree,a.link_Nam linkNam,a.link_Code linkCode from BSWL.CONTRACT c-->
+				<!--				left join BSWL.APPROVAL_PROCESS_SET a on c.f_id = a.bill_fid-->
+				<!--				<if test="linkNamItem.orderBy != null and linkNamItem.orderBy != '1'.toString() ">left join (select-->
+				<!--					bill_fid, min(is_agree) is_agree,order_by from BSWL.APPROVAL_PROCESS_SET-->
+				<!--					where 1=1-->
+				<!--					group by order_by,bill_fid) r2 on a.bill_fid = r2.bill_fid-->
+				<!--				</if>-->
+				<!--				where 1=1-->
+				<!--				<if test="contractFileVo.fId != null and contractFileVo.fId != ''">and c.f_id = #{contractFileVo.fId}-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.contNam != null and contractFileVo.contNam != ''">and c.CONT_NAM like-->
+				<!--					concat(concat('%', #{contractFileVo.contNam}),'%')-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.contNo != null and contractFileVo.contNo != ''">and c.CONT_NO like-->
+				<!--					concat(concat('%', UPPER(#{contractFileVo.contNo}) ),'%')-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.dept != null and contractFileVo.dept != ''">and c.DEPT =-->
+				<!--					#{contractFileVo.dept}-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.contractType != null and contractFileVo.contractType != ''">and c.CONTRACT_TYPE-->
+				<!--					like concat(concat('%', #{contractFileVo.contractType}),'%')-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.cargoNam != null and contractFileVo.cargoNam != ''">and c.CARGO_NAM like-->
+				<!--					concat(concat('%', #{contractFileVo.cargoNam}),'%')-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.params != null ">and c.START_DTE &gt;=-->
+				<!--					to_date(#{contractFileVo.params[0]},'yyyy-MM-dd HH24:mi:ss') and c.START_DTE &lt;=-->
+				<!--					to_date(#{contractFileVo.params[1]},'yyyy-MM-dd HH24:mi:ss')-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.linkNamArray != null ">-->
+				<!--					and c.FIRST_NAM in-->
+				<!--					<foreach item="item" collection="contractFileVo.linkNamArray" open="(" separator="," close=")">-->
+				<!--						#{item}-->
+				<!--					</foreach>-->
+				<!--				</if>-->
+				<!--				<choose>-->
+				<!--					<when test="contractFileVo.isCancel != null and contractFileVo.isCancel != ''">-->
+				<!--						and c.IS_CANCEL = #{contractFileVo.isCancel}-->
+				<!--					</when>-->
+				<!--					<otherwise>-->
+				<!--						and c.IS_CANCEL is null-->
+				<!--					</otherwise>-->
+				<!--				</choose>-->
+				<!--				<if test="contractFileVo.shipNam != null and contractFileVo.shipNam != ''">and c.SHIP_NAM like-->
+				<!--					concat(concat('%', #{contractFileVo.shipNam}),'%')-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.operator != null and contractFileVo.operator != ''">and a.approver =-->
+				<!--					#{contractFileVo.operator}-->
+				<!--				</if>-->
+
+				<!--				<if test="contractFileVo.pFid != null and contractFileVo.pFid != ''">and a.p_Fid =-->
+				<!--					#{contractFileVo.pFid}-->
+				<!--				</if>-->
+
+				<!--				<if test="contractFileVo.isAgree != null and contractFileVo.isAgree != ''">and a.IS_AGREE =-->
+				<!--					#{contractFileVo.isAgree}-->
+				<!--				</if>-->
+
+				<!--				<if test="contractFileVo.orderBy != null and contractFileVo.orderBy != ''">and a.ORDER_BY =-->
+				<!--					#{contractFileVo.orderBy}-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.orderBy != null and contractFileVo.orderBy != '1'.toString() ">and r2.ORDER_BY-->
+				<!--					= to_number(#{contractFileVo.orderBy})-1-->
+				<!--				</if>-->
+				<!--				<if test="contractFileVo.orderBy != null and contractFileVo.orderBy != '1'.toString() ">and r2.is_agree-->
+				<!--					= '1'-->
+				<!--				</if>-->
+
+			</otherwise>
+		</choose>
+
+
+	</select>
+
+	<select id="getFiles" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ContractFileVo"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile">
+			select * from SYS_FILE where TABLE_FID = #{fId} and del_flag = 0
+	</select>
+
+	<select id="getContractRates" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ContractFileVo"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.ContractRate">
+			select * from CONTRACT_RATE where C_FID = #{fId}
+	</select>
+
+	<update id="updateContract" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.Contract">
+		update CONTRACT
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="contNam != null">CONT_NAM = #{contNam},</if>
+			<if test="contNo != null">CONT_NO = #{contNo},</if>
+			<if test="firstNam != null">FIRST_NAM = #{firstNam},</if>
+			<if test="dept != null">DEPT = #{dept},</if>
+			<if test="operator != null">OPERATOR = #{operator},</if>
+			<if test="secondNam != null">SECOND_NAM = #{secondNam},</if>
+			<if test="contractType != null">CONTRACT_TYPE = #{contractType},</if>
+			<if test="cargoNam != null">CARGO_NAM = #{cargoNam},</if>
+			<if test="cargoFee != null">CARGO_FEE = #{cargoFee},</if>
+			<if test="startDte != null">START_DTE = #{startDte},</if>
+			<if test="endDte != null">END_DTE = #{endDte},</if>
+			<if test="settlementBasis != null">SETTLEMENT_BASIS = #{settlementBasis},</if>
+			<if test="clearingForm != null">CLEARING_FORM = #{clearingForm},</if>
+			<if test="contact != null">CONTACT = #{contact},</if>
+			<if test="phone != null">PHONE = #{phone},</if>
+			<if test="markTxt != null">MARKTXT = #{markTxt},</if>
+			<if test="urlFile != null">URL_FILE = #{urlFile},</if>
+			<if test="isCancel != null">IS_CANCEL = #{isCancel},</if>
+			<if test="times != null">TIMES = #{times},</if>
+			<if test="contractStatus != null">CONTRACT_STATUS = #{contractStatus},</if>
+			<if test="operNam != null">OPER_NAM = #{operNam},</if>
+			<if test="recordTim != null">RECORD_TIM = #{recordTim},</if>
+			<if test="updateNam != null">UPDATE_NAM = #{updateNam},</if>
+			<if test="updateTim != null">UPDATE_TIM = #{updateTim},</if>
+			<if test="delNam != null">DEL_NAM = #{delNam},</if>
+			<if test="delTim != null">DEL_TIM = #{delTim},</if>
+			<if test="firstCod != null">FIRST_COD = #{firstCod},</if>
+			<if test="secondCod != null">SECOND_COD = #{secondCod},</if>
+			<if test="format != null">FORMAT = #{format},</if>
+			<if test="shipNam != null">SHIP_NAM = #{shipNam},</if>
+			<if test="contNoMaster != null">CONT_NO_MASTER = #{contNoMaster},</if>
+			<if test="cargoCod != null">CARGO_COD = #{cargoCod},</if>
+			<if test="pkgKindNam != null">PKG_KIND_NAM = #{pkgKindNam},</if>
+			<if test="cargoKindCod != null">CARGO_KIND_COD = #{cargoKindCod},</if>
+			<if test="cargoKindNam != null">CARGO_KIND_NAM = #{cargoKindNam},</if>
+			<if test="deptNo != null">DEPT_NO = #{deptNo},</if>
+			<if test="conFile != null">CON_File = #{conFile},</if>
+			<if test="locate != null">LOCATE = #{locate},</if>
+			<if test="tradeId != null">TRADE_ID = #{tradeId},</if>
+			<if test="inoutId != null">INOUT_ID = #{inoutId},</if>
+			<if test="cargoNumUnit != null">CARGO_NUM_UNIT = #{cargoNumUnit},</if>
+			<if test="cargoFeeUnit != null">CARGO_FEE_UNIT = #{cargoFeeUnit},</if>
+			<if test="cancelStatus != null">CANCEL_STATUS = #{cancelStatus},</if>
+		</trim>
+		where f_id = #{fId}
+	</update>
+	<!--	<select id="getEffectiveInfo" resultMap="contractFileMap">-->
+	<!--		select * from CONTRACT-->
+	<!--		where 1=1 and sysdate &gt;= start_dte and sysdate  &lt;= end_dte-->
+	<!--	</select>-->
+	<!--查不是作废的并且合同状态是2-->
+	<select id="getEffectiveInfo" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.Contract" resultMap="contractFileMap">
+		select * from CONTRACT
+		where 1=1 and  is_cancel IS  NULL AND contract_status = 2 AND del_nam IS NULL
+		<if test="dept != null and dept != ''">and dept= #{dept}</if>
+		order by record_tim desc
+	</select>
+
+	<select id="getEffectiveInfoOther" resultMap="contractFileMap">
+		select * from CONTRACT
+		where 1=1 and  is_cancel IS  NULL AND contract_status = 2 AND del_nam IS NULL
+		<if test="contract.dept != null and contract.dept != ''">and dept= #{contract.dept}</if>
+		<if test="deptArr != null and deptArr.length > 0">
+			and dept not in
+			<foreach item="item" collection="deptArr" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		order by record_tim desc
+	</select>
+
+	<select id="getContractMessage" parameterType="java.util.Set"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+		SELECT
+		c.CONTRACT_TYPE as contractType,
+		c.DEPT as dept,
+		c.CONT_NO as contNo,c.FIRST_NAM as firstNam,
+		c.SECOND_NAM as secondNam,c.SHIP_NAM as shipNam,
+		c.CARGO_KIND_NAM as cargoKindNam,c.CARGO_NAM as cargoNam,
+		c.CARGO_NUM as cargoNum,c.CARGO_FEE as cargoFee,
+		c.SETTLEMENT_BASIS as settlementBasis,c.START_DTE as startDte,c.END_DTE as endDte,
+		c.OPERATOR as operator,t.fee_rat as feeRat,t.fee_nam as feeNam
+		FROM (SELECT c.f_Id,c.CONTRACT_TYPE,c.DEPT,
+		c.CONT_NO,c.FIRST_NAM,
+		c.SECOND_NAM,c.SHIP_NAM,
+		c.CARGO_KIND_NAM,c.CARGO_NAM,
+		c.CARGO_NUM,c.CARGO_FEE,
+		c.SETTLEMENT_BASIS,c.START_DTE,c.END_DTE,c.OPERATOR
+		FROM contract c WHERE cont_no in
+		<foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+		AND del_nam IS NULL) c
+		LEFT JOIN (select c_FID, to_char(wm_concat(fee_rat) )AS fee_rat,
+		to_char(wm_concat(fee_nam) ) AS fee_nam FROM contract_rate where del_nam IS NULL group by c_FID) t
+		ON c.f_id = t.c_fid
+	</select>
+
+	<select id="getInYard" parameterType="java.util.Set"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+		SELECT c.cont_no AS contNo,
+		t.INOUT_YARD_NO AS inYardNo,
+		t.RECORD_TIM AS inRecordTim
+		FROM (SELECT * FROM contract c WHERE del_nam IS NULL )c
+		LEFT JOIN (SELECT * FROM inout_yard_head WHERE del_nam IS NULL ) t
+		ON c.cont_no =t.cont_no AND t.IN_out = 1
+		WHERE c.cont_no IN
+		<foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getOutYard" parameterType="java.util.Set"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+		SELECT c.cont_no AS contNo,
+		t.INOUT_YARD_NO AS outYardNo,
+		t.RECORD_TIM AS outRecordTim
+		FROM (SELECT * FROM contract c WHERE del_nam IS NULL )c
+		LEFT JOIN (SELECT * FROM inout_yard_head WHERE del_nam IS NULL ) t
+		ON c.cont_no =t.cont_no AND t.IN_out = 0
+		WHERE c.cont_no IN
+		<foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getRealInOut" parameterType="java.util.Set"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+		SELECT t.cont_no AS contNo,
+		t.ioyard_list_no AS ioyardListNo,
+		s.in_yard_dat AS inYardDat,
+		sum(IN_Weight_Wgt) AS inWeightWgt,
+		s.out_yard_dat AS outYardDat,
+		sum(out_Weight_Wgt) AS outWeightWgt
+		from ( SELECT * FROM ioyard_list_head t WHERE
+		t.cont_no IN
+		<foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+		AND t.del_nam IS NULL)t
+		LEFT JOIN (SELECT * FROM ioyard_list_body s WHERE s.del_nam IS NULL)s
+		ON t .f_id = s.f_fid GROUP BY t.cont_no,t.ioyard_list_no, s.in_yard_dat,s.out_yard_dat
+	</select>
+	<select id="getCollection" parameterType="java.util.Set"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+
+		SELECT t.cont_no as contNo,t.bill_dat as billDatCollection,t.bill_cod as billCodCollection,t.money as moneyCollection FROM
+		(SELECT * FROM bill_approve WHERE del_nam IS NULL AND bill_type = '收款通知单')t
+		WHERE t.cont_no IN
+		<foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getSettlement" parameterType="java.util.Set"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+
+		SELECT t.cont_no as contNo,t.bill_dat as billDatSettlement,t.bill_cod as billCodSettlement,t.money as moneySettlement FROM
+		(SELECT * FROM bill_approve WHERE del_nam IS NULL AND bill_type = '业务结算单')t
+		WHERE t.cont_no IN
+		<foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getRebates" parameterType="java.util.Set"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+
+		SELECT t.cont_no as contNo, t.money as moneyRebates FROM
+		(SELECT * FROM bill_approve WHERE del_nam IS NULL AND bill_type = '付款单')t
+		WHERE t.cont_no IN
+		<foreach collection="set" item="item" index="index" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="getAllInfo" parameterType="java.lang.String" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+		SELECT
+		zhyc.f_Id,
+		zhyc.CONTRACT_TYPE as contractType,zhyc.DEPT as dept,
+		zhyc.CONT_NO as contNo,zhyc.FIRST_NAM as firstNam,
+		zhyc.SECOND_NAM as secondNam,zhyc.SHIP_NAM as shipNam,
+		zhyc.CARGO_KIND_NAM as cargoKindNam,zhyc.CARGO_NAM as cargoNam,
+		zhyc.CARGO_NUM as cargoNum,zhyc.CARGO_FEE as cargoFee,
+		zhyc.SETTLEMENT_BASIS as settlementBasis, zhyc.START_DTE as startDte,
+		zhyc.END_DTE as endDte,zhyc.OPERATOR as operator,zhyc.fee_rat as feeRat,zhyc.fee_nam as feeNam,
+		zhyc.inYardNo,
+		zhyc.inRecordTim,
+		zhyc.outYardNo,
+		zhyc.outRecordTim ,
+		zhyc.ioyardListNo,
+		zhyc.inYardDat,
+		zhyc.outYardDat,
+		zhyc.inWeightWgt,
+		zhyc.outWeightWgt,
+		jsd.moneyRebates,
+		jsd.billDatSettlement,
+		jsd.moneySettlement,
+		jsd.billSettlement as billCodSettlement,
+		jsd.billDatCollection,
+		jsd.moneyCollection,
+		jsd.billCodCollection,
+		Rownum rm
+
+ FROM (
+ SELECT
+ htt.f_Id,
+htt.CONTRACT_TYPE,htt.DEPT,
+htt.CONT_NO,htt.FIRST_NAM,
+htt.SECOND_NAM,htt.SHIP_NAM,
+htt.CARGO_KIND_NAM,htt.CARGO_NAM,
+htt.CARGO_NUM,htt.CARGO_FEE,
+htt.SETTLEMENT_BASIS,htt.START_DTE,htt.END_DTE,htt.OPERATOR,htt.fee_rat,htt.fee_nam,
+htt.inYardNo,
+htt.inRecordTim,
+htt.outYardNo,
+htt.outRecordTim ,
+sj.ioyardListNo,
+sj.inYardDat,
+sj.outYardDat,
+sj.inWeightWgt,
+sj.outWeightWgt,
+ROWNUM rc
+FROM
+ (SELECT
+ht.f_Id,
+ht.CONTRACT_TYPE,ht.DEPT,
+ht.CONT_NO,ht.FIRST_NAM,
+ht.SECOND_NAM,ht.SHIP_NAM,
+ht.CARGO_KIND_NAM,ht.CARGO_NAM,
+ht.CARGO_NUM,ht.CARGO_FEE,
+ht.SETTLEMENT_BASIS,ht.START_DTE,ht.END_DTE,ht.OPERATOR,ht.fee_rat,ht.fee_nam,
+io.inYardNo,
+io.inRecordTim,
+io.outYardNo,
+io.outRecordTim,
+ROWNUM ra
+FROM
+(SELECT
+c.f_Id,
+c.CONTRACT_TYPE,c.DEPT,
+c.CONT_NO,c.FIRST_NAM,
+c.SECOND_NAM,c.SHIP_NAM,
+c.CARGO_KIND_NAM,c.CARGO_NAM,
+c.CARGO_NUM,c.CARGO_FEE,
+c.SETTLEMENT_BASIS,c.START_DTE,c.END_DTE,c.OPERATOR,t.fee_rat,t.fee_nam,
+ROWNUM r1
+FROM (SELECT c.f_Id,c.CONTRACT_TYPE,c.DEPT,
+c.CONT_NO,c.FIRST_NAM,
+c.SECOND_NAM,c.SHIP_NAM,
+c.CARGO_KIND_NAM,c.CARGO_NAM,
+c.CARGO_NUM,c.CARGO_FEE,
+c.SETTLEMENT_BASIS,c.START_DTE,c.END_DTE,c.OPERATOR
+FROM contract c WHERE cont_no = #{contNo} AND del_nam IS NULL) c
+LEFT JOIN (select c_FID, to_char(wm_concat(fee_rat) )AS fee_rat,
+to_char(wm_concat(fee_nam) ) AS fee_nam FROM  contract_rate group  by c_FID) t
+ON c.f_id = t.c_fid) ht
+FULL JOIN
+(SELECT
+a.inYardNo,
+a.inRecordTim,
+b.outYardNo,
+b.outRecordTim,
+ROWNUM r2
+FROM
+ ( SELECT f_id, INOUT_YARD_NO AS inYardNo,RECORD_TIM AS inRecordTim,ROWNUM r1 FROM inout_yard_head a WHERE CONT_NO = #{contNo} AND  IN_out = 1 and  del_nam is null ) a
+ FULL JOIN ( SELECT f_id, INOUT_YARD_NO AS outYardNo,RECORD_TIM AS outRecordTim ,ROWNUM r1 FROM inout_yard_head  WHERE CONT_NO = #{contNo} AND IN_out = 0  and  del_nam is null) b ON a.r1 = b.r1
+) io
+ON ht.r1 = io.r2) htt
+FULL JOIN
+(
+ SELECT
+ sjc.ioyard_list_no AS ioyardListNo,
+ sjc.in_yard_dat AS inYardDat,
+ sjc.out_yard_dat AS outYardDat,
+ sjc.in_yard_way AS inWeightWgt,
+ sjc.out_yard_way AS outWeightWgt,
+ ROWNUM rb
+  FROM
+ (SELECT
+t.ioyard_list_no,s.in_yard_dat,sum(IN_Weight_Wgt) AS in_yard_way,
+s.out_yard_dat,sum(out_Weight_Wgt) AS out_yard_way
+from (
+ SELECT * FROM ioyard_list_head t
+  WHERE t.cont_no = #{contNo} AND t.del_nam IS NULL)t
+LEFT JOIN (SELECT * FROM ioyard_list_body s WHERE s.del_nam IS NULL)s
+ON t .f_id = s.f_fid
+GROUP BY   t.ioyard_list_no, s.in_yard_dat,s.out_yard_dat)sjc
+) sj
+ON htt.ra = sj.rb) zhyc
+
+FULL JOIN
+(
+ SELECT
+ mg.moneyRebates,
+ mg.billDatSettlement,
+ mg.moneySettlement ,
+ mg.billSettlement,
+ zz.billDatCollection,
+ zz.moneyCollection,
+ zz.billCodCollection,
+ Rownum rn
+ FROM (
+ SELECT
+ a.moneyRebates,
+ b.billDatSettlement,
+ b.moneySettlement,
+ b.billSettlement,
+ ROWNUM r1
+FROM
+ ( SELECT money AS moneyRebates ,ROWNUM r1
+ FROM BILL_APPROVE a
+ WHERE CONT_NO = #{contNo} AND BILL_TYPE = '付款单' and del_nam is null  and approve_status = 2 and is_cancel != 1) a
+ FULL JOIN
+ ( SELECT bill_dat AS billDatSettlement, money AS moneySettlement, bill_cod AS billSettlement, ROWNUM r1
+ FROM BILL_APPROVE a
+ WHERE CONT_NO = #{contNo} AND BILL_TYPE = '业务结算单' and del_nam is null  and approve_status = 2 and is_cancel != 1) b ON a.r1 = b.r1
+ )mg
+  FULL JOIN ( SELECT bill_dat AS billDatCollection, money AS moneyCollection, bill_cod AS billCodCollection, ROWNUM r1
+ FROM BILL_APPROVE a
+ WHERE CONT_NO = #{contNo} AND BILL_TYPE = '收款通知单' and del_nam is null and approve_status = 2 and is_cancel != 1)zz
+ ON mg.r1 = zz.r1) jsd
+ ON zhyc.rc = jsd.rn
+ ORDER BY rm
+</select>
+
+</mapper>

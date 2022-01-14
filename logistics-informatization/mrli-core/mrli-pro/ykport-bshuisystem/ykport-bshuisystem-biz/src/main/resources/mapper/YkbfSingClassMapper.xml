@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.YkbfSingClassMapper">
+	<resultMap id="myMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.SingClassInfo">
+
+	</resultMap>
+	<select id="getPage" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.YkbfSingClass"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SingClassInfo">
+		SELECT y.* ,
+		s.bhrqcbs,
+		s.inout_flag,
+		s.on_inventory,
+		s.this_inventory
+		FROM YKBF_SING_CLASS@ykport1_nw410_link  y
+		LEFT JOIN sing_class_info s
+		on y.bh = s.bh AND y.rqcbs = s.rqcbs
+		where 1=1 and
+		<if test="ykbfSingClass.startDte!= null  ">
+			y.RQCBS BETWEEN
+			#{ykbfSingClass.startDte[0]} AND #{ykbfSingClass.startDte[1]}
+		</if>
+		<if test="ykbfSingClass.rqcbs!= null and ykbfSingClass.rqcbs!= '' ">
+			and y.RQCBS like concat(concat('%', (#{ykbfSingClass.rqcbs}) ),'%')
+		</if>
+		<if test="ykbfSingClass.cbs!= null and ykbfSingClass.cbs!= '' ">
+			and y.cbs = #{ykbfSingClass.cbs}
+		</if>
+		<if test="ykbfSingClass.hm!= null and ykbfSingClass.hm!= '' ">
+			and y.hm = #{ykbfSingClass.hm}
+		</if>
+		<if test="ykbfSingClass.sqdw!= null and ykbfSingClass.sqdw!= '' ">
+			and y.sqdw = #{ykbfSingClass.sqdw}
+		</if>
+
+	</select>
+	<select id="getNoPage" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.YkbfSingClass"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SingClassInfo">
+		SELECT y.* ,
+		s.bhrqcbs,
+		s.inout_flag,
+		s.on_inventory,
+		s.this_inventory
+		FROM YKBF_SING_CLASS@ykport1_nw410_link  y
+		LEFT JOIN sing_class_info s
+		on y.bh = s.bh AND y.rqcbs = s.rqcbs
+		where 1=1 and
+		<if test="ykbfSingClass.startDte!= null  ">
+			y.RQCBS BETWEEN
+			#{ykbfSingClass.startDte[0]} AND #{ykbfSingClass.startDte[1]}
+		</if>
+		<if test="ykbfSingClass.rqcbs!= null and ykbfSingClass.rqcbs!= '' ">
+			and y.RQCBS like concat(concat('%', (#{ykbfSingClass.rqcbs}) ),'%')
+		</if>
+		<if test="ykbfSingClass.cbs!= null and ykbfSingClass.cbs!= '' ">
+			and y.cbs = #{ykbfSingClass.cbs}
+		</if>
+		<if test="ykbfSingClass.hm!= null and ykbfSingClass.hm!= '' ">
+			and y.hm = #{ykbfSingClass.hm}
+		</if>
+		<if test="ykbfSingClass.sqdw!= null and ykbfSingClass.sqdw!= '' ">
+			and y.sqdw = #{ykbfSingClass.sqdw}
+		</if>
+
+	</select>
+</mapper>

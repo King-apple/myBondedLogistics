@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.ContractObjectMapper">
+
+  <resultMap id="contractObjectMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.ContractObject">
+                  <id property="fId" column="F_ID"/>
+                        <result property="cargoKindCod" column="CARGO_KIND_COD"/>
+                        <result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+                        <result property="cargoCod" column="CARGO_COD"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="cargoNamCustoms" column="CARGO_NAM_CUSTOMS"/>
+                        <result property="markTxt" column="MARKTXT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+	  					<result property="updateTim" column="UPDATE_TIM"/>
+	  					<result property="delNam" column="DEL_NAM"/>
+	  					<result property="delTim" column="DEL_TIM"/>
+  </resultMap>
+	<select id="selectFid" resultType="integer">
+		SELECT SEQ_CARGO_NAMES.NEXTVAL FROM DUAL;
+	</select>
+</mapper>

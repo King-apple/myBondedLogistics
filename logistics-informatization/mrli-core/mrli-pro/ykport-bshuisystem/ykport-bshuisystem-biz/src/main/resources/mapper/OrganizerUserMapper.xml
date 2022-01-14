@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.OrganizerUserMapper">
+
+	<resultMap id="organizerUserMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.OrganizerUser">
+		<id property="fId" column="F_ID"/>
+		<result property="oFid" column="O_FID"/>
+		<result property="uFid" column="U_FID"/>
+	</resultMap>
+	<resultMap id="OrganizerUserInfoVo" type="com.newweb.mrli.ykport.baoshuisystem.vo.OrganizerUserInfoVo">
+		<id property="fId" column="F_ID"/>
+		<result property="uFid" column="U_FID"/>
+		<result property="oFid" column="O_FID"/>
+		<result property="organizerCode" column="ORGANIZER_CODE"/>
+		<result property="organizer" column="ORGANIZER"/>
+		<association property="bsUser" javaType="com.newweb.mrli.ykport.baoshuisystem.entity.BSUser">
+			<result column="USER_ID" property="userId"/>
+			<result column="USERNAME" property="username"/>
+			<result column="PASSWORD" property="password"/>
+			<result column="DEPTID" property="deptId"/>
+		</association>
+	</resultMap>
+	<select id="selectFid" resultType="integer">
+		SELECT SEQ_ORGANIZER_USER.NEXTVAL FROM DUAL;
+	</select>
+
+	<select id="selectOrgUserInfoVo" resultMap="OrganizerUserInfoVo"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.vo.OrganizerUserInfoVo">
+		SELECT
+			*
+		FROM
+			bswl.ORGANIZER_USER o
+			LEFT JOIN bswl.ORGANIZER_INFO i ON o.O_FID = i.F_ID
+		where U_FID = #{uFid}
+	</select>
+
+
+</mapper>

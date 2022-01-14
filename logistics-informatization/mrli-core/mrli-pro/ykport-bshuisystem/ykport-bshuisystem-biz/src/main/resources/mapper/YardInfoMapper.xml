@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.YardInfoMapper">
+
+  <resultMap id="yardInfoMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.YardInfo">
+                  <id property="fId" column="F_ID"/>
+                        <result property="inYardNo" column="IN_YARD_NO"/>
+                        <result property="consignNam" column="CONSIGN_NAM"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="shipNam" column="SHIP_NAM"/>
+                        <result property="inPiecesNum" column="IN_PIECES_NUM"/>
+                        <result property="inWeightWgt" column="IN_WEIGHT_WGT"/>
+                        <result property="inYardDat" column="IN_YARD_DAT"/>
+                        <result property="inSettleDat" column="IN_SETTLE_DAT"/>
+                        <result property="outPiecesNum" column="OUT_PIECES_NUM"/>
+                        <result property="outWeightWgt" column="OUT_WEIGHT_WGT"/>
+                        <result property="surplusPiecesNum" column="SURPLUS_PIECES_NUM"/>
+                        <result property="surplusWeightWgt" column="SURPLUS_WEIGHT_WGT"/>
+                        <result property="yardNam" column="YARD_NAM"/>
+                        <result property="areaNam" column="AREA_NAM"/>
+                        <result property="areaStart" column="AREA_START"/>
+                        <result property="areaEnd" column="AREA_END"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+            </resultMap>
+	<select id="getCargo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.YardInfo">
+		select DISTINCT CARGO_NAM from yard_info t WHERE CARGO_NAM IS NOT NULL
+	</select>
+
+	<select id="getConSign" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.YardInfo">
+		select DISTINCT CONSIGN_NAM from yard_info t WHERE CONSIGN_NAM IS NOT NULL
+	</select>
+</mapper>

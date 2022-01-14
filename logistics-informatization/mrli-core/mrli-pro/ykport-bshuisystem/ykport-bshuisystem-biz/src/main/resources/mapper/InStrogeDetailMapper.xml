@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.generator.mapper.InStrogeDetailMapper">
+
+  <resultMap id="inStrogeDetailMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.InStrogeDetail">
+                  <id property="unitCod" column="UNIT_COD"/>
+                        <result property="bz" column="BZ"/>
+                        <result property="inStrogeDate" column="IN_STROGE_DATE"/>
+                        <result property="bh" column="BH"/>
+                        <result property="liushuihao" column="LIUSHUIHAO"/>
+                        <result property="inoutYardNo" column="INOUT_YARD_NO"/>
+                        <result property="subunitCod" column="SUBUNIT_COD"/>
+                        <result property="subunitNam" column="SUBUNIT_NAM"/>
+                        <result property="cbh" column="CBH"/>
+                        <result property="cm" column="CM"/>
+                        <result property="tdh" column="TDH"/>
+                        <result property="jck" column="JCK"/>
+                        <result property="nwm" column="NWM"/>
+                        <result property="cbb" column="CBB"/>
+                        <result property="inStrogeFlag" column="IN_STROGE_FLAG"/>
+                        <result property="inStrogeMethod" column="IN_STROGE_METHOD"/>
+                        <result property="zykq" column="ZYKQ"/>
+                        <result property="firstInStrogeDate" column="FIRST_IN_STROGE_DATE"/>
+                        <result property="strogeName" column="STROGE_NAME"/>
+                        <result property="locationNo" column="LOCATION_NO"/>
+                        <result property="agentCod" column="AGENT_COD"/>
+                        <result property="agentNam" column="AGENT_NAM"/>
+                        <result property="cargoOwnerCode" column="CARGO_OWNER_CODE"/>
+                        <result property="cargoOwnerName" column="CARGO_OWNER_NAME"/>
+                        <result property="cargoNo" column="CARGO_NO"/>
+                        <result property="cargoKindCod" column="CARGO_KIND_COD"/>
+                        <result property="hl" column="HL"/>
+                        <result property="hm" column="HM"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="packingCode" column="PACKING_CODE"/>
+                        <result property="cargoPackage" column="cargo_Package"/>
+                        <result property="specification" column="SPECIFICATION"/>
+                        <result property="jianshu" column="JIANSHU"/>
+                        <result property="piecesWgt" column="PIECES_WGT"/>
+                        <result property="volume" column="VOLUME"/>
+                        <result property="stackingFeeFlag" column="STACKING_FEE_FLAG"/>
+                        <result property="ifendId" column="IFEND_ID"/>
+                        <result property="operator" column="OPERATOR"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="hz" column="HZ"/>
+            </resultMap>
+</mapper>

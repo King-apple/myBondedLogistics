@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.OilDataStatisticsMapper">
+
+  <resultMap id="oilDataStatisticsMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.OilDataStatistics">
+                  <id property="fId" column="F_ID"/>
+                        <result property="inAccountNum" column="IN_ACCOUNT_NUM"/>
+                        <result property="inOperationUnit" column="IN_OPERATION_UNIT"/>
+                        <result property="inOperationUnitCod" column="IN_OPERATION_UNIT_COD"/>
+                        <result property="inUpdateDte" column="IN_UPDATE_DTE"/>
+                        <result property="oilKnd" column="OIL_KND"/>
+                        <result property="loginAccount" column="LOGIN_ACCOUNT"/>
+                        <result property="inAddDte" column="IN_ADD_DTE"/>
+                        <result property="inConsignNam" column="IN_CONSIGN_NAM"/>
+                        <result property="inCargoNam" column="IN_CARGO_NAM"/>
+                        <result property="inType" column="IN_TYPE"/>
+                        <result property="inBlno" column="IN_BLNO"/>
+                        <result property="inStorageTank" column="IN_STORAGE_TANK"/>
+                        <result property="inQuantityPlan" column="IN_QUANTITY_PLAN"/>
+                        <result property="inDensityStandard" column="IN_DENSITY_STANDARD"/>
+                        <result property="inDensity" column="IN_DENSITY"/>
+                        <result property="inStartTim" column="IN_START_TIM"/>
+                        <result property="inEndTim" column="IN_END_TIM"/>
+                        <result property="inConfirmTim" column="IN_CONFIRM_TIM"/>
+                        <result property="inQuantityReal" column="IN_QUANTITY_REAL"/>
+                        <result property="inCustomsDeclarationNum" column="IN_CUSTOMS_DECLARATION_NUM"/>
+                        <result property="outAccountNum" column="OUT_ACCOUNT_NUM"/>
+                        <result property="outOperationUnit" column="OUT_OPERATION_UNIT"/>
+                        <result property="outOpetationUnitCod" column="OUT_OPETATION_UNIT_COD"/>
+                        <result property="outUpdateDte" column="OUT_UPDATE_DTE"/>
+                        <result property="outAddDte" column="OUT_ADD_DTE"/>
+                        <result property="outConsignNam" column="OUT_CONSIGN_NAM"/>
+                        <result property="outCargoNam" column="OUT_CARGO_NAM"/>
+                        <result property="outType" column="OUT_TYPE"/>
+                        <result property="outBlno" column="OUT_BLNO"/>
+                        <result property="outStorageTank" column="OUT_STORAGE_TANK"/>
+                        <result property="outQuantityPlan" column="OUT_QUANTITY_PLAN"/>
+                        <result property="outDensityStandard" column="OUT_DENSITY_STANDARD"/>
+                        <result property="outDensity" column="OUT_DENSITY"/>
+                        <result property="outStartTim" column="OUT_START_TIM"/>
+                        <result property="outEndTim" column="OUT_END_TIM"/>
+                        <result property="outConfirmTim" column="OUT_CONFIRM_TIM"/>
+                        <result property="outQuantityReal" column="OUT_QUANTITY_REAL"/>
+                        <result property="outCustomsDeclarationNum" column="OUT_CUSTOMS_DECLARATION_NUM"/>
+                        <result property="inventory" column="INVENTORY"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+            </resultMap>
+	<resultMap id="oilDataStatisticsVoMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.OilDataStatisticsVo">
+		<id property="fId" column="F_ID"/>
+		<result property="inAccountNum" column="IN_ACCOUNT_NUM"/>
+		<result property="inOperationUnit" column="IN_OPERATION_UNIT"/>
+		<result property="inOperationUnitCod" column="IN_OPERATION_UNIT_COD"/>
+		<result property="inUpdateDte" column="IN_UPDATE_DTE"/>
+		<result property="oilKnd" column="OIL_KND"/>
+		<result property="loginAccount" column="LOGIN_ACCOUNT"/>
+		<result property="inAddDte" column="IN_ADD_DTE"/>
+		<result property="inConsignNam" column="IN_CONSIGN_NAM"/>
+		<result property="inCargoNam" column="IN_CARGO_NAM"/>
+		<result property="inType" column="IN_TYPE"/>
+		<result property="inBlno" column="IN_BLNO"/>
+		<result property="inStorageTank" column="IN_STORAGE_TANK"/>
+		<result property="inQuantityPlan" column="IN_QUANTITY_PLAN"/>
+		<result property="inDensityStandard" column="IN_DENSITY_STANDARD"/>
+		<result property="inDensity" column="IN_DENSITY"/>
+		<result property="inStartTim" column="IN_START_TIM"/>
+		<result property="inEndTim" column="IN_END_TIM"/>
+		<result property="inConfirmTim" column="IN_CONFIRM_TIM"/>
+		<result property="inQuantityReal" column="IN_QUANTITY_REAL"/>
+		<result property="inCustomsDeclarationNum" column="IN_CUSTOMS_DECLARATION_NUM"/>
+		<result property="outAccountNum" column="OUT_ACCOUNT_NUM"/>
+		<result property="outOperationUnit" column="OUT_OPERATION_UNIT"/>
+		<result property="outOpetationUnitCod" column="OUT_OPETATION_UNIT_COD"/>
+		<result property="outUpdateDte" column="OUT_UPDATE_DTE"/>
+		<result property="outAddDte" column="OUT_ADD_DTE"/>
+		<result property="outConsignNam" column="OUT_CONSIGN_NAM"/>
+		<result property="outCargoNam" column="OUT_CARGO_NAM"/>
+		<result property="outType" column="OUT_TYPE"/>
+		<result property="outBlno" column="OUT_BLNO"/>
+		<result property="outStorageTank" column="OUT_STORAGE_TANK"/>
+		<result property="outQuantityPlan" column="OUT_QUANTITY_PLAN"/>
+		<result property="outDensityStandard" column="OUT_DENSITY_STANDARD"/>
+		<result property="outDensity" column="OUT_DENSITY"/>
+		<result property="outStartTim" column="OUT_START_TIM"/>
+		<result property="outEndTim" column="OUT_END_TIM"/>
+		<result property="outConfirmTim" column="OUT_CONFIRM_TIM"/>
+		<result property="outQuantityReal" column="OUT_QUANTITY_REAL"/>
+		<result property="outCustomsDeclarationNum" column="OUT_CUSTOMS_DECLARATION_NUM"/>
+		<result property="inventory" column="INVENTORY"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM"/>
+		<result property="updateNam" column="UPDATE_NAM"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+	</resultMap>
+	<select id="selectPageData" resultMap="oilDataStatisticsVoMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.OilDataStatisticsVo">
+		select * from OIL_DATA_STATISTICS
+		where 1=1
+		<if test="oilDataStatisticsVo.inAccountNum != null and oilDataStatisticsVo.inAccountNum != ''"> and in_account_num = #{oilDataStatisticsVo.inAccountNum}</if>
+		<if test="oilDataStatisticsVo.inOperationUnit != null and oilDataStatisticsVo.inOperationUnit != ''"> and in_operation_unit = #{oilDataStatisticsVo.inOperationUnit}</if>
+		<if test="oilDataStatisticsVo.inOperationUnitCod != null and oilDataStatisticsVo.inOperationUnitCod != ''"> and in_operation_unit_cod = #{oilDataStatisticsVo.inOperationUnitCod}</if>
+		<if test="oilDataStatisticsVo.inUpdateDte != null and oilDataStatisticsVo.inUpdateDte != ''"> and in_update_dte = #{oilDataStatisticsVo.inUpdateDte}</if>
+		<if test="oilDataStatisticsVo.oilKnd != null and oilDataStatisticsVo.oilKnd != ''"> and oil_knd like concat(concat('%',#{oilDataStatisticsVo.oilKnd}),'%') </if>
+		<if test="oilDataStatisticsVo.loginAccount != null and oilDataStatisticsVo.loginAccount != ''"> and login_account like concat(concat('%',#{oilDataStatisticsVo.loginAccount}),'%') </if>
+		<if test="oilDataStatisticsVo.inAddDteStr != null"> and in_add_dte &gt;= to_date(#{oilDataStatisticsVo.inAddDteStr[0]},'yyyy-MM-dd hh24:mi:ss') and in_add_dte &lt;= to_date(#{oilDataStatisticsVo.inAddDteStr[1]},'yyyy-MM-dd hh24:mi:ss')</if>
+		<if test="oilDataStatisticsVo.inConsignNam != null and oilDataStatisticsVo.inConsignNam != ''"> and in_consign_nam like concat(concat('%',#{oilDataStatisticsVo.inConsignNam}),'%') </if>
+		<if test="oilDataStatisticsVo.inCargoNam != null and oilDataStatisticsVo.inCargoNam != ''"> and in_cargo_nam like concat(concat('%',#{oilDataStatisticsVo.inCargoNam}),'%') </if>
+		<if test="oilDataStatisticsVo.inType != null and oilDataStatisticsVo.inType != ''"> and in_type = #{oilDataStatisticsVo.inType}</if>
+		<if test="oilDataStatisticsVo.inBlno != null and oilDataStatisticsVo.inBlno != ''"> and in_blno = #{oilDataStatisticsVo.inBlno}</if>
+		<if test="oilDataStatisticsVo.inStorageTank != null and oilDataStatisticsVo.inStorageTank != ''"> and in_storage_tank = #{oilDataStatisticsVo.inStorageTank}</if>
+		<if test="oilDataStatisticsVo.inQuantityPlan != null"> and in_qantity_plan = #{oilDataStatisticsVo.inQuantityPlan}</if>
+		<if test="oilDataStatisticsVo.inDensityStandard != null and oilDataStatisticsVo.inDensityStandard != ''"> and in_density_standard = #{oilDataStatisticsVo.inDensityStandard}</if>
+		<if test="oilDataStatisticsVo.inDensity != null"> and in_density = #{oilDataStatisticsVo.inDensity}</if>
+		<if test="oilDataStatisticsVo.inStartTim != null and oilDataStatisticsVo.inStartTim != ''"> and in_start_tim = #{oilDataStatisticsVo.inStartTim}</if>
+		<if test="oilDataStatisticsVo.inEndTim != null and oilDataStatisticsVo.inEndTim != ''"> and in_end_tim = #{oilDataStatisticsVo.inEndTim}</if>
+		<if test="oilDataStatisticsVo.inConfirmTim != null and oilDataStatisticsVo.inConfirmTim != ''"> and in_confirm_tim = #{oilDataStatisticsVo.inConfirmTim}</if>
+		<if test="oilDataStatisticsVo.inQuantityReal != null"> and in_quantity_real = #{oilDataStatisticsVo.inQuantityReal}</if>
+		<if test="oilDataStatisticsVo.inCustomsDeclarationNum != null and oilDataStatisticsVo.inCustomsDeclarationNum != ''"> and in_customs_declaration_num = #{oilDataStatisticsVo.inCustomsDeclarationNum}</if>
+		<if test="oilDataStatisticsVo.outAccountNum != null and oilDataStatisticsVo.outAccountNum != ''"> and out_account_num = #{oilDataStatisticsVo.outAccountNum}</if>
+		<if test="oilDataStatisticsVo.outOperationUnit != null and oilDataStatisticsVo.outOperationUnit != ''"> and out_operation_unit = #{oilDataStatisticsVo.outOperationUnit}</if>
+		<if test="oilDataStatisticsVo.outOperationUnitCod != null and oilDataStatisticsVo.outOperationUnitCod != ''"> and out_operation_unit_cod = #{oilDataStatisticsVo.outOperationUnitCod}</if>
+		<if test="oilDataStatisticsVo.outUpdateDte != null and oilDataStatisticsVo.outUpdateDte != ''"> and out_update_dte = #{oilDataStatisticsVo.outUpdateDte}</if>
+		<if test="oilDataStatisticsVo.outAddDteStr != null"> and out_add_dte &gt;= to_date(#{oilDataStatisticsVo.outAddDteStr[0]},'yyyy-MM-dd hh24:mi:ss') and out_add_dte &lt;= to_date(#{oilDataStatisticsVo.outAddDteStr[1]},'yyyy-MM-dd hh24:mi:ss')</if>
+		<if test="oilDataStatisticsVo.outConsignNam != null and oilDataStatisticsVo.outConsignNam != ''"> and out_consign_nam like concat(concat('%',#{oilDataStatisticsVo.outConsignNam}),'%') </if>
+		<if test="oilDataStatisticsVo.outCargoNam != null and oilDataStatisticsVo.outCargoNam != ''"> and out_cargo_nam like concat(concat('%',#{oilDataStatisticsVo.outCargoNam}),'%') </if>
+		<if test="oilDataStatisticsVo.outType != null and oilDataStatisticsVo.outType != ''"> and out_type = #{oilDataStatisticsVo.outType}</if>
+		<if test="oilDataStatisticsVo.outBlno != null and oilDataStatisticsVo.outBlno != ''"> and out_blno = #{oilDataStatisticsVo.outBlno}</if>
+		<if test="oilDataStatisticsVo.outStorageTank != null and oilDataStatisticsVo.outStorageTank != ''"> and out_storage_tank = #{oilDataStatisticsVo.outStorageTank}</if>
+		<if test="oilDataStatisticsVo.outQuantityPlan != null"> and out_qantity_plan = #{oilDataStatisticsVo.outQuantityPlan}</if>
+		<if test="oilDataStatisticsVo.outDensityStandard != null and oilDataStatisticsVo.outDensityStandard != ''"> and out_density_standard = #{oilDataStatisticsVo.outDensityStandard}</if>
+		<if test="oilDataStatisticsVo.outDensity != null"> and out_density = #{oilDataStatisticsVo.outDensity}</if>
+		<if test="oilDataStatisticsVo.outStartTim != null and oilDataStatisticsVo.outStartTim != ''"> and out_start_tim = #{oilDataStatisticsVo.outStartTim}</if>
+		<if test="oilDataStatisticsVo.outEndTim != null and oilDataStatisticsVo.outEndTim != ''"> and out_end_tim = #{oilDataStatisticsVo.outEndTim}</if>
+		<if test="oilDataStatisticsVo.outConfirmTim != null and oilDataStatisticsVo.outConfirmTim != ''"> and out_confirm_tim = #{oilDataStatisticsVo.outConfirmTim}</if>
+		<if test="oilDataStatisticsVo.outQuantityReal != null"> and out_quantity_real = #{oilDataStatisticsVo.outQuantityReal}</if>
+		<if test="oilDataStatisticsVo.outCustomsDeclarationNum != null and oilDataStatisticsVo.outCustomsDeclarationNum != ''"> and out_customs_declaration_num = #{oilDataStatisticsVo.outCustomsDeclarationNum}</if>
+		 and del_tim is null
+		 order by record_tim desc
+	</select>
+	<select id="selectOilDataStatisticsVoList" resultMap="oilDataStatisticsVoMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.OilDataStatisticsVo">
+		select * from OIL_DATA_STATISTICS
+		where 1=1
+		<if test="oilDataStatisticsVo.inAccountNum != null and oilDataStatisticsVo.inAccountNum != ''"> and in_account_num = #{oilDataStatisticsVo.inAccountNum}</if>
+		<if test="oilDataStatisticsVo.inOperationUnit != null and oilDataStatisticsVo.inOperationUnit != ''"> and in_operation_unit = #{oilDataStatisticsVo.inOperationUnit}</if>
+		<if test="oilDataStatisticsVo.inOperationUnitCod != null and oilDataStatisticsVo.inOperationUnitCod != ''"> and in_operation_unit_cod = #{oilDataStatisticsVo.inOperationUnitCod}</if>
+		<if test="oilDataStatisticsVo.inUpdateDte != null and oilDataStatisticsVo.inUpdateDte != ''"> and in_update_dte = #{oilDataStatisticsVo.inUpdateDte}</if>
+		<if test="oilDataStatisticsVo.oilKnd != null and oilDataStatisticsVo.oilKnd != ''"> and oil_knd like concat(concat('%',#{oilDataStatisticsVo.oilKnd}),'%') </if>
+		<if test="oilDataStatisticsVo.loginAccount != null and oilDataStatisticsVo.loginAccount != ''"> and login_account like concat(concat('%',#{oilDataStatisticsVo.loginAccount}),'%') </if>
+		<if test="oilDataStatisticsVo.inAddDteStr != null"> and in_add_dte &gt;= to_date(#{oilDataStatisticsVo.inAddDteStr[0]},'yyyy-MM-dd hh24:mi:ss') and in_add_dte &lt;= to_date(#{oilDataStatisticsVo.inAddDteStr[1]},'yyyy-MM-dd hh24:mi:ss')</if>
+		<if test="oilDataStatisticsVo.inConsignNam != null and oilDataStatisticsVo.inConsignNam != ''"> and in_consign_nam like concat(concat('%',#{oilDataStatisticsVo.inConsignNam}),'%') </if>
+		<if test="oilDataStatisticsVo.inCargoNam != null and oilDataStatisticsVo.inCargoNam != ''"> and in_cargo_nam like concat(concat('%',#{oilDataStatisticsVo.inCargoNam}),'%') </if>
+		<if test="oilDataStatisticsVo.inType != null and oilDataStatisticsVo.inType != ''"> and in_type = #{oilDataStatisticsVo.inType}</if>
+		<if test="oilDataStatisticsVo.inBlno != null and oilDataStatisticsVo.inBlno != ''"> and in_blno = #{oilDataStatisticsVo.inBlno}</if>
+		<if test="oilDataStatisticsVo.inStorageTank != null and oilDataStatisticsVo.inStorageTank != ''"> and in_storage_tank = #{oilDataStatisticsVo.inStorageTank}</if>
+		<if test="oilDataStatisticsVo.inQuantityPlan != null"> and in_qantity_plan = #{oilDataStatisticsVo.inQuantityPlan}</if>
+		<if test="oilDataStatisticsVo.inDensityStandard != null and oilDataStatisticsVo.inDensityStandard != ''"> and in_density_standard = #{oilDataStatisticsVo.inDensityStandard}</if>
+		<if test="oilDataStatisticsVo.inDensity != null"> and in_density = #{oilDataStatisticsVo.inDensity}</if>
+		<if test="oilDataStatisticsVo.inStartTim != null and oilDataStatisticsVo.inStartTim != ''"> and in_start_tim = #{oilDataStatisticsVo.inStartTim}</if>
+		<if test="oilDataStatisticsVo.inEndTim != null and oilDataStatisticsVo.inEndTim != ''"> and in_end_tim = #{oilDataStatisticsVo.inEndTim}</if>
+		<if test="oilDataStatisticsVo.inConfirmTim != null and oilDataStatisticsVo.inConfirmTim != ''"> and in_confirm_tim = #{oilDataStatisticsVo.inConfirmTim}</if>
+		<if test="oilDataStatisticsVo.inQuantityReal != null"> and in_quantity_real = #{oilDataStatisticsVo.inQuantityReal}</if>
+		<if test="oilDataStatisticsVo.inCustomsDeclarationNum != null and oilDataStatisticsVo.inCustomsDeclarationNum != ''"> and in_customs_declaration_num = #{oilDataStatisticsVo.inCustomsDeclarationNum}</if>
+		<if test="oilDataStatisticsVo.outAccountNum != null and oilDataStatisticsVo.outAccountNum != ''"> and out_account_num = #{oilDataStatisticsVo.outAccountNum}</if>
+		<if test="oilDataStatisticsVo.outOperationUnit != null and oilDataStatisticsVo.outOperationUnit != ''"> and out_operation_unit = #{oilDataStatisticsVo.outOperationUnit}</if>
+		<if test="oilDataStatisticsVo.outOperationUnitCod != null and oilDataStatisticsVo.outOperationUnitCod != ''"> and out_operation_unit_cod = #{oilDataStatisticsVo.outOperationUnitCod}</if>
+		<if test="oilDataStatisticsVo.outUpdateDte != null and oilDataStatisticsVo.outUpdateDte != ''"> and out_update_dte = #{oilDataStatisticsVo.outUpdateDte}</if>
+		<if test="oilDataStatisticsVo.outAddDteStr != null"> and out_add_dte &gt;= to_date(#{oilDataStatisticsVo.outAddDteStr[0]},'yyyy-MM-dd hh24:mi:ss') and out_add_dte &lt;= to_date(#{oilDataStatisticsVo.outAddDteStr[1]},'yyyy-MM-dd hh24:mi:ss')</if>
+		<if test="oilDataStatisticsVo.outConsignNam != null and oilDataStatisticsVo.outConsignNam != ''"> and out_consign_nam like concat(concat('%',#{oilDataStatisticsVo.outConsignNam}),'%') </if>
+		<if test="oilDataStatisticsVo.outCargoNam != null and oilDataStatisticsVo.outCargoNam != ''"> and out_cargo_nam like concat(concat('%',#{oilDataStatisticsVo.outCargoNam}),'%') </if>
+		<if test="oilDataStatisticsVo.outType != null and oilDataStatisticsVo.outType != ''"> and out_type = #{oilDataStatisticsVo.outType}</if>
+		<if test="oilDataStatisticsVo.outBlno != null and oilDataStatisticsVo.outBlno != ''"> and out_blno = #{oilDataStatisticsVo.outBlno}</if>
+		<if test="oilDataStatisticsVo.outStorageTank != null and oilDataStatisticsVo.outStorageTank != ''"> and out_storage_tank = #{oilDataStatisticsVo.outStorageTank}</if>
+		<if test="oilDataStatisticsVo.outQuantityPlan != null"> and out_qantity_plan = #{oilDataStatisticsVo.outQuantityPlan}</if>
+		<if test="oilDataStatisticsVo.outDensityStandard != null and oilDataStatisticsVo.outDensityStandard != ''"> and out_density_standard = #{oilDataStatisticsVo.outDensityStandard}</if>
+		<if test="oilDataStatisticsVo.outDensity != null"> and out_density = #{oilDataStatisticsVo.outDensity}</if>
+		<if test="oilDataStatisticsVo.outStartTim != null and oilDataStatisticsVo.outStartTim != ''"> and out_start_tim = #{oilDataStatisticsVo.outStartTim}</if>
+		<if test="oilDataStatisticsVo.outEndTim != null and oilDataStatisticsVo.outEndTim != ''"> and out_end_tim = #{oilDataStatisticsVo.outEndTim}</if>
+		<if test="oilDataStatisticsVo.outConfirmTim != null and oilDataStatisticsVo.outConfirmTim != ''"> and out_confirm_tim = #{oilDataStatisticsVo.outConfirmTim}</if>
+		<if test="oilDataStatisticsVo.outQuantityReal != null"> and out_quantity_real = #{oilDataStatisticsVo.outQuantityReal}</if>
+		<if test="oilDataStatisticsVo.outCustomsDeclarationNum != null and oilDataStatisticsVo.outCustomsDeclarationNum != ''"> and out_customs_declaration_num = #{oilDataStatisticsVo.outCustomsDeclarationNum}</if>
+		and del_tim is null
+		order by in_add_dte
+	</select>
+</mapper>

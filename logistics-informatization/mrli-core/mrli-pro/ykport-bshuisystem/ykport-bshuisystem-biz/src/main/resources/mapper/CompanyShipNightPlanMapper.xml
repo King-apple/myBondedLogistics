@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.CompanyShipNightPlanMapper">
+	<select id="getUnitNam" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.CDatacodes">
+		SELECT   CODE, MEANING FROM ykport0.C_DATACODES
+				 WHERE FLDNAME = 'UNIT_NAM_UP' ORDER BY CODE
+	</select>
+	<select id="getMessage" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.CompanyShipNightPlanHead">
+		SELECT * from ykport0.SUB_SHIP_PLAN_HEAD where 1=1
+		<if test="planDte!= null "> and plan_dte = to_date(#{planDte},'yyyy-MM-dd') </if>
+		<if test="unitCod != null  and unitCod != ''"> and unit_cod = #{unitCod}</if>
+
+	</select>
+</mapper>

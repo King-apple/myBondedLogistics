@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.ForwarderParameterMapper">
+
+  <resultMap id="forwarderParameterMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.ForwarderParameter">
+                  <id property="fId" column="F_ID"/>
+                        <result property="serialNumberPay" column="SERIAL_NUMBER_PAY"/>
+                        <result property="contCod" column="CONT_COD"/>
+                        <result property="billDate" column="BILL_DATE"/>
+                        <result property="secondNam" column="SECOND_NAM"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="feeQuantity" column="FEE_QUANTITY"/>
+                        <result property="nember" column="NEMBER"/>
+                        <result property="shipNam" column="SHIP_NAM"/>
+                        <result property="loadUnloadDate" column="LOAD_UNLOAD_DATE"/>
+                        <result property="currentAccount" column="CURRENT_ACCOUNT"/>
+                        <result property="payContent" column="PAY_CONTENT"/>
+                        <result property="payUnit" column="PAY_UNIT"/>
+                        <result property="firstNam" column="FIRST_NAM"/>
+                        <result property="money" column="MONEY"/>
+                        <result property="receiptInvoice" column="RECEIPT_INVOICE"/>
+                        <result property="businessSettlementNam" column="BUSINESS_SETTLEMENT_NAM"/>
+                        <result property="applicationInvoice" column="APPLICATION_INVOICE"/>
+                        <result property="openInvoice" column="OPEN_INVOICE"/>
+                        <result property="serialNumberSet" column="SERIAL_NUMBER_SET"/>
+                        <result property="settlemnentDataMonth" column="SETTLEMNENT_DATA_MONTH"/>
+                        <result property="ladderPrice" column="LADDER_PRICE"/>
+                        <result property="sendInvoice" column="SEND_INVOICE"/>
+                        <result property="receivedPay" column="RECEIVED_PAY"/>
+                        <result property="profits" column="PROFITS"/>
+                        <result property="spareMoney" column="SPARE_MONEY"/>
+                        <result property="differenceMoney" column="DIFFERENCE_MONEY"/>
+                        <result property="markTxt" column="MARK_TXT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+            </resultMap>
+</mapper>

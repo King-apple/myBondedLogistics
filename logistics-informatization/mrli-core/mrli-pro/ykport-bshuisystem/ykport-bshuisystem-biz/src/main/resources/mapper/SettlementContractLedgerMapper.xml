@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.SettlementContractLedgerMapper">
+
+  <resultMap id="settlementContractLedgerMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.SettlementContractLedger">
+                  <id property="fId" column="F_ID"/>
+                        <result property="contractType" column="CONTRACT_TYPE"/>
+                        <result property="dept" column="DEPT"/>
+                        <result property="contNo" column="CONT_NO"/>
+                        <result property="secondNam" column="SECOND_NAM"/>
+                        <result property="shipNam" column="SHIP_NAM"/>
+                        <result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="cargoNum" column="CARGO_NUM"/>
+                        <result property="cargoFee" column="CARGO_FEE"/>
+                        <result property="settlementBasis" column="SETTLEMENT_BASIS"/>
+                        <result property="startDte" column="START_DTE"/>
+                        <result property="endDte" column="END_DTE"/>
+                        <result property="operator" column="OPERATOR"/>
+                        <result property="feeRat" column="FEE_RAT"/>
+                        <result property="feeNam" column="FEE_NAM"/>
+                        <result property="inYardNo" column="IN_YARD_NO"/>
+                        <result property="outYardNo" column="OUT_YARD_NO"/>
+                        <result property="inRecordTim" column="IN_RECORD_TIM"/>
+                        <result property="outRecordTim" column="OUT_RECORD_TIM"/>
+                        <result property="inRoughWet" column="IN_ROUGH_WET"/>
+                        <result property="outRoughWet" column="OUT_ROUGH_WET"/>
+                        <result property="ioyardListNo" column="IOYARD_LIST_NO"/>
+                        <result property="inYardDat" column="IN_YARD_DAT"/>
+                        <result property="outYardDat" column="OUT_YARD_DAT"/>
+                        <result property="inWeightWgt" column="IN_WEIGHT_WGT"/>
+                        <result property="outWeightWgt" column="OUT_WEIGHT_WGT"/>
+                        <result property="billDatCollection" column="BILL_DAT_COLLECTION"/>
+                        <result property="billDatSettlement" column="BILL_DAT_SETTLEMENT"/>
+                        <result property="billCodCollection" column="BILL_COD_COLLECTION"/>
+                        <result property="billCodSettlement" column="BILL_COD_SETTLEMENT"/>
+                        <result property="moneyCollection" column="MONEY_COLLECTION"/>
+                        <result property="moneySettlement" column="MONEY_SETTLEMENT"/>
+                        <result property="moneyRebates" column="MONEY_REBATES"/>
+                        <result property="balance" column="BALANCE"/>
+                        <result property="profit" column="PROFIT"/>
+            </resultMap>
+</mapper>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.BusinessBillsHeadMapper">
+
+	<resultMap id="businessBillsHeadMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.BusinessBillsHead">
+		<id property="fId" column="F_ID"/>
+		<result property="companyNam" column="COMPANY_NAM"/>
+		<result property="billKnd" column="BILL_KND"/>
+		<result property="billNam" column="BILL_NAM"/>
+		<result property="billCod" column="BILL_COD"/>
+		<result property="contCod" column="CONT_COD"/>
+		<result property="dept" column="DEPT"/>
+		<result property="billDate" column="BILL_DATE"/>
+		<result property="secondCod" column="SECOND_COD"/>
+		<result property="secondNam" column="SECOND_NAM"/>
+		<result property="shipNam" column="SHIP_NAM"/>
+		<result property="cargoCod" column="CARGO_COD"/>
+		<result property="cargoNam" column="CARGO_NAM"/>
+		<result property="feeQuantity" column="FEE_QUANTITY"/>
+		<result property="feeNam" column="FEE_NAM"/>
+		<result property="operator" column="OPERATOR"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM"/>
+		<result property="updateNam" column="UPDATE_NAM"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+		<result property="deptId" column="DEPT_ID"/>
+	</resultMap>
+	<resultMap id="enternalPaymentMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo">
+		<id property="fId" column="F_ID"/>
+		<result property="companyNam" column="COMPANY_NAM"/>
+		<result property="billKnd" column="BILL_KND"/>
+		<result property="billNam" column="BILL_NAM"/>
+		<result property="billCod" column="BILL_COD"/>
+		<result property="contCod" column="CONT_COD"/>
+		<result property="dept" column="DEPT"/>
+		<result property="billDate" column="BILL_DATE"/>
+		<result property="secondCod" column="SECOND_COD"/>
+		<result property="secondNam" column="SECOND_NAM"/>
+		<result property="shipNam" column="SHIP_NAM"/>
+		<result property="cargoCod" column="CARGO_COD"/>
+		<result property="cargoNam" column="CARGO_NAM"/>
+		<result property="feeQuantity" column="FEE_QUANTITY"/>
+		<result property="feeNam" column="FEE_NAM"/>
+		<result property="operator" column="OPERATOR"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM" jdbcType="TIMESTAMP"/>
+		<result property="updateNam" column="UPDATE_NAM" jdbcType="TIMESTAMP"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+		<result property="invoiceType" column="INVOICE_TYPE"/>
+		<result property="deptId" column="DEPT_ID"/>
+		<collection property="sysFileList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile"
+					select="getFiles"
+					column="{fId=F_ID}">
+			<!-- property 表示com.domain.Class中的属性； column 表示表中的列名 -->
+			<result property="id" column="ID"/>
+			<result property="fileName" column="FILE_NAME"/>
+			<result property="original" column="ORIGINAL"/>
+			<result property="bucketName" column="BUCKET_NAME"/>
+			<result property="type" column="TYPE"/>
+			<result property="fileSize" column="FILE_SIZE"/>
+			<result property="delFlag" column="DEL_FLAG"/>
+			<result property="tableName" column="TABLE_NAME"/>
+			<result property="tableFid" column="TABLE_FID"/>
+			<result property="url" column="URL"/>
+		</collection>
+		<collection property="bbBodyList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.BusinessBillsBody"
+					select="getBodyList"
+					column="{fId=F_ID}">
+		</collection>
+	</resultMap>
+
+	<select id="getFiles" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile">
+			select * from BSWL.SYS_FILE where TABLE_FID = #{fId}
+	</select>
+
+	<select id="getBodyList" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.BusinessBillsBody">
+			select * from BSWL.BUSINESS_BILLS_BODY  where DEL_TIM IS NULL and DEL_NAM IS NULL and H_FID =#{fId,jdbcType=BIGINT}
+	</select>
+	<select id="selectPageVo" resultMap="enternalPaymentMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo">
+		select *
+		from BSWL.BUSINESS_BILLS_HEAD t
+		where 1=1
+		<if test="externalPaymentVo.billCod != null and externalPaymentVo.billCod != ''">
+			and t.BILL_COD like concat(concat('%', (#{externalPaymentVo.billCod}) ),'%')
+		</if>
+		<if test="externalPaymentVo.secondNam != null and externalPaymentVo.secondNam != ''">
+			and t.SECOND_NAM = #{externalPaymentVo.secondNam}
+		</if>
+		<if test="externalPaymentVo.contCod != null and externalPaymentVo.contCod != ''">
+			and t.CONT_COD = #{externalPaymentVo.contCod}
+		</if>
+		<if test="externalPaymentVo.cargoKindNam != null and externalPaymentVo.cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{externalPaymentVo.cargoKindNam}
+		</if>
+		<if test="externalPaymentVo.params != null ">
+			and t.BILL_DATE >= to_date(#{externalPaymentVo.params[0]},'yyyy-MM-dd') and t.BILL_DATE &lt;= to_date(#{externalPaymentVo.params[1]},'yyyy-MM-dd')
+		</if>
+		<if test="externalPaymentVo.deptId != null and externalPaymentVo.deptId != ''">
+			and t.DEPT_ID = #{externalPaymentVo.deptId}
+		</if>
+		<if test="externalPaymentVo.operNam != null and externalPaymentVo.operNam != ''">
+			and t.OPER_NAM = #{externalPaymentVo.operNam}
+		</if>
+
+		and t.DEL_TIM IS NULL and t.DEL_NAM IS NULL and t.INVOICE_TYPE IS NULL
+		order by t.RECORD_TIM desc
+
+	</select>
+
+	<select id="selectBusinessPageVo" resultMap="enternalPaymentMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo">
+		select *
+		from BSWL.BUSINESS_BILLS_HEAD t
+		where 1=1 and t.DEL_TIM IS NULL and t.DEL_NAM IS NULL and t.INVOICE_TYPE IS NOT NULL
+		<if test="externalPaymentVo.operNam != null and externalPaymentVo.operNam != ''">
+			and t.OPER_NAM = #{externalPaymentVo.operNam}
+		</if>
+		<if test="externalPaymentVo.billCod != null and externalPaymentVo.billCod != ''">
+			and t.BILL_COD like concat(concat('%', (#{externalPaymentVo.billCod}) ),'%')
+		</if>
+		<if test="externalPaymentVo.secondNam != null and externalPaymentVo.secondNam != ''">
+			and t.SECOND_NAM = #{externalPaymentVo.secondNam}
+		</if>
+		<if test="externalPaymentVo.contCod != null and externalPaymentVo.contCod != ''">
+			and t.CONT_COD = #{externalPaymentVo.contCod}
+		</if>
+		<if test="externalPaymentVo.cargoKindNam != null and externalPaymentVo.cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{externalPaymentVo.cargoKindNam}
+		</if>
+		<if test="externalPaymentVo.params != null ">
+			and t.BILL_DATE >= to_date(#{externalPaymentVo.params[0]},'yyyy-MM-dd') and t.BILL_DATE &lt;= to_date(#{externalPaymentVo.params[1]},'yyyy-MM-dd')
+		</if>
+		<if test="externalPaymentVo.deptId != null and externalPaymentVo.deptId != ''">
+			and t.DEPT_ID = #{externalPaymentVo.deptId}
+		</if>
+		order by t.RECORD_TIM desc
+	</select>
+
+	<resultMap id="mapPay" type="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo">
+		<id property="fId" column="F_ID"/>
+		<collection property="bbBodyList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.BusinessBillsBody"
+					select="getBodyListPay"
+					column="{fId=F_ID}">
+		</collection>
+	</resultMap>
+	<select id="selectPayment" resultMap="mapPay" >
+		select * from BSWL.BUSINESS_BILLS_HEAD t
+		where t.DEL_TIM IS NULL and t.DEL_NAM IS NULL and t.INVOICE_TYPE IS NULL
+		order by t.RECORD_TIM desc
+	</select>
+	<resultMap id="mapBus" type="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo">
+		<id property="fId" column="F_ID"/>
+		<collection property="bbBodyList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.BusinessBillsBody"
+					select="getBodyListPay"
+					column="{fId=F_ID}">
+		</collection>
+	</resultMap>
+	<select id="selectSettlement" resultMap="mapBus">
+		select *
+		from BSWL.BUSINESS_BILLS_HEAD t
+		where 1=1 and t.DEL_TIM IS NULL and t.DEL_NAM IS NULL and t.INVOICE_TYPE IS NOT NULL
+		order by t.RECORD_TIM desc
+	</select>
+
+
+	<select id="getBodyListPay" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.BusinessBillsBody">
+			select * from BSWL.BUSINESS_BILLS_BODY  where DEL_TIM IS NULL and DEL_NAM IS NULL and ITEM_NAM = '应收款'  and H_FID =#{fId,jdbcType=BIGINT}
+	</select>
+
+	<select id="getCargoKindOperation" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo">
+		select a.f_id,a.BILL_DATE,a.CARGO_NAM,a.IN_SHIP_NAME,a.OUT_SHIP_NAME, a.SECOND_NAM ,a.LOADING_SHIP,a.TRADE_ID,a.FEE_QUANTITY,(NVL(b.TOTAL_MONEY, 0)-NVL(a.TOTAL_MONEY, 0)) TOTAL_MONEY from (SELECT
+		h.f_id f_id,
+			max( h.BILL_DATE ) BILL_DATE,
+			max( h.CARGO_NAM ) CARGO_NAM,
+			max( h.IN_SHIP_NAME ) IN_SHIP_NAME,
+			max( h.OUT_SHIP_NAME ) OUT_SHIP_NAME ,
+			max( h.SECOND_NAM ) SECOND_NAM ,
+			max( h.LOADING_SHIP ) LOADING_SHIP ,
+			max( h.TRADE_ID ) TRADE_ID ,
+			max(h.FEE_QUANTITY) FEE_QUANTITY,
+			sum(b.TOTAL_MONEY) TOTAL_MONEY,
+			b.ITEM_NAM
+		FROM
+			BUSINESS_BILLS_HEAD h
+			LEFT JOIN BUSINESS_BILLS_BODY b ON h.F_ID = b.H_FID
+		WHERE
+			h.DEL_NAM IS NULL
+			AND b.DEL_NAM IS NULL
+			and b.ITEM_NAM  = '应付款'
+			and h.dept = '货代部'
+		<if test="externalPaymentVo.year != null ">
+			and TO_CHAR(h.BILL_DATE,'yyyy') = #{externalPaymentVo.year}
+		</if>
+
+		GROUP BY
+			h.f_id,b.ITEM_NAM) a INNER JOIN (SELECT
+			h.f_id f_id,
+			max( h.BILL_DATE ) BILL_DATE,
+			max( h.CARGO_NAM ) CARGO_NAM,
+			max( h.IN_SHIP_NAME ) IN_SHIP_NAME,
+			max( h.OUT_SHIP_NAME ) OUT_SHIP_NAME ,
+			max( h.SECOND_NAM ) SECOND_NAM ,
+			max( h.LOADING_SHIP ) LOADING_SHIP ,
+			max( h.TRADE_ID ) TRADE_ID ,
+			max(h.FEE_QUANTITY) FEE_QUANTITY,
+			sum(b.TOTAL_MONEY) TOTAL_MONEY,
+			b.ITEM_NAM
+		FROM
+			BUSINESS_BILLS_HEAD h
+			LEFT JOIN BUSINESS_BILLS_BODY b ON h.F_ID = b.H_FID
+		WHERE
+			h.DEL_NAM IS NULL
+			AND b.DEL_NAM IS NULL
+			and ITEM_NAM  = '应收款'
+			and h.dept = '货代部'
+			<if test="externalPaymentVo.year != null ">
+				and TO_CHAR(h.BILL_DATE,'yyyy') = #{externalPaymentVo.year}
+			</if>
+		GROUP BY
+			h.f_id,b.ITEM_NAM) b on a.f_id = b.F_ID order by a.BILL_DATE
+		</select>
+
+	<select id="getIncomeStatistcs" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.ExternalPaymentVo" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.IncomeStatistcsVo">
+		select a.f_id,
+		a.BILL_DATE,
+		a.SECOND_NAM ,
+		a.FEE_QUANTITY,
+		(NVL(b.TOTAL_MONEY, 0)-NVL(a.TOTAL_MONEY, 0)) TOTAL_MONEY ,
+		NVL( c.TOTAL_MONEY, 0 ) agencyCustomsDeclarationFee,
+		a.ONE_DAY_TOUR
+		from (SELECT
+		h.f_id f_id,
+		max( h.BILL_DATE ) BILL_DATE,
+		max( h.CARGO_NAM ) CARGO_NAM,
+		max( h.IN_SHIP_NAME ) IN_SHIP_NAME,
+		max( h.OUT_SHIP_NAME ) OUT_SHIP_NAME ,
+		max( h.SECOND_NAM ) SECOND_NAM ,
+		max( h.LOADING_SHIP ) LOADING_SHIP ,
+		max( h.TRADE_ID ) TRADE_ID ,
+		max(h.FEE_QUANTITY) FEE_QUANTITY,
+		sum(b.TOTAL_MONEY) TOTAL_MONEY,
+		max( NVL(h.ONE_DAY_TOUR,0)) ONE_DAY_TOUR ,
+		b.ITEM_NAM
+		FROM
+		BUSINESS_BILLS_HEAD h
+		LEFT JOIN BUSINESS_BILLS_BODY b ON h.F_ID = b.H_FID
+		WHERE
+		h.DEL_NAM IS NULL
+		AND b.DEL_NAM IS NULL
+		and b.ITEM_NAM  = '应付款'
+		and h.dept = '货代部'
+		<if test="externalPaymentVo.year != null ">
+			and TO_CHAR(h.BILL_DATE,'yyyy') = #{externalPaymentVo.year}
+		</if>
+
+		GROUP BY
+		h.f_id,b.ITEM_NAM) a INNER JOIN (SELECT
+		h.f_id f_id,
+		max( h.BILL_DATE ) BILL_DATE,
+		max( h.CARGO_NAM ) CARGO_NAM,
+		max( h.IN_SHIP_NAME ) IN_SHIP_NAME,
+		max( h.OUT_SHIP_NAME ) OUT_SHIP_NAME ,
+		max( h.SECOND_NAM ) SECOND_NAM ,
+		max( h.LOADING_SHIP ) LOADING_SHIP ,
+		max( h.TRADE_ID ) TRADE_ID ,
+		max(h.FEE_QUANTITY) FEE_QUANTITY,
+		sum(b.TOTAL_MONEY) TOTAL_MONEY,
+
+		b.ITEM_NAM
+		FROM
+		BUSINESS_BILLS_HEAD h
+		LEFT JOIN BUSINESS_BILLS_BODY b ON h.F_ID = b.H_FID
+		WHERE
+		h.DEL_NAM IS NULL
+		AND b.DEL_NAM IS NULL
+		and ITEM_NAM  = '应收款'
+		and h.dept = '货代部'
+		<if test="externalPaymentVo.year != null ">
+			and TO_CHAR(h.BILL_DATE,'yyyy') = #{externalPaymentVo.year}
+		</if>
+		GROUP BY
+		h.f_id,b.ITEM_NAM) b on a.f_id = b.F_ID
+
+		left JOIN (
+		SELECT
+		h.f_id f_id,
+		sum( bo.TOTAL_MONEY ) TOTAL_MONEY,
+		bo.ITEM_NAM
+		FROM
+		BUSINESS_BILLS_HEAD h
+		LEFT JOIN BUSINESS_BILLS_BODY bo ON h.F_ID = bo.H_FID
+		WHERE
+		h.DEL_NAM IS NULL
+		AND bo.DEL_NAM IS NULL
+		AND bo.ITEM_NAM = '应收款'
+		AND bo.FEE_NAM = #{externalPaymentVo.feeNam}
+		and h.dept = '货代部'
+		<if test="externalPaymentVo.year != null ">
+			and TO_CHAR(h.BILL_DATE,'yyyy') = #{externalPaymentVo.year}
+		</if>
+
+		GROUP BY
+		h.f_id,
+		bo.ITEM_NAM
+		) c ON a.f_id = c.F_ID
+		order by a.BILL_DATE
+	</select>
+</mapper>

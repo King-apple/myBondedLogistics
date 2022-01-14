@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.CheckWeightMapper">
+
+  <resultMap id="checkWeightMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.CheckWeight">
+                  <id property="recordDte" column="RECORD_DTE"/>
+                        <result property="checkNo" column="CHECK_NO"/>
+                        <result property="trustNo" column="TRUST_NO"/>
+                        <result property="cargoNo" column="CARGO_NO"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="cargoKindCod" column="CARGO_KIND_COD"/>
+                        <result property="feeWayId" column="FEE_WAY_ID"/>
+                        <result property="feeWayNam" column="FEE_WAY_NAM"/>
+                        <result property="shipNo" column="SHIP_NO"/>
+                        <result property="shipNam" column="SHIP_NAM"/>
+                        <result property="berthCod" column="BERTH_COD"/>
+                        <result property="inoutId" column="INOUT_ID"/>
+                        <result property="tradeId" column="TRADE_ID"/>
+                        <result property="billNo" column="BILL_NO"/>
+                        <result property="piecesNum" column="PIECES_NUM"/>
+                        <result property="weightWgt" column="WEIGHT_WGT"/>
+                        <result property="wgtUnit" column="WGT_UNIT"/>
+                        <result property="addMinRat" column="ADD_MIN_RAT"/>
+                        <result property="toPlaceNam" column="TO_PLACE_NAM"/>
+                        <result property="checkId" column="CHECK_ID"/>
+                        <result property="requireUnitNam" column="REQUIRE_UNIT_NAM"/>
+                        <result property="agentCod" column="AGENT_COD"/>
+                        <result property="agentNam" column="AGENT_NAM"/>
+                        <result property="workPlace" column="WORK_PLACE"/>
+                        <result property="workPlaceCod" column="WORK_PLACE_COD"/>
+                        <result property="unitCod" column="UNIT_COD"/>
+                        <result property="unitNam" column="UNIT_NAM"/>
+                        <result property="subunitCod" column="SUBUNIT_COD"/>
+                        <result property="subunitNam" column="SUBUNIT_NAM"/>
+                        <result property="ifendId" column="IFEND_ID"/>
+                        <result property="remarkTxt" column="REMARK_TXT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="countWayCod" column="COUNT_WAY_COD"/>
+                        <result property="countWay" column="COUNT_WAY"/>
+                        <result property="trainNo" column="TRAIN_NO"/>
+                        <result property="trainCod" column="TRAIN_COD"/>
+                        <result property="inoutYardNo" column="INOUT_YARD_NO"/>
+                        <result property="carId" column="CAR_ID"/>
+                        <result property="gCarId" column="G_CAR_ID"/>
+            </resultMap>
+
+	<select id="getCheckWeightForCheckNo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.CheckWeight">
+		SELECT * FROM (SELECT * FROM BSWL.CHECK_WEIGHT where check_no like CONCAT(CONCAT('%',#{unitCode}),'%')  ORDER BY check_no desc) WHERE ROWNUM = 1;
+	</select>
+</mapper>

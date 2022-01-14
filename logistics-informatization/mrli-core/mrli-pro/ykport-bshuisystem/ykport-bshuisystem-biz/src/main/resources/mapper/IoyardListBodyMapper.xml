@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.IoyardListBodyMapper">
+
+  <resultMap id="ioyardListBodyMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardListBody">
+                  <id property="fId" column="F_ID"/>
+                        <result property="fFid" column="F_FID"/>
+                        <result property="ioyardListNo" column="IOYARD_LIST_NO"/>
+                        <result property="inYardDat" column="IN_YARD_DAT"/>
+                        <result property="inYardWay" column="IN_YARD_WAY"/>
+                        <result property="consignNam" column="CONSIGN_NAM"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="cPkgKindNam" column="C_PKG_KIND_NAM"/>
+                        <result property="yardNam" column="YARD_NAM"/>
+                        <result property="inPiecesNum" column="IN_PIECES_NUM"/>
+                        <result property="inWeightWgt" column="IN_WEIGHT_WGT"/>
+                        <result property="inSettleWgt" column="IN_SETTLE_WGT"/>
+                        <result property="inYardNo" column="IN_YARD_NO"/>
+                        <result property="outYardDat" column="OUT_YARD_DAT"/>
+                        <result property="outYardWay" column="OUT_YARD_WAY"/>
+                        <result property="outPiecesNum" column="OUT_PIECES_NUM"/>
+                        <result property="outWeightWgt" column="OUT_WEIGHT_WGT"/>
+                        <result property="outSettleWgt" column="OUT_SETTLE_WGT"/>
+                        <result property="outYardNo" column="OUT_YARD_NO"/>
+                        <result property="markTxt" column="MARK_TXT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+            </resultMap>
+	<select id="selectListOther" resultMap="ioyardListBodyMap">
+		select * from ioyard_list_body where del_tim is null and f_fid = (
+			select f_fid from ioyard_list_body where f_id=#{fId}
+		)
+	</select>
+</mapper>

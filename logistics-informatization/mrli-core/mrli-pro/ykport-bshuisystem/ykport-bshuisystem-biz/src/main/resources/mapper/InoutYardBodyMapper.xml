@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.InoutYardBodyMapper">
+
+  <resultMap id="inoutYardBodyMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardBody">
+                  <id property="fId" column="F_ID"/>
+                        <result property="hFid" column="H_FID"/>
+                        <result property="cFid" column="C_FID"/>
+                        <result property="contNo" column="CONT_NO"/>
+                        <result property="cargoNo" column="CARGO_NO"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="format" column="FORMAT"/>
+                        <result property="pieceNum" column="PIECE_NUM"/>
+                        <result property="bucketNum" column="BUCKET_NUM"/>
+                        <result property="roughWet" column="ROUGH_WET"/>
+                        <result property="netWet" column="NET_WET"/>
+                        <result property="unitPrice" column="UNIT_PRICE"/>
+                        <result property="unitPriceKnd" column="UNIT_PRICE_KND"/>
+                        <result property="totalPrice" column="TOTAL_PRICE"/>
+                        <result property="unit" column="UNIT"/>
+                        <result property="transportMeans" column="TRANSPORT_MEANS"/>
+                        <result property="importCountry" column="IMPORT_COUNTRY"/>
+                        <result property="distinationCountry" column="DISTINATION_COUNTRY"/>
+                        <result property="deadLoad" column="DEAD_LOAD"/>
+                        <result property="checkNo" column="CHECK_NO"/>
+                        <result property="markTxt" column="MARK_TXT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+                        <result property="boundFlag" column="BOUND_FLAG"/>
+                        <result property="cargoKindNo" column="CARGO_KIND_NO"/>
+                        <result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+                        <result property="inoutId" column="INOUT_ID"/>
+                        <result property="tradeId" column="TRADE_ID"/>
+                        <result property="billNo" column="BILL_NO"/>
+                        <result property="addMinRat" column="ADD_MIN_RAT"/>
+                        <result property="unitCod" column="UNIT_COD"/>
+                        <result property="unitNam" column="UNIT_NAM"/>
+            </resultMap>
+
+	<select id="selectInoutYardBodyFid" resultType="Integer">
+		SELECT SEQ_INOUT_YARD_BODY.NEXTVAL FROM DUAL;
+	</select>
+
+	<update id="updateForCheckNo" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardBody">
+		update BSWL.INOUT_YARD_BODY
+		set check_no = ""
+		where f_id=#{fId}
+	</update>
+	<select id="getList" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardBody">
+		select  b.* FROM inout_yard_body b LEFT JOIN inout_yard_head t
+		ON t.f_id = b.h_fid WHERE t.del_nam IS NULL AND b.del_nam IS NULL and b.in_out = 1 and b.SHOW_FLAG = 1
+	</select>
+	<select id="selectPageVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardBody" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardBody">
+		select  b.* FROM inout_yard_body b LEFT JOIN inout_yard_head t
+		ON t.f_id = b.h_fid WHERE t.business_knd != '一日游业务' AND t.del_nam IS NULL AND b.del_nam IS NULL and b.in_out = 1 and b.SHOW_FLAG = 1
+		<if test="inoutYardBody.inCheckNum != null and inoutYardBody.inCheckNum != ''">
+			and b.IN_CHECK_NUM like concat(concat('%', #{inoutYardBody.inCheckNum}),'%')
+		</if>
+	</select>
+</mapper>

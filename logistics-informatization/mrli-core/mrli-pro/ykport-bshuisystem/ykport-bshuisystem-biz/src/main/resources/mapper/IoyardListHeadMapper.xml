@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.IoyardListHeadMapper">
+
+		  <resultMap id="ioyardListHeadMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardListHead">
+						<id property="fId" column="F_ID"/>
+						<result property="ioyardListNam" column="IOYARD_LIST_NAM"/>
+						<result property="ioyardListNo" column="IOYARD_LIST_NO"/>
+						<result property="contNo" column="CONT_NO"/>
+						<result property="listDat" column="LIST_DAT"/>
+						<result property="operNam" column="OPER_NAM"/>
+						<result property="recordTim" column="RECORD_TIM"/>
+						<result property="updateNam" column="UPDATE_NAM"/>
+						<result property="updateTim" column="UPDATE_TIM"/>
+						<result property="delNam" column="DEL_NAM"/>
+						<result property="delTim" column="DEL_TIM"/>
+			</resultMap>
+
+			<resultMap id="ioyardListHeadBodyMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardListHeadBodyVo">
+				<id property="fId" column="F_ID"/>
+				<result property="ioyardListNam" column="IOYARD_LIST_NAM"/>
+				<result property="ioyardListNo" column="IOYARD_LIST_NO"/>
+				<result property="contNo" column="CONT_NO"/>
+				<result property="listDat" column="LIST_DAT"/>
+				<result property="operNam" column="OPER_NAM"/>
+				<result property="recordTim" column="RECORD_TIM"/>
+				<result property="updateNam" column="UPDATE_NAM"/>
+				<result property="updateTim" column="UPDATE_TIM"/>
+				<result property="delNam" column="DEL_NAM"/>
+				<result property="delTim" column="DEL_TIM"/>
+				<collection property="ioyardListBodyList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardListBody"
+							select="getIoyardListBodys"
+							column="{fId=F_ID}">
+				</collection>
+			</resultMap>
+
+			<select id="getIoyardListHead" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardListHeadBodyVo"
+				resultMap="ioyardListHeadBodyMap">
+					SELECT
+						*
+					from
+						Ioyard_List_HEAD
+					where 1=1
+				<if test="ioyardListHeadBodyVo.ioyardListNo != null and ioyardListHeadBodyVo.ioyardListNo != ''"> and IOYARD_LIST_NO like concat(concat('%', #{ioyardListHeadBodyVo.ioyardListNo}),'%')</if>
+				<if test="ioyardListHeadBodyVo.contNo != null and ioyardListHeadBodyVo.contNo != ''"> and CONT_NO like concat(concat('%', #{ioyardListHeadBodyVo.contNo}),'%')</if>
+				<if test="ioyardListHeadBodyVo.params != null "> and LIST_DAT &gt;= to_date(#{ioyardListHeadBodyVo.params[0]},'yyyy-MM-dd HH24:mi:ss') and LIST_DAT &lt;= to_date(#{ioyardListHeadBodyVo.params[1]},'yyyy-MM-dd HH24:mi:ss')</if>
+				and del_nam is null
+				order by RECORD_TIM desc
+			</select>
+
+			<select id="getIoyardListBodys" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardListHeadBodyVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardListBody">
+					select * from Ioyard_List_Body where F_FID = #{fId} and del_nam is  null
+			</select>
+</mapper>

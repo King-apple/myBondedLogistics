@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.CodeListMapper">
+	  <resultMap id="codeListMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.CodeList">
+		<result property="paramCode" column="PARAM_CODE"/>
+		<result property="paramName" column="PARAM_NAME"/>
+		<result property="paramDate" column="PARAM_DATE"/>
+		<result property="paramChildCode" column="PARAM_CHILD_CODE"/>
+	  </resultMap>
+
+	  <update id="updateCodeList" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.CodeList">
+			update BSWL.CODE_LIST
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="paramCode != null and paramCode != '' ">PARAM_CODE = #{paramCode},</if>
+				<if test="paramChildCode != null and paramChildCode != '' ">PARAM_CHILD_CODE = #{paramChildCode},</if>
+			</trim>
+			where param_Date = #{paramDate} and param_Name = #{paramName}
+	  </update>
+
+	  <insert id="insertCodeList" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.CodeList">
+		insert into BSWL.CODE_LIST
+		  <trim prefix="(" suffix=")" suffixOverrides=",">
+			  <if test="paramCode != null">param_Code,</if>
+			  <if test="paramChildCode != null">param_Child_Code,</if>
+			  <if test="paramDate != null">param_Date,</if>
+			  <if test="paramName != null">param_Name,</if>
+		  </trim>
+		  <trim prefix="values (" suffix=")" suffixOverrides=",">
+			  <if test="paramCode != null">#{paramCode},</if>
+			  <if test="paramChildCode != null">#{paramChildCode},</if>
+			  <if test="paramDate != null">#{paramDate},</if>
+			  <if test="paramName != null">#{paramName},</if>
+		  </trim>
+	  </insert>
+</mapper>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.IoyardSettlementBillsHeadMapper">
+
+	<resultMap id="ioyardSettlementBillsHeadMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardSettlementBillsHead">
+		<id property="fId" column="F_ID"/>
+		<result property="companyNam" column="COMPANY_NAM"/>
+		<result property="billNam" column="BILL_NAM"/>
+		<result property="secondCod" column="SECOND_COD"/>
+		<result property="secondNam" column="SECOND_NAM"/>
+		<result property="listFid" column="LIST_FID"/>
+		<result property="ioyardListNo" column="IOYARD_LIST_NO"/>
+		<result property="inYardWay" column="IN_YARD_WAY"/>
+		<result property="contFid" column="CONT_FID"/>
+		<result property="contNo" column="CONT_NO"/>
+		<result property="firstNam" column="FIRST_NAM"/>
+		<result property="firstCod" column="FIRST_COD"/>
+		<result property="dept" column="DEPT"/>
+		<result property="cargoCod" column="CARGO_COD"/>
+		<result property="cargoNam" column="CARGO_NAM"/>
+		<result property="outYardWay" column="OUT_YARD_WAY"/>
+		<result property="billCod" column="BILL_COD"/>
+		<result property="markTxt" column="MARK_TXT"/>
+		<result property="operDat" column="OPER_DAT"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM"/>
+		<result property="updateNam" column="UPDATE_NAM"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+		<result property="invoiceType" column="INVOICE_TYPE"/>
+		<result property="deptId" column="DEPT_ID"/>
+	</resultMap>
+
+	<resultMap id="ioYardSBMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardSettlementBilldHeadBodyVo">
+		<id property="fId" column="F_ID"/>
+		<result property="contFid" column="CONT_FID"/>
+		<collection property="sysFileList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile"
+					select="getFiles"
+					column="{fId=F_ID}">
+			<!-- property 表示com.domain.Class中的属性； column 表示表中的列名 -->
+			<result property="id" column="ID"/>
+			<result property="fileName" column="FILE_NAME"/>
+			<result property="original" column="ORIGINAL"/>
+			<result property="bucketName" column="BUCKET_NAME"/>
+			<result property="type" column="TYPE"/>
+			<result property="fileSize" column="FILE_SIZE"/>
+			<result property="delFlag" column="DEL_FLAG"/>
+			<result property="tableName" column="TABLE_NAME"/>
+			<result property="tableFid" column="TABLE_FID"/>
+			<result property="url" column="URL"/>
+		</collection>
+		<collection property="ioYardSBBodyList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardSettlementBillsBody"
+					select="getIoYardSBBodyList"
+					column="{fId=F_ID}">
+		</collection>
+		<collection property="contractRateList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.ContractRate"
+					select="getContractRates"
+					column="{contFid=CONT_FID}">
+		</collection>
+	</resultMap>
+	<resultMap id="inOutMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardListHeadBodyVo">
+		<id property="fId" column="F_ID"/>
+		<result property="contNo" column="CONT_NO"/>
+		<collection property="ioyardListBodyList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardListBody"
+					select="getList"
+					column="{fId=F_ID}">
+		</collection>
+
+	</resultMap>
+
+	<select id="getIoYardSBBodyList" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardSettlementBilldHeadBodyVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardSettlementBillsBody">
+			select * from BSWL.IOYARD_SETTLEMENT_BILLS_BODY  where DEL_TIM IS NULL and DEL_NAM IS NULL and F_FID =#{fId,jdbcType=BIGINT}
+	</select>
+	<select id="getFiles" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardSettlementBilldHeadBodyVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile">
+			select * from SYS_FILE where TABLE_FID = #{fId}
+	</select>
+	<select id="selectPageVo" resultMap="ioYardSBMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardSettlementBilldHeadBodyVo">
+		select *
+		from ioyard_settlement_bills_head t
+		where 1=1 and t.DEL_TIM IS NULL and t.DEL_NAM IS NULL
+
+		<if test="ioYardVo.contNo != null and ioYardVo.contNo != ''">
+			and t.CONT_NO like concat(concat('%', (#{ioYardVo.contNo}) ),'%')
+		</if>
+		<if test="ioYardVo.billCod != null and ioYardVo.billCod != ''">
+			and t.BILL_COD like concat(concat('%', (#{ioYardVo.billCod}) ),'%')
+		</if>
+		<if test="ioYardVo.cargoKindNam != null and ioYardVo.cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{ioYardVo.cargoKindNam}
+		</if>
+		<if test="ioYardVo.params != null ">
+			and t.OPER_DAT >= to_date(#{ioYardVo.params[0]},'yyyy-MM-dd') and t.OPER_DAT &lt;= to_date(#{ioYardVo.params[1]},'yyyy-MM-dd')
+		</if>
+		<if test="ioYardVo.deptId != null and ioYardVo.deptId != ''">
+		and t.DEPT_ID = #{ioYardVo.deptId}
+		</if>
+		<if test="ioYardVo.operNam != null and ioYardVo.operNam != ''">
+		and t.OPER_NAM = #{ioYardVo.operNam}
+		</if>
+		order by t.RECORD_TIM desc
+
+	</select>
+
+	<select id="getCodeInoutYard" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardListHead" resultMap="inOutMap">
+		select *
+		from ioyard_list_head t where t.CONT_NO = #{contNo} and t.SETTLEMENT_GENERATE_FLAG = #{settlementGenerateFlag} and  t.DEL_TIM is null
+	</select>
+	<select id="getList" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardListHeadBodyVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardListBody">
+		select *
+		from BSWL.IOYARD_LIST_BODY t where  DEL_TIM IS NULL and DEL_NAM IS NULL and F_FID =#{fId,jdbcType=BIGINT}
+	</select>
+	<select id="getContractList" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardListHeadBodyVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Contract">
+		select *
+		from BSWL.CONTRACT t where  t.DEL_TIM IS NULL and t.DEL_NAM IS NULL and t.CONT_NO = #{contNo}
+	</select>
+	<select id="getContractRates" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardSettlementBilldHeadBodyVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.ContractRate">
+			select FEE_NAM,FEE_RAT from CONTRACT_RATE where C_FID = #{contFid}
+	</select>
+	<select id="selectBillCod" resultType="java.lang.String">
+			select BILL_COD from ioyard_settlement_bills_head where  DEL_TIM IS NULL and DEL_NAM IS NULL
+		</select>
+
+	<resultMap id="MapBill" type="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardSettlementBilldHeadBodyVo">
+		<id property="fId" column="F_ID"/>
+		<collection property="ioYardSBBodyList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.IoyardSettlementBillsBody"
+					select="getIoYardSBBodyList"
+					column="{fId=F_ID}">
+		</collection>
+	</resultMap>
+	<select id="selectInoutBill" resultMap="MapBill">
+			select * from ioyard_settlement_bills_head where  DEL_TIM IS NULL and DEL_NAM IS NULL
+	</select>
+</mapper>

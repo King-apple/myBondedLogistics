@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.CustomsAccountingStatisticsMapper">
+
+  <resultMap id="customsAccountingStatisticsMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.CustomsAccountingStatistics">
+                  <id property="fId" column="F_ID"/>
+                        <result property="consignNam" column="CONSIGN_NAM"/>
+                        <result property="cargoNamCustoms" column="CARGO_NAM_CUSTOMS"/>
+	  					<result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+                        <result property="inDte" column="IN_DTE"/>
+                        <result property="inRoughWet" column="IN_ROUGH_WET"/>
+                        <result property="inNetWet" column="IN_NET_WET"/>
+                        <result property="inCargoAccount" column="IN_CARGO_ACCOUNT"/>
+                        <result property="inOriginCountry" column="IN_ORIGIN_COUNTRY"/>
+                        <result property="inFinalDestination" column="IN_FINAL_DESTINATION"/>
+                        <result property="inCheckNum" column="IN_CHECK_NUM"/>
+                        <result property="inNuclearCouplet" column="IN_NUCLEAR_COUPLET"/>
+                        <result property="inCustomsDeclarationNum" column="IN_CUSTOMS_DECLARATION_NUM"/>
+                        <result property="inIdentificationCod" column="IN_IDENTIFICATION_COD"/>
+                        <result property="inWaybillNum" column="IN_WAYBILL_NUM"/>
+                        <result property="inCategory" column="IN_CATEGORY"/>
+                        <result property="outDte" column="OUT_DTE"/>
+                        <result property="outRoughWet" column="OUT_ROUGH_WET"/>
+                        <result property="outNetWet" column="OUT_NET_WET"/>
+                        <result property="outCargoAccount" column="OUT_CARGO_ACCOUNT"/>
+                        <result property="outOriginCountry" column="OUT_ORIGIN_COUNTRY"/>
+                        <result property="outFinalDestination" column="OUT_FINAL_DESTINATION"/>
+                        <result property="outCheckNum" column="OUT_CHECK_NUM"/>
+                        <result property="outNuclearCouplet" column="OUT_NUCLEAR_COUPLET"/>
+                        <result property="outCustomsDeclarationNum" column="OUT_CUSTOMS_DECLARATION_NUM"/>
+                        <result property="outIdentificationCod" column="OUT_IDENTIFICATION_COD"/>
+                        <result property="outWaybillNum" column="OUT_WAYBILL_NUM"/>
+                        <result property="outCategory" column="OUT_CATEGORY"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+            </resultMap>
+
+	<resultMap id="customsAccountingMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsAccountingStatisticsVo">
+		<result property="consignNam" column="CONSIGN_NAM"/>
+		<result property="cargoNamCustoms" column="CARGO_NAM_CUSTOMS"/>
+		<result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+		<result property="inDte" column="IN_DTE"/>
+		<result property="inRoughWet" column="IN_ROUGH_WET"/>
+		<result property="inNetWet" column="IN_NET_WET"/>
+		<result property="inCargoAccount" column="IN_CARGO_ACCOUNT"/>
+		<result property="inOriginCountry" column="IN_ORIGIN_COUNTRY"/>
+		<result property="inFinalDestination" column="IN_FINAL_DESTINATION"/>
+		<result property="inCheckNum" column="IN_CHECK_NUM"/>
+		<result property="inNuclearCouplet" column="IN_NUCLEAR_COUPLET"/>
+		<result property="inCustomsDeclarationNum" column="IN_CUSTOMS_DECLARATION_NUM"/>
+		<result property="inIdentificationCod" column="IN_IDENTIFICATION_COD"/>
+		<result property="inWaybillNum" column="IN_WAYBILL_NUM"/>
+		<result property="inCategory" column="IN_CATEGORY"/>
+		<result property="outDte" column="OUT_DTE"/>
+		<result property="outRoughWet" column="OUT_ROUGH_WET"/>
+		<result property="outNetWet" column="OUT_NET_WET"/>
+		<result property="outCargoAccount" column="OUT_CARGO_ACCOUNT"/>
+		<result property="outOriginCountry" column="OUT_ORIGIN_COUNTRY"/>
+		<result property="outFinalDestination" column="OUT_FINAL_DESTINATION"/>
+		<result property="outCheckNum" column="OUT_CHECK_NUM"/>
+		<result property="outNuclearCouplet" column="OUT_NUCLEAR_COUPLET"/>
+		<result property="outCustomsDeclarationNum" column="OUT_CUSTOMS_DECLARATION_NUM"/>
+		<result property="outIdentificationCod" column="OUT_IDENTIFICATION_COD"/>
+		<result property="outWaybillNum" column="OUT_WAYBILL_NUM"/>
+		<result property="outCategory" column="OUT_CATEGORY"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM"/>
+		<result property="updateNam" column="UPDATE_NAM"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+	</resultMap>
+	<select id="selectPageVo" resultMap="customsAccountingMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsAccountingStatisticsVo">
+		select * from CUSTOMS_ACCOUNTING_STATISTICS
+		where 1=1
+		<if test="customsAccountingStatisticsvo.fId != null and customsAccountingStatisticsvo.fId != ''"> and f_id = #{customsAccountingStatisticsvo.fId}</if>
+		<if test="customsAccountingStatisticsvo.consignNam != null and customsAccountingStatisticsvo.consignNam != ''">and consign_nam = #{customsAccountingStatisticsvo.consignNam} </if>
+		<if test="customsAccountingStatisticsvo.cargoNamCustoms != null and customsAccountingStatisticsvo.cargoNamCustoms != ''"> and cargo_nam_customs = #{customsAccountingStatisticsvo.cargoNamCustoms}</if>
+		<if test="customsAccountingStatisticsvo.cargoKindNam != null and customsAccountingStatisticsvo.cargoKindNam != ''"> and cargo_kind_nam = #{customsAccountingStatisticsvo.cargoKindNam}</if>
+		<if test="customsAccountingStatisticsvo.inDteStr != null "> and IN_DTE &gt;= to_date(#{customsAccountingStatisticsvo.inDteStr[0]},'yyyy-MM-dd') and IN_DTE &lt;= to_date(#{customsAccountingStatisticsvo.inDteStr[1]},'yyyy-MM-dd')</if>
+		<if test="customsAccountingStatisticsvo.outDteStr != null">and OUT_DTE >= to_date(#{customsAccountingStatisticsvo.outDteStr[0]},'yyyy-MM-dd') and OUT_DTE &lt;= to_date(#{customsAccountingStatisticsvo.outDteStr[1]},'yyyy-MM-dd')</if>
+		<if test="customsAccountingStatisticsvo.inCategory != null and customsAccountingStatisticsvo.inCategory != ''">and in_category = #{customsAccountingStatisticsvo.inCategory} </if>
+		<if test="customsAccountingStatisticsvo.outCategory != null and customsAccountingStatisticsvo.outCategory != ''">and out_category = #{customsAccountingStatisticsvo.outCategory} </if>
+		<if test="customsAccountingStatisticsvo.inCheckNum != null and customsAccountingStatisticsvo.inCheckNum != ''">and in_check_num = #{customsAccountingStatisticsvo.inCheckNum} </if>
+		<if test="customsAccountingStatisticsvo.outCheckNum != null and customsAccountingStatisticsvo.outCheckNum != ''">and out_check_num = #{customsAccountingStatisticsvo.outCheckNum} </if>
+		<if test="customsAccountingStatisticsvo.inCustomsDeclarationNum != null and customsAccountingStatisticsvo.inCustomsDeclarationNum != ''">and in_customs_declaration_num = #{customsAccountingStatisticsvo.inCustomsDeclarationNum} </if>
+		<if test="customsAccountingStatisticsvo.outCustomsDeclarationNum != null and customsAccountingStatisticsvo.outCustomsDeclarationNum != ''">and out_customs_declaration_num = #{customsAccountingStatisticsvo.outCustomsDeclarationNum} </if>
+		<if test="customsAccountingStatisticsvo.inWaybillNum != null and customsAccountingStatisticsvo.inWaybillNum != ''">and in_waybill_num = #{customsAccountingStatisticsvo.inWaybillNum} </if>
+		<if test="customsAccountingStatisticsvo.outWaybillNum != null and customsAccountingStatisticsvo.outWaybillNum != ''">and out_waybill_num = #{customsAccountingStatisticsvo.outWaybillNum} </if>
+		and DEL_TIM IS  NULL and DEL_NAM IS NULL
+		order by RECORD_TIM desc
+	</select>
+
+
+
+	<select id="getManipulated" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsVo" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsVo">
+		select sa.cargo_nam_customs,
+	   to_char(ROUND(sa.IN_NET_WET/1000,2),'FM999990.00') as M_IN_NET_WET,
+	   to_char(ROUND(sa.OUT_NET_WET/1000,2),'FM999990.00') as M_OUT_NET_WET,
+	   to_char(ROUND(sa.IN_FIRST/10000,2),'FM999990.00') as M_IN_FIRST,
+	   to_char(ROUND(sa.IN_SECOND/10000,2),'FM999990.00') as M_IN_SECOND,
+	   to_char(ROUND(sa.OUT_FIRST/10000,2),'FM999990.00') as M_OUT_FIRST,
+	   to_char(ROUND(sa.OUT_SECOND/10000,2),'FM99990.00') as M_OUT_SECOND,
+
+	   to_char(ROUND(tr.IN_NET_WET/1000,2),'FM999990.00') as Y_IN_NET_WET,
+	   to_char(ROUND(tr.OUT_NET_WET/1000,2),'FM999990.00') as Y_OUT_NET_WET,
+	   to_char(ROUND(tr.IN_FIRST/10000,2),'FM999990.00') as Y_IN_FIRST,
+	   to_char(ROUND(tr.IN_SECOND/10000,2),'FM999990.00') as Y_IN_SECOND,
+	   to_char(ROUND(tr.OUT_FIRST/10000,2),'FM999990.00') as Y_OUT_FIRST,
+	   to_char(ROUND(tr.OUT_SECOND/10000,2),'FM999990.00') as Y_OUT_SECOND
+
+		from (
+		select li.CARGO_NAM_CUSTOMS,
+			   li.IN_NET_WET,
+			   li.OUT_NET_WET,
+			   lp.IN_FIRST,
+			   lp.IN_SECOND,
+			   ld.OUT_FIRST,
+			   ld.OUT_SECOND
+		from
+		(
+		select w.CARGO_NAM_CUSTOMS, sum(w.IN_NET_WET) IN_NET_WET ,sum(w.OUT_NET_WET) OUT_NET_WET
+		from BSWL.CUSTOMS_ACCOUNTING_STATISTICS w
+		<!-- where  to_char(w.in_dte, 'yyyy-mm') = #{inDte} -->
+		where  to_char(w.in_dte, 'yyyy-mm') between #{inDteStart} and #{inDteEnd}
+		group by w.CARGO_NAM_CUSTOMS
+		) li
+		left join
+		(
+		select y.cargo_nam_customs,
+		SUM(DECODE(y.IN_CATEGORY, '一线', y.sumAcount, 0)) as IN_FIRST
+		,
+		SUM(DECODE(y.IN_CATEGORY, '二线', y.sumAcount, 0)) as IN_SECOND
+		from
+		(
+		select t.cargo_nam_customs, t.IN_CATEGORY, sum(t.IN_CARGO_ACCOUNT) sumAcount
+		from BSWL.CUSTOMS_ACCOUNTING_STATISTICS t
+		<!--where  to_char(t.in_dte, 'yyyy-mm') = #{inDte}-->
+		where  to_char(t.in_dte, 'yyyy-mm') between #{inDteStart} and #{inDteEnd}
+		group by t.IN_CATEGORY, t.cargo_nam_customs
+		) y
+		group by y.cargo_nam_customs
+		) lp on lp.cargo_nam_customs = li.cargo_nam_customs
+
+		left join
+		(
+		select y.cargo_nam_customs,
+		SUM(DECODE(y.OUT_CATEGORY, '一线', y.sumAcount, 0)) OUT_FIRST
+		,
+		SUM(DECODE(y.OUT_CATEGORY, '二线', y.sumAcount, 0)) OUT_SECOND
+		from
+		(
+		select t.cargo_nam_customs, t.OUT_CATEGORY, sum(t.OUT_CARGO_ACCOUNT) sumAcount
+		from BSWL.CUSTOMS_ACCOUNTING_STATISTICS t
+		where  to_char(t.in_dte, 'yyyy-mm') = #{inDte}
+		group by t.OUT_CATEGORY, t.cargo_nam_customs
+		) y
+		group by y.cargo_nam_customs
+		) ld on ld.cargo_nam_customs = li.cargo_nam_customs
+		) sa
+		left join
+		(
+		select li.CARGO_NAM_CUSTOMS,
+			   li.IN_NET_WET,
+			   li.OUT_NET_WET,
+			   lp.IN_FIRST,
+			   lp.IN_SECOND,
+			   ld.OUT_FIRST,
+			   ld.OUT_SECOND
+		from
+		(
+		select w.CARGO_NAM_CUSTOMS, sum(w.IN_NET_WET) IN_NET_WET ,sum(w.OUT_NET_WET) OUT_NET_WET
+		from BSWL.CUSTOMS_ACCOUNTING_STATISTICS w
+		where  to_char(w.in_dte, 'yyyy') = #{year}
+		group by w.CARGO_NAM_CUSTOMS
+		) li
+		left join
+		(
+		select y.cargo_nam_customs,
+		SUM(DECODE(y.IN_CATEGORY, '一线', y.sumAcount, 0)) as IN_FIRST
+		,
+		SUM(DECODE(y.IN_CATEGORY, '二线', y.sumAcount, 0)) as IN_SECOND
+		from
+		(
+		select t.cargo_nam_customs, t.IN_CATEGORY, sum(t.IN_CARGO_ACCOUNT) sumAcount
+		from BSWL.CUSTOMS_ACCOUNTING_STATISTICS t
+		where  to_char(t.in_dte, 'yyyy') = #{year}
+		group by t.IN_CATEGORY, t.cargo_nam_customs
+		) y
+		group by y.cargo_nam_customs
+		) lp on lp.cargo_nam_customs = li.cargo_nam_customs
+
+		left join
+		(
+		select y.cargo_nam_customs,
+		SUM(DECODE(y.OUT_CATEGORY, '一线', y.sumAcount, 0)) OUT_FIRST
+		,
+		SUM(DECODE(y.OUT_CATEGORY, '二线', y.sumAcount, 0)) OUT_SECOND
+		from
+		(
+		select t.cargo_nam_customs, t.OUT_CATEGORY, sum(t.OUT_CARGO_ACCOUNT) sumAcount
+		from BSWL.CUSTOMS_ACCOUNTING_STATISTICS t
+		where  to_char(t.in_dte, 'yyyy') = #{year}
+		group by t.OUT_CATEGORY, t.cargo_nam_customs
+		) y
+		group by y.cargo_nam_customs
+		) ld on ld.cargo_nam_customs = li.cargo_nam_customs
+		) tr on tr.CARGO_NAM_CUSTOMS = sa.CARGO_NAM_CUSTOMS
+	</select>
+
+	<select id="getManipulatedForNew" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsVo" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsVo">
+		select lm.CARGO_KIND_NAM,
+       to_char(ROUND(nvl(lm.M_IN_NET_WET,0)/1000,2),'FM999990.00') as M_IN_NET_WET,
+       to_char(ROUND(nvl(lm.M_OUT_NET_WET,0)/1000,2),'FM999990.00') as M_OUT_NET_WET,
+       to_char(ROUND(nvl(lm.M_OUT_CARGO_ACCOUNT,0)/10000,2),'FM999990.00') as M_OUT_CARGO_ACCOUNT,
+
+       to_char(ROUND(nvl(lr.Y_IN_NET_WET,0)/1000,2),'FM999990.00') as Y_IN_NET_WET,
+       to_char(ROUND(nvl(lr.Y_IN_CARGO_ACCOUNT,0)/10000,2),'FM999990.00') as Y_IN_CARGO_ACCOUNT,
+       to_char(ROUND(nvl(lr.Y_OUT_NET_WET,0)/1000,2),'FM999990.00') as Y_OUT_NET_WET,
+       to_char(ROUND(nvl(lr.Y_OUT_CARGO_ACCOUNT,0)/10000,2),'FM999990.00') as Y_OUT_CARGO_ACCOUNT,
+       to_char(ROUND(nvl(lr.Y_SUM_NET_WET,0)/1000,2),'FM999990.00') as Y_SUM_NET_WET,
+       to_char(ROUND(nvl(lr.Y_SUM_CARGO_ACCOUNT,0)/10000,2),'FM999990.00') as Y_SUM_CARGO_ACCOUNT,
+
+       case to_char(nvl(lr.Y_NET_WET_SCALE,'0'))
+       when '0' then '0'
+       else concat(to_char(lr.Y_NET_WET_SCALE*100),'%') END as Y_NET_WET_SCALE,
+       case to_char(nvl(lr.Y_CARGO_ACCOUNT_SCALE,'0'))
+       when '0' then '0'
+       else concat(to_char(lr.Y_CARGO_ACCOUNT_SCALE*100),'%') END as Y_CARGO_ACCOUNT_SCALE,
+       to_char(ROUND(nvl(lr.Y_FIRST_OUT_CARGO_ACCOUNT,0)/10000,2),'FM999990.00') as Y_FIRST_OUT_CARGO_ACCOUNT
+from
+(
+  select k.CARGO_KIND_NAM,
+         k.M_IN_NET_WET,
+         k.M_OUT_NET_WET,
+         a.M_OUT_CARGO_ACCOUNT
+
+  from
+  (
+  select CARGO_KIND_NAM ,sum(IN_NET_WET) as M_IN_NET_WET, sum(OUT_NET_WET) as M_OUT_NET_WET
+  from customs_accounting_statistics t
+  where t.del_nam is null
+  <!-- and to_char(t.in_dte, 'yyyy-mm') = #{inDte} -->
+		and to_char(t.in_dte, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}
+  <if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+  <if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+  group by t.CARGO_KIND_NAM
+  ) k
+  left join
+  (
+  select CARGO_KIND_NAM ,sum(OUT_CARGO_ACCOUNT) M_OUT_CARGO_ACCOUNT
+  from customs_accounting_statistics t
+  where t.del_nam is null
+  <!-- and to_char(t.in_dte, 'yyyy-mm') = #{inDte} -->
+  and to_char(t.in_dte, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}
+   and t.out_category = '一线'
+	<if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+	<if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+	group by t.CARGO_KIND_NAM
+  ) a on a.CARGO_KIND_NAM = k.CARGO_KIND_NAM
+) lm
+left join
+
+
+
+(
+select lu.CARGO_KIND_NAM,
+       lu.Y_IN_NET_WET,
+       lu.Y_IN_CARGO_ACCOUNT,
+       lu.Y_OUT_NET_WET,
+       lu.Y_OUT_CARGO_ACCOUNT,
+       lu.Y_SUM_NET_WET,
+       lu.Y_SUM_CARGO_ACCOUNT,
+       lu.Y_NET_WET_SCALE,
+       lu.Y_CARGO_ACCOUNT_SCALE,
+       lq.Y_FIRST_OUT_CARGO_ACCOUNT
+from
+(
+select lo.CARGO_KIND_NAM,
+       lo.Y_IN_NET_WET,
+       lo.Y_IN_CARGO_ACCOUNT,
+       lo.Y_OUT_NET_WET,
+       lo.Y_OUT_CARGO_ACCOUNT,
+       lo.Y_SUM_NET_WET,
+       lo.Y_SUM_CARGO_ACCOUNT,
+       (lo.Y_SUM_NET_WET-lp.YOLD_SUM_NET_WET)/lp.YOLD_SUM_NET_WET as Y_NET_WET_SCALE,
+       (lo.Y_SUM_CARGO_ACCOUNT-lp.YOLD_SUM_CARGO_ACCOUNT)/lp.YOLD_SUM_CARGO_ACCOUNT as Y_CARGO_ACCOUNT_SCALE
+from
+(
+select  CARGO_KIND_NAM ,
+        sum(IN_NET_WET) as Y_IN_NET_WET,
+        sum(IN_CARGO_ACCOUNT) as Y_IN_CARGO_ACCOUNT,
+        sum(OUT_NET_WET) as Y_OUT_NET_WET,
+        sum(OUT_CARGO_ACCOUNT) as Y_OUT_CARGO_ACCOUNT,
+        sum(IN_NET_WET)+sum(OUT_NET_WET) Y_SUM_NET_WET,
+        sum(IN_CARGO_ACCOUNT)+sum(OUT_CARGO_ACCOUNT) as Y_SUM_CARGO_ACCOUNT
+from customs_accounting_statistics t
+where t.del_nam is null and to_char(t.in_dte, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd}
+		<if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+		<if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+		group by t.CARGO_KIND_NAM
+) lo
+left join
+(
+select  CARGO_KIND_NAM ,
+        sum(IN_NET_WET) as YOLD_IN_NET_WET,
+        sum(IN_CARGO_ACCOUNT) as YOLD_IN_CARGO_ACCOUNT,
+        sum(OUT_NET_WET) as YOLD_OUT_NET_WET,
+        sum(OUT_CARGO_ACCOUNT) as YOLD_OUT_CARGO_ACCOUNT,
+        sum(IN_NET_WET)+sum(OUT_NET_WET) YOLD_SUM_NET_WET,
+        sum(IN_CARGO_ACCOUNT)+sum(OUT_CARGO_ACCOUNT) as YOLD_SUM_CARGO_ACCOUNT
+from customs_accounting_statistics t
+where t.del_nam is null and to_char(t.in_dte, 'yyyy-mm-dd') between #{oldYearStart} and #{oldYearEnd}
+		<if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+		<if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+		group by t.CARGO_KIND_NAM
+) lp on lp.CARGO_KIND_NAM = lo.CARGO_KIND_NAM
+) lu
+left join
+(
+select  CARGO_KIND_NAM,
+        sum(OUT_CARGO_ACCOUNT) as Y_FIRST_OUT_CARGO_ACCOUNT
+from customs_accounting_statistics t
+where t.del_nam is null and to_char(t.in_dte, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd} and t.OUT_CATEGORY='一线'
+		<if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+		<if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+		group by t.CARGO_KIND_NAM
+) lq on lq.CARGO_KIND_NAM = lu.CARGO_KIND_NAM
+) lr on lr.CARGO_KIND_NAM = lm.CARGO_KIND_NAM
+
+union all
+
+
+		select '一日游' as CARGO_KIND_NAM,
+		to_char(ROUND(nvl(lr.m_in_net_wet,0)/1000,2),'FM999990.00') as M_IN_NET_WET,
+		to_char(ROUND(nvl(lr.m_out_net_wet,0)/1000,2),'FM999990.00') as M_OUT_NET_WET,
+		'0' as M_OUT_CARGO_ACCOUNT,
+
+		to_char(ROUND(nvl(ld.y_in_net_wet,0)/1000,2),'FM999990.00') as Y_IN_NET_WET,
+		to_char(ROUND(nvl(ld.y_in_total_price,0)/10000,2),'FM999990.00') as Y_IN_CARGO_ACCOUNT,
+		to_char(ROUND(nvl(ld.y_out_net_wet,0)/1000,2),'FM999990.00') as Y_OUT_NET_WET,
+		to_char(ROUND(nvl(ld.y_out_total_price,0)/10000,2),'FM999990.00') as Y_OUT_CARGO_ACCOUNT,
+		to_char(ROUND(nvl(ld.y_sum_net_wet,0)/1000,2),'FM999990.00') as Y_SUM_NET_WET,
+		to_char(ROUND(nvl(ld.y_sum_total_price,0)/10000,2),'FM999990.00') as Y_SUM_CARGO_ACCOUNT,
+		case to_char(nvl(ld.y_scale_net_wet,'0'))
+		when '0' then '0'
+		else concat(to_char(ld.y_scale_net_wet*100),'%') END as Y_NET_WET_SCALE,
+		case to_char(nvl(ld.y_scale_total_price,'0'))
+		when '0' then '0'
+		else concat(to_char(ld.y_scale_total_price*100),'%') END as Y_CARGO_ACCOUNT_SCALE,
+		'0' as Y_FIRST_OUT_CARGO_ACCOUNT
+		from
+		(
+		select lo.business_knd,
+		lo.in_net_wet as m_in_net_wet,
+		lo.in_total_price as m_in_total_price,
+		lu.out_net_wet as m_out_net_wet,
+		lu.out_total_price as m_out_total_price
+		from
+		(
+		select '一日游' as business_knd,sum(cast(lw.net_wet_sum as numeric(12,4))) as in_net_wet, sum(lw.total_price_sum) as in_total_price
+		from
+		(
+		select t.business_knd, t.F_ID as in_f_id, t.in_category, t.F_ID as out_f_id, t.out_category, t.in_check_num , t.net_wet_sum,t.total_price_sum
+		from INOUT_YARD_HEAD t
+		where t.business_knd = '一日游业务'
+		and t.in_out = '1' and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}
+		) lw
+		group by business_knd
+		) lo
+		left join
+		(
+		select '一日游' as business_knd ,sum(cast(lw.net_wet_sum as numeric(12,4))) as out_net_wet, sum(lw.total_price_sum) as out_total_price
+		from
+		(
+		select t.business_knd, t.F_ID as in_f_id, t.in_category, t.F_ID as out_f_id, t.out_category, t.in_check_num , t.net_wet_sum,t.total_price_sum
+		from INOUT_YARD_HEAD t
+		where t.business_knd = '一日游业务'
+		and t.in_out = '0' and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}
+		)  lw
+		group by business_knd
+		) lu on lu.business_knd = lo.business_knd
+		) lr
+		left join
+		(
+		select li.business_knd,
+		li.y_in_net_wet,
+		li.y_in_total_price,
+		li.y_out_net_wet,
+		li.y_out_total_price,
+		li.y_sum_net_wet,
+		li.y_sum_total_price,
+		(li.y_sum_net_wet-lj.yold_sum_net_wet)/lj.yold_sum_net_wet as y_scale_net_wet,
+		(li.y_sum_total_price-lj.yold_sum_total_price)/lj.yold_sum_total_price as y_scale_total_price
+		from
+		(
+		select lo.business_knd,
+		lo.in_net_wet as y_in_net_wet,
+		lo.in_total_price as y_in_total_price,
+		lu.out_net_wet as y_out_net_wet,
+		lu.out_total_price as y_out_total_price,
+		(lo.in_net_wet+lu.out_net_wet) as y_sum_net_wet,
+		(lo.in_total_price+lu.out_total_price) as y_sum_total_price
+		from
+		(
+		select '一日游' as business_knd,sum(cast(lw.total_price_sum as numeric(12,4))) as in_net_wet, sum(lw.total_price_sum) as in_total_price
+		from
+		(
+		select t.business_knd, t.F_ID as in_f_id, t.in_category, t.F_ID as out_f_id, t.out_category, t.in_check_num , t.net_wet_sum,t.total_price_sum
+		from INOUT_YARD_HEAD t
+		where t.business_knd = '一日游业务'
+		and t.in_out = '1' and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd}
+		)  lw
+		group by business_knd
+		)lo
+		left join
+		(
+		select '一日游' as business_knd ,sum(cast(lw.net_wet_sum as numeric(12,4))) as out_net_wet, sum(lw.total_price_sum) as out_total_price
+		from
+		(
+
+		select t.business_knd, t.F_ID as in_f_id, t.in_category, t.F_ID as out_f_id, t.out_category, t.in_check_num , t.net_wet_sum,t.total_price_sum
+		from INOUT_YARD_HEAD t
+		where t.business_knd = '一日游业务'
+		and t.in_out = '0' and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd}
+
+		)  lw
+		group by business_knd
+		) lu on lu.business_knd = lo.business_knd
+		) li
+		left join
+		(
+		select lo.business_knd,
+		lo.in_net_wet as yold_in_net_wet,
+		lo.in_total_price as yold_in_total_price,
+		lu.out_net_wet as yold_out_net_wet,
+		lu.out_total_price as yold_out_total_price,
+		(lo.in_net_wet+lu.out_net_wet) as yold_sum_net_wet,
+		(lo.in_total_price+lu.out_total_price) as yold_sum_total_price
+		from
+		(
+		select '一日游' as business_knd, sum(cast(lw.net_wet_sum as numeric(12,4))) as in_net_wet, sum(lw.total_price_sum) as in_total_price
+		from
+		(
+		select t.business_knd, t.F_ID as in_f_id, t.in_category, t.F_ID as out_f_id, t.out_category, t.in_check_num , t.net_wet_sum,t.total_price_sum
+		from INOUT_YARD_HEAD t
+		where t.business_knd = '一日游业务'
+		and t.in_out = '0' and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm-dd') between #{oldYearStart} and #{oldYearEnd}
+
+		)  lw
+		group by business_knd
+		)lo
+		left join
+		(
+		select '一日游' as business_knd , sum(cast(lw.net_wet_sum as numeric(12,4))) as out_net_wet, sum(lw.total_price_sum) as out_total_price
+		from
+		(
+		select t.business_knd, t.F_ID as in_f_id, t.in_category, t.F_ID as out_f_id, t.out_category, t.in_check_num , t.net_wet_sum,t.total_price_sum
+		from INOUT_YARD_HEAD t
+		where t.business_knd = '一日游业务'
+		and t.in_out = '0' and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm-dd') between #{oldYearStart} and #{oldYearEnd}
+
+		)  lw
+		group by business_knd
+		) lu on lu.business_knd = lo.business_knd
+		) lj on lj.business_knd = li.business_knd
+		) ld on ld.business_knd = lr.business_knd
+
+
+
+
+
+<!--		select '一日游' as CARGO_KIND_NAM,-->
+<!--		to_char(ROUND(nvl(lr.m_in_net_wet,0)/1000,2),'FM999990.00') as M_IN_NET_WET,-->
+<!--		to_char(ROUND(nvl(lr.m_out_net_wet,0)/1000,2),'FM999990.00') as M_OUT_NET_WET,-->
+<!--		'0' as M_OUT_CARGO_ACCOUNT,-->
+
+<!--		to_char(ROUND(nvl(ld.y_in_net_wet,0)/1000,2),'FM999990.00') as Y_IN_NET_WET,-->
+<!--		to_char(ROUND(nvl(ld.y_in_total_price,0)/10000,2),'FM999990.00') as Y_IN_CARGO_ACCOUNT,-->
+<!--		to_char(ROUND(nvl(ld.y_out_net_wet,0)/1000,2),'FM999990.00') as Y_OUT_NET_WET,-->
+<!--		to_char(ROUND(nvl(ld.y_out_total_price,0)/10000,2),'FM999990.00') as Y_OUT_CARGO_ACCOUNT,-->
+<!--		to_char(ROUND(nvl(ld.y_sum_net_wet,0)/1000,2),'FM999990.00') as Y_SUM_NET_WET,-->
+<!--		to_char(ROUND(nvl(ld.y_sum_total_price,0)/10000,2),'FM999990.00') as Y_SUM_CARGO_ACCOUNT,-->
+<!--		case to_char(nvl(ld.y_scale_net_wet,'0'))-->
+<!--		when '0' then '0'-->
+<!--		else concat(to_char(ld.y_scale_net_wet*100),'%') END as Y_NET_WET_SCALE,-->
+<!--		case to_char(nvl(ld.y_scale_total_price,'0'))-->
+<!--		when '0' then '0'-->
+<!--		else concat(to_char(ld.y_scale_total_price*100),'%') END as Y_CARGO_ACCOUNT_SCALE,-->
+<!--		'0' as Y_FIRST_OUT_CARGO_ACCOUNT-->
+<!--		from-->
+<!--		(-->
+<!--		select lo.business_knd,-->
+<!--		lo.in_net_wet as m_in_net_wet,-->
+<!--		lo.in_total_price as m_in_total_price,-->
+<!--		lu.out_net_wet as m_out_net_wet,-->
+<!--		lu.out_total_price as m_out_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select '一日游' as business_knd,sum(cast(li.net_wet as numeric(12,4))) as in_net_wet, sum(li.TOTAL_PRICE) as in_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select lp.business_knd, lp.F_ID as in_f_id, lp.in_category, li.F_ID as out_f_id, li.out_category, li.in_check_num-->
+<!--		from-->
+<!--		(-->
+<!--		select t.business_knd, t.F_ID, t.in_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '1'-->
+<!--		&lt;!&ndash; and to_char(t.record_tim, 'yyyy-mm') = #{inDte} &ndash;&gt;-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) lp inner join-->
+<!--		(-->
+<!--		select t.business_knd,t.F_ID, t.out_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '0'-->
+<!--		&lt;!&ndash; and to_char(t.record_tim, 'yyyy-mm') = #{inDte} &ndash;&gt;-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) li on lp.in_check_num = li.in_check_num-->
+<!--		)  lw-->
+<!--		left join INOUT_YARD_BODY li on li.h_fid= lw.in_F_ID and li.in_check_num=lw.in_check_num and trim(translate(li.net_wet,'0123456789.',' ')) is null-->
+<!--		group by business_knd-->
+<!--		)lo-->
+<!--		left join-->
+<!--		(-->
+<!--		select '一日游' as business_knd ,sum(cast(li.net_wet as numeric(12,4))) as out_net_wet, sum(li.TOTAL_PRICE) as out_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select lp.business_knd, lp.F_ID as in_f_id, lp.in_category, li.F_ID as out_f_id, li.out_category, li.in_check_num-->
+<!--		from-->
+<!--		(-->
+<!--		select t.business_knd, t.F_ID, t.in_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '1'-->
+<!--		&lt;!&ndash; and to_char(t.record_tim, 'yyyy-mm') = #{inDte} &ndash;&gt;-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) lp inner join-->
+<!--		(-->
+<!--		select t.business_knd,t.F_ID, t.out_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '0'-->
+<!--		&lt;!&ndash; and to_char(t.record_tim, 'yyyy-mm') = #{inDte} &ndash;&gt;-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{inDteStart} and #{inDteEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) li on lp.in_check_num = li.in_check_num-->
+<!--		)  lw-->
+<!--		left join INOUT_YARD_BODY li on li.h_fid= lw.out_F_ID and li.in_check_num=lw.in_check_num and trim(translate(li.net_wet,'0123456789.',' ')) is null-->
+<!--		group by business_knd-->
+<!--		) lu on lu.business_knd = lo.business_knd-->
+<!--		) lr-->
+<!--		left join-->
+<!--		(-->
+<!--		select li.business_knd,-->
+<!--		li.y_in_net_wet,-->
+<!--		li.y_in_total_price,-->
+<!--		li.y_out_net_wet,-->
+<!--		li.y_out_total_price,-->
+<!--		li.y_sum_net_wet,-->
+<!--		li.y_sum_total_price,-->
+<!--		(li.y_sum_net_wet-lj.yold_sum_net_wet)/lj.yold_sum_net_wet as y_scale_net_wet,-->
+<!--		(li.y_sum_total_price-lj.yold_sum_total_price)/lj.yold_sum_total_price as y_scale_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select lo.business_knd,-->
+<!--		lo.in_net_wet as y_in_net_wet,-->
+<!--		lo.in_total_price as y_in_total_price,-->
+<!--		lu.out_net_wet as y_out_net_wet,-->
+<!--		lu.out_total_price as y_out_total_price,-->
+<!--		(lo.in_net_wet+lu.out_net_wet) as y_sum_net_wet,-->
+<!--		(lo.in_total_price+lu.out_total_price) as y_sum_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select '一日游' as business_knd,sum(cast(li.net_wet as numeric(12,4))) as in_net_wet, sum(li.TOTAL_PRICE) as in_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select lp.business_knd, lp.F_ID as in_f_id, lp.in_category, li.F_ID as out_f_id, li.out_category, li.in_check_num-->
+<!--		from-->
+<!--		(-->
+<!--		select t.business_knd, t.F_ID, t.in_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '1'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) lp inner join-->
+<!--		(-->
+<!--		select t.business_knd,t.F_ID, t.out_category,r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '0'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) li on lp.in_check_num = li.in_check_num-->
+<!--		)  lw-->
+<!--		left join INOUT_YARD_BODY li on li.h_fid= lw.in_F_ID  and li.in_check_num=lw.in_check_num and trim(translate(li.net_wet,'0123456789.',' ')) is null-->
+<!--		group by business_knd-->
+<!--		)lo-->
+<!--		left join-->
+<!--		(-->
+<!--		select '一日游' as business_knd ,sum(cast(li.net_wet as numeric(12,4))) as out_net_wet, sum(li.TOTAL_PRICE) as out_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select lp.business_knd, lp.F_ID as in_f_id, lp.in_category, li.F_ID as out_f_id, li.out_category, li.in_check_num-->
+<!--		from-->
+<!--		(-->
+<!--		select t.business_knd, t.F_ID, t.in_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '1'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) lp inner join-->
+<!--		(-->
+<!--		select t.business_knd,t.F_ID, t.out_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '0'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{yearStart} and #{yearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) li on lp.in_check_num = li.in_check_num-->
+<!--		)  lw-->
+<!--		left join INOUT_YARD_BODY li on li.h_fid= lw.out_F_ID and li.in_check_num=lw.in_check_num and trim(translate(li.net_wet,'0123456789.',' ')) is null-->
+<!--		group by business_knd-->
+<!--		) lu on lu.business_knd = lo.business_knd-->
+<!--		) li-->
+<!--		left join-->
+<!--		(-->
+<!--		select lo.business_knd,-->
+<!--		lo.in_net_wet as yold_in_net_wet,-->
+<!--		lo.in_total_price as yold_in_total_price,-->
+<!--		lu.out_net_wet as yold_out_net_wet,-->
+<!--		lu.out_total_price as yold_out_total_price,-->
+<!--		(lo.in_net_wet+lu.out_net_wet) as yold_sum_net_wet,-->
+<!--		(lo.in_total_price+lu.out_total_price) as yold_sum_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select '一日游' as business_knd, sum(cast(li.net_wet as numeric(12,4))) as in_net_wet, sum(li.TOTAL_PRICE) as in_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select lp.business_knd, lp.F_ID as in_f_id, lp.in_category, li.F_ID as out_f_id, li.out_category, li.in_check_num-->
+<!--		from-->
+<!--		(-->
+<!--		select t.business_knd, t.F_ID, t.in_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '1'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{oldYearStart} and #{oldYearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) lp inner join-->
+<!--		(-->
+<!--		select t.business_knd,t.F_ID, t.out_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '0'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{oldYearStart} and #{oldYearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) li on lp.in_check_num = li.in_check_num-->
+<!--		)  lw-->
+<!--		left join INOUT_YARD_BODY li on li.h_fid= lw.in_F_ID and li.in_check_num=lw.in_check_num and trim(translate(li.net_wet,'0123456789.',' ')) is null-->
+<!--		group by business_knd-->
+<!--		)lo-->
+<!--		left join-->
+<!--		(-->
+<!--		select '一日游' as business_knd , sum(cast(li.net_wet as numeric(12,4))) as out_net_wet, sum(li.TOTAL_PRICE) as out_total_price-->
+<!--		from-->
+<!--		(-->
+<!--		select lp.business_knd, lp.F_ID as in_f_id, lp.in_category, li.F_ID as out_f_id, li.out_category, li.in_check_num-->
+<!--		from-->
+<!--		(-->
+<!--		select t.business_knd, t.F_ID, t.in_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '1'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{oldYearStart} and #{oldYearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) lp inner join-->
+<!--		(-->
+<!--		select t.business_knd,t.F_ID, t.out_category, r.in_check_num-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and r.del_nam is null and r.in_check_num is not null-->
+<!--		where t.business_knd = '一日游业务'-->
+<!--		and t.in_out = '0'-->
+<!--		and to_char(t.record_tim, 'yyyy-mm-dd') between #{oldYearStart} and #{oldYearEnd}-->
+<!--		and t.del_nam is null-->
+<!--		) li on lp.in_check_num = li.in_check_num-->
+<!--		)  lw-->
+<!--		left join INOUT_YARD_BODY li on li.h_fid= lw.out_F_ID and li.in_check_num=lw.in_check_num and trim(translate(li.net_wet,'0123456789.',' ')) is null-->
+<!--		group by business_knd-->
+<!--		) lu on lu.business_knd = lo.business_knd-->
+<!--		) lj on lj.business_knd = li.business_knd-->
+<!--		) ld on ld.business_knd = lr.business_knd-->
+
+	</select>
+
+	<select id="getManipulatedCargo" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsCargoVo" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsCargoVo">
+		select li.consign_nam,
+		li.CARGO_KIND_NAM,
+		nvl(li.m_in_net_wet, 0) as m_in_net_wet,
+		nvl(li.m_out_net_wet, 0) as m_out_net_wet,
+		nvl(lo.y_in_net_wet, 0) as y_in_net_wet,
+		nvl(lo.y_out_net_wet, 0) as y_out_net_wet,
+		nvl(lr.y_kucun, 0) as y_kucun
+		from
+		(
+		select t.consign_nam,t.CARGO_KIND_NAM,sum(t.in_net_wet) as m_in_net_wet,sum(t.out_net_wet) as m_out_net_wet
+		from CUSTOMS_ACCOUNTING_STATISTICS t
+		where t.del_nam is null
+		and to_char(t.in_dte, 'yyyy-mm') = #{inDte}
+		<if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+		<if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+		group by t.CARGO_KIND_NAM,t.consign_nam
+		) li
+		left join
+		(
+		select t.consign_nam,t.CARGO_KIND_NAM,sum(t.in_net_wet) as y_in_net_wet,sum(t.out_net_wet) as y_out_net_wet
+		from CUSTOMS_ACCOUNTING_STATISTICS t
+		where t.del_nam is null
+		and to_char(t.in_dte, 'yyyy-mm') between #{yearStart} and #{yearEnd}
+		<if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+		<if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+		group by t.CARGO_KIND_NAM,t.consign_nam
+		) lo on lo.consign_nam = li.consign_nam and lo.CARGO_KIND_NAM = li.CARGO_KIND_NAM
+
+		left join
+		(
+		select t.consign_nam,t.CARGO_KIND_NAM,(sum(t.in_net_wet)-sum(t.out_net_wet)) as y_kucun
+		from CUSTOMS_ACCOUNTING_STATISTICS t
+		where t.del_nam is null
+		and to_char(t.in_dte, 'yyyy-mm') &lt;= #{inDte}
+		<if test="cargoNamCustoms!=null and cargoNamCustoms!=''"> and t.cargo_nam_customs = #{cargoNamCustoms}</if>
+		<if test="cargoKindNam!=null and cargoKindNam!=''"> and t.CARGO_KIND_NAM = #{cargoKindNam}</if>
+		group by t.CARGO_KIND_NAM,t.consign_nam
+		) lr on li.consign_nam = lr.consign_nam and li.CARGO_KIND_NAM = lr.CARGO_KIND_NAM
+
+		union all
+
+		select '一日游业务' as consign_nam,
+		'一日游业务' as CARGO_KIND_NAM,
+		nvl(s.m_in_net_wet, 0) as m_in_net_wet,
+		nvl(s.m_out_net_wet, 0) as m_out_net_wet,
+		nvl(v.y_in_net_wet, 0) as y_in_net_wet,
+		nvl(v.y_out_net_wet, 0) as y_out_net_wet,
+		nvl(f.y_kucun, 0) as y_kucun
+		from
+		(
+		select '一日游' as business_knd ,sum(h.out_net_wet) as m_out_net_wet, sum(h.in_net_wet) as m_in_net_wet
+		from
+		(
+		select  t.business_knd , q.out_net_wet, t.in_net_wet
+		from
+		(
+		select t.business_knd, r.in_check_num, r.h_fid,r.net_wet as in_net_wet
+		from INOUT_YARD_HEAD t
+		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and trim(translate(r.net_wet,'0123456789.',' ')) is null
+		where t.business_knd='一日游业务'
+		and t.in_out = '0'
+		and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm') = #{inDte}
+		) t
+		inner join (
+		select  t.business_knd, r.in_check_num , r.h_fid,r.net_wet as out_net_wet
+		from INOUT_YARD_HEAD t
+		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and trim(translate(r.net_wet,'0123456789.',' ')) is null
+		where t.business_knd='一日游业务'
+		and t.in_out = '1'
+		and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm') = #{inDte}
+		) q on q.in_check_num = t.in_check_num
+		) h
+		group by business_knd
+		) s
+
+		left join
+		(
+		select '一日游' as business_knd ,sum(h.out_net_wet) as y_out_net_wet, sum(h.in_net_wet) as y_in_net_wet
+		from
+		(
+		select  t.business_knd , q.out_net_wet, t.in_net_wet
+		from
+		(
+		select t.business_knd, r.in_check_num, r.h_fid,r.net_wet as in_net_wet
+		from INOUT_YARD_HEAD t
+		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and trim(translate(r.net_wet,'0123456789.',' ')) is null
+		where t.business_knd='一日游业务'
+		and t.in_out = '0'
+		and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm') between #{yearStart} and #{yearEnd}
+		) t
+		inner join (
+		select  t.business_knd, r.in_check_num , r.h_fid,r.net_wet as out_net_wet
+		from INOUT_YARD_HEAD t
+		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and trim(translate(r.net_wet,'0123456789.',' ')) is null
+		where t.business_knd='一日游业务'
+		and t.in_out = '1'
+		and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm') between #{yearStart} and #{yearEnd}
+		) q on q.in_check_num = t.in_check_num
+		) h
+		group by business_knd
+		) v on v.business_knd = s.business_knd
+
+		left join
+		(
+		select '一日游' as business_knd ,(sum(h.out_net_wet)-sum(h.in_net_wet)) as y_kucun
+		from
+		(
+		select  t.business_knd , q.out_net_wet, t.in_net_wet
+		from
+		(
+		select t.business_knd, r.in_check_num, r.h_fid,r.net_wet as in_net_wet
+		from INOUT_YARD_HEAD t
+		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and trim(translate(r.net_wet,'0123456789.',' ')) is null
+		where t.business_knd='一日游业务'
+		and t.in_out = '0'
+		and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm') &lt;= #{inDte}
+		) t
+		inner join (
+		select  t.business_knd, r.in_check_num , r.h_fid,r.net_wet as out_net_wet
+		from INOUT_YARD_HEAD t
+		right join INOUT_YARD_BODY r on r.h_fid=t.f_id and trim(translate(r.net_wet,'0123456789.',' ')) is null
+		where t.business_knd='一日游业务'
+		and t.in_out = '1'
+		and t.del_nam is null
+		and to_char(t.record_tim, 'yyyy-mm') &lt;= #{inDte}
+		) q on q.in_check_num = t.in_check_num
+		) h
+		group by business_knd
+		) f on f.business_knd = s.business_knd
+
+	</select>
+
+
+	<select id="getOutAmount" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsOutAmountVo" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsOutAmountVo">
+		select
+		l.CARGO_KIND_NAM,
+		to_char(ROUND(nvl(l.m_out_cargo_account,0)/1000,2),'FM999990.00') as m_out_cargo_account,
+       nvl(k.m_oldout_cargo_account,0) as m_oldout_cargo_account,
+       nvl(s.m_upout_cargo_account,0) as m_upout_cargo_account,
+		to_char(decode(nvl(k.m_oldout_cargo_account,0),0,0,(nvl(l.m_out_cargo_account,0)-nvl(k.m_oldout_cargo_account,0))/nvl(k.m_oldout_cargo_account,0)),'FM999990.00')||'%' as m_compared_cargo_account	,
+		to_char(decode(nvl(s.m_upout_cargo_account,0),0,0,(nvl(l.m_out_cargo_account,0)-nvl(s.m_upout_cargo_account,0))/nvl(s.m_upout_cargo_account,0)),'FM999990.00')||'%' as m_ring_cargo_accout,
+
+		to_char(ROUND(nvl(x.year_out_cargo_account,0)/1000,2),'FM999990.00') as year_out_cargo_account,
+       nvl(b.year_oldout_cargo_account,0) as year_oldout_cargo_account,
+		to_char(decode(nvl(b.year_oldout_cargo_account,0),0,0,(nvl(x.year_out_cargo_account,0)-nvl(b.year_oldout_cargo_account,0))/nvl(b.year_oldout_cargo_account,0)),'FM999990.00')||'%' as year_compared_cargo_account
+		from
+		(
+		select t.CARGO_KIND_NAM,sum(t.out_cargo_account) m_out_cargo_account
+		from customs_accounting_statistics t
+		where  t.del_nam is null
+		and t.OUT_CARGO_ACCOUNT is not null
+		and to_char(t.OUT_DTE, 'yyyy-mm') = #{inDte}
+		<if test="cargoNamCustoms != null and cargoNamCustoms != ''">
+			and t.cargo_nam_customs = #{cargoNamCustoms}
+		</if>
+		<if test="cargoKindNam != null and cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{cargoKindNam}
+		</if>
+		group by t.CARGO_KIND_NAM
+		) l
+		left join
+		(
+		select t.CARGO_KIND_NAM,nvl(sum(t.out_cargo_account),0) m_oldout_cargo_account
+		from customs_accounting_statistics t
+		where  t.del_nam is null
+		and t.OUT_CARGO_ACCOUNT is not null
+		and to_char(t.OUT_DTE, 'yyyy-mm') = #{oldYearMonth}
+		<if test="cargoNamCustoms != null and cargoNamCustoms != ''">
+			and t.cargo_nam_customs = #{cargoNamCustoms}
+		</if>
+		<if test="cargoKindNam != null and cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{cargoKindNam}
+		</if>
+		group by t.CARGO_KIND_NAM
+		)k on k.CARGO_KIND_NAM = l.CARGO_KIND_NAM
+
+		left join
+		(
+		select t.CARGO_KIND_NAM,nvl(sum(t.out_cargo_account),0) m_upout_cargo_account
+		from customs_accounting_statistics t
+		where  t.del_nam is null
+		and t.OUT_CARGO_ACCOUNT is not null
+		and to_char(t.OUT_DTE, 'yyyy-mm') = #{yearOldMonth}
+		<if test="cargoNamCustoms != null and cargoNamCustoms != ''">
+			and t.cargo_nam_customs = #{cargoNamCustoms}
+		</if>
+		<if test="cargoKindNam != null and cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{cargoKindNam}
+		</if>
+		group by t.CARGO_KIND_NAM
+		)s on s.CARGO_KIND_NAM = l.CARGO_KIND_NAM
+
+		left join
+		(
+		select t.CARGO_KIND_NAM,nvl(sum(t.out_cargo_account),0) year_out_cargo_account
+		from customs_accounting_statistics t
+		where  t.del_nam is null
+		and t.OUT_CARGO_ACCOUNT is not null
+		and to_char(t.OUT_DTE, 'yyyy') = #{year}
+		<if test="cargoNamCustoms != null and cargoNamCustoms != ''">
+			and t.cargo_nam_customs = #{cargoNamCustoms}
+		</if>
+		<if test="cargoKindNam != null and cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{cargoKindNam}
+		</if>
+		group by t.CARGO_KIND_NAM
+		)x on x.CARGO_KIND_NAM = l.CARGO_KIND_NAM
+		left join
+		(
+		select t.CARGO_KIND_NAM,nvl(sum(t.out_cargo_account),0) year_oldout_cargo_account
+		from customs_accounting_statistics t
+		where  t.del_nam is null
+		and t.OUT_CARGO_ACCOUNT is not null
+		and to_char(t.OUT_DTE, 'yyyy') = #{oldYear}
+		<if test="cargoNamCustoms != null and cargoNamCustoms != ''">
+			and t.cargo_nam_customs = #{cargoNamCustoms}
+		</if>
+		<if test="cargoKindNam != null and cargoKindNam != ''">
+			and t.CARGO_KIND_NAM = #{cargoKindNam}
+		</if>
+		group by t.CARGO_KIND_NAM
+		)b on b.CARGO_KIND_NAM = l.CARGO_KIND_NAM
+
+		union all
+
+
+		select lp.cargo_nam_customs as cargo_nam_customs,
+		to_char(ROUND(nvl(lp.m_out_cargo_account,0)/1000,2),'FM999990.00') as m_out_cargo_account,
+		nvl(lo.m_oldout_cargo_account,0) as m_oldout_cargo_account,
+		nvl(lq.m_upout_cargo_account,0) as m_upout_cargo_account,
+		to_char(decode(nvl(lo.m_oldout_cargo_account,0),0,0,(nvl(lp.m_out_cargo_account,0)-nvl(lo.m_oldout_cargo_account,0))/nvl(lo.m_oldout_cargo_account,0)),'FM999990.00')||'%' as m_compared_cargo_account  ,
+		to_char(decode(nvl(lq.m_upout_cargo_account,0),0,0,(nvl(lp.m_out_cargo_account,0)-nvl(lq.m_upout_cargo_account,0))/nvl(lq.m_upout_cargo_account,0)),'FM999990.00')||'%' as m_ring_cargo_accout,
+
+		to_char(ROUND(nvl(lu.year_out_cargo_account,0)/1000,2),'FM999990.00') as year_out_cargo_account,
+		nvl(lf.year_oldout_cargo_account,0) as year_oldout_cargo_account,
+		to_char(decode(nvl(lf.year_oldout_cargo_account,0),0,0,(nvl(lu.year_out_cargo_account,0)-nvl(lf.year_oldout_cargo_account,0))/nvl(lf.year_oldout_cargo_account,0)),'FM999990.00')||'%' as year_compared_cargo_account
+		from
+		(
+		select '一日游业务' as cargo_nam_customs,sum(t.TOTAL_PRICE) m_out_cargo_account
+		from INOUT_YARD_BODY t
+		where t.del_nam is null and t.in_out='0'
+		and to_char(t.RECORD_TIM, 'yyyy-mm') = #{inDte}
+		group by t.in_out
+		) lp
+		left join
+		(
+		select '一日游业务' as cargo_nam_customs, nvl(sum(t.TOTAL_PRICE),0) m_oldout_cargo_account
+		from INOUT_YARD_BODY t
+		where t.del_nam is null and t.in_out='0'
+		and to_char(t.RECORD_TIM, 'yyyy-mm') = #{oldYearMonth}
+		group by t.in_out
+		)lo on lo.cargo_nam_customs = lp.cargo_nam_customs
+		left join
+		(
+		select '一日游业务' as cargo_nam_customs, nvl(sum(t.TOTAL_PRICE),0) m_upout_cargo_account
+		from INOUT_YARD_BODY t
+		where t.del_nam is null and t.in_out='0'
+		and to_char(t.RECORD_TIM, 'yyyy-mm') = #{yearOldMonth}
+		group by t.in_out
+		)lq on lq.cargo_nam_customs = lp.cargo_nam_customs
+
+		left join
+		(
+		select '一日游业务' as cargo_nam_customs, nvl(sum(t.TOTAL_PRICE),0) year_out_cargo_account
+		from INOUT_YARD_BODY t
+		where t.del_nam is null and t.in_out='0'
+		and to_char(t.RECORD_TIM, 'yyyy') = #{year}
+		group by t.in_out
+		)lu on lu.cargo_nam_customs = lp.cargo_nam_customs
+
+		left join
+		(
+		select '一日游业务' as cargo_nam_customs, nvl(sum(t.TOTAL_PRICE),0) year_oldout_cargo_account
+		from INOUT_YARD_BODY t
+		where t.del_nam is null and t.in_out='0'
+		and to_char(t.RECORD_TIM, 'yyyy') = #{oldYear}
+		group by t.in_out
+		)lf on lf.cargo_nam_customs = lp.cargo_nam_customs
+
+
+	</select>
+
+
+	<select id="getCargoKind" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.CargoKindTypeVo" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.CargoKindTypeVo">
+
+		select p.mon||'月' mon,
+		nvl(k.year_new_in_net_wet,0) year_new_in_net_wet,
+		nvl(r.year_old_in_net_wet,0) year_old_in_net_wet,
+		to_char(decode(nvl(r.year_old_in_net_wet,0),0,0,(nvl(k.year_new_in_net_wet,0)-nvl(r.year_old_in_net_wet,0))/nvl(r.year_old_in_net_wet,0)),'FM999990.00') as year_in_compared_wet,
+		nvl(w.year_new_out_net_wet,0) year_new_out_net_wet,
+		nvl(q.year_old_out_net_wet,0) year_old_out_net_wet,
+		to_char(decode(nvl(q.year_old_out_net_wet,0),0,0,(nvl(w.year_new_out_net_wet,0)-nvl(q.year_old_out_net_wet,0))/nvl(q.year_old_out_net_wet,0)),'FM999990.00') as year_out_compared_wet
+		from
+		(
+		select lpad(level,2,0) mon from dual connect by level&lt;= decode(#{nowYear},(select  to_char(sysdate, 'yyyy' )  from dual),(select  to_char(sysdate, 'mm' )  from dual),12)
+		) p
+
+		left join(
+		select sum(t.in_net_wet) year_new_in_net_wet,to_char(t.IN_DTE, 'mm') as mon
+		from customs_accounting_statistics t
+		where to_char(t.IN_DTE, 'yyyy') = #{nowYear}
+		and t.CARGO_KIND_NAM = #{cargoKindNam}
+		group by to_char(t.IN_DTE, 'mm')
+		order by to_char(t.IN_DTE, 'mm')
+		)k on k.mon = p.mon
+
+		left join(
+		select sum(t.in_net_wet) year_old_in_net_wet,to_char(t.IN_DTE, 'mm') as mon
+		from customs_accounting_statistics t
+		where to_char(t.IN_DTE, 'yyyy') = #{oldYear}
+		and t.CARGO_KIND_NAM = #{cargoKindNam}
+		group by to_char(t.IN_DTE, 'mm')
+		order by to_char(t.IN_DTE, 'mm')
+		)r on r.mon = p.mon
+
+
+		left join(
+		select sum(t.out_net_wet) year_new_out_net_wet,to_char(t.OUT_DTE, 'mm') as mon
+		from customs_accounting_statistics t
+		where to_char(t.OUT_DTE, 'yyyy') = #{nowYear}
+		and t.CARGO_KIND_NAM = #{cargoKindNam}
+		group by to_char(t.OUT_DTE, 'mm')
+		order by to_char(t.OUT_DTE, 'mm')
+		)w on w.mon = p.mon
+
+		left join(
+		select sum(t.out_net_wet) year_old_out_net_wet,to_char(t.OUT_DTE, 'mm') as mon
+		from customs_accounting_statistics t
+		where to_char(t.OUT_DTE, 'yyyy') = #{oldYear}
+		and t.CARGO_KIND_NAM = #{cargoKindNam}
+		group by to_char(t.OUT_DTE, 'mm')
+		order by to_char(t.OUT_DTE, 'mm')
+		)q on q.mon = p.mon
+
+		order by p.mon
+
+
+	</select>
+
+	<select id="getAll" resultMap="customsAccountingMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsAccountingStatisticsVo">
+		select * from CUSTOMS_ACCOUNTING_STATISTICS
+		where 1=1
+		<if test="customsAccountingStatisticsvo.fId != null and customsAccountingStatisticsvo.fId != ''"> and f_id = #{customsAccountingStatisticsvo.fId}</if>
+		<if test="customsAccountingStatisticsvo.consignNam != null and customsAccountingStatisticsvo.consignNam != ''">and consign_nam = #{customsAccountingStatisticsvo.consignNam} </if>
+		<if test="customsAccountingStatisticsvo.cargoNamCustoms != null and customsAccountingStatisticsvo.cargoNamCustoms != ''"> and cargo_nam_customs = #{customsAccountingStatisticsvo.cargoNamCustoms}</if>
+		<if test="customsAccountingStatisticsvo.cargoKindNam != null and customsAccountingStatisticsvo.cargoKindNam != ''"> and cargo_kind_nam = #{customsAccountingStatisticsvo.cargoKindNam}</if>
+		<if test="customsAccountingStatisticsvo.inDteStr != null "> and IN_DTE &gt;= to_date(#{customsAccountingStatisticsvo.inDteStr[0]},'yyyy-MM-dd') and IN_DTE &lt;= to_date(#{customsAccountingStatisticsvo.inDteStr[1]},'yyyy-MM-dd')</if>
+		<if test="customsAccountingStatisticsvo.outDteStr != null">and OUT_DTE >= to_date(#{customsAccountingStatisticsvo.outDteStr[0]},'yyyy-MM-dd') and OUT_DTE &lt;= to_date(#{customsAccountingStatisticsvo.outDteStr[1]},'yyyy-MM-dd')</if>
+		<if test="customsAccountingStatisticsvo.inCategory != null and customsAccountingStatisticsvo.inCategory != ''">and in_category = #{customsAccountingStatisticsvo.inCategory} </if>
+		<if test="customsAccountingStatisticsvo.outCategory != null and customsAccountingStatisticsvo.outCategory != ''">and out_category = #{customsAccountingStatisticsvo.outCategory} </if>
+		<if test="customsAccountingStatisticsvo.inCheckNum != null and customsAccountingStatisticsvo.inCheckNum != ''">and in_check_num = #{customsAccountingStatisticsvo.inCheckNum} </if>
+		<if test="customsAccountingStatisticsvo.outCheckNum != null and customsAccountingStatisticsvo.outCheckNum != ''">and out_check_num = #{customsAccountingStatisticsvo.outCheckNum} </if>
+		<if test="customsAccountingStatisticsvo.inCustomsDeclarationNum != null and customsAccountingStatisticsvo.inCustomsDeclarationNum != ''">and in_customs_declaration_num = #{customsAccountingStatisticsvo.inCustomsDeclarationNum} </if>
+		<if test="customsAccountingStatisticsvo.outCustomsDeclarationNum != null and customsAccountingStatisticsvo.outCustomsDeclarationNum != ''">and out_customs_declaration_num = #{customsAccountingStatisticsvo.outCustomsDeclarationNum} </if>
+		<if test="customsAccountingStatisticsvo.inWaybillNum != null and customsAccountingStatisticsvo.inWaybillNum != ''">and in_waybill_num = #{customsAccountingStatisticsvo.inWaybillNum} </if>
+		<if test="customsAccountingStatisticsvo.outWaybillNum != null and customsAccountingStatisticsvo.outWaybillNum != ''">and out_waybill_num = #{customsAccountingStatisticsvo.outWaybillNum} </if>
+		and DEL_TIM IS  NULL and DEL_NAM IS NULL
+		order by RECORD_TIM desc
+	</select>
+	<select id="finalSql" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.CustomsAccountingStatisticsVo">
+		select SUM(in_rough_wet) as inRoughWet,
+			SUM(IN_NET_WET) as inNetWet,
+			SUM(IN_CARGO_ACCOUNT) as inCargoAccount,
+			SUM(OUT_ROUGH_WET) as outRoughWet,
+			SUM(OUT_NET_WET) as outNetWet,
+			SUM(OUT_CARGO_ACCOUNT) as outCargoAccount
+        from customs_accounting_statistics t where 1=1
+		<if test="customsAccountingStatisticsvo.fId != null and customsAccountingStatisticsvo.fId != ''"> and f_id = #{customsAccountingStatisticsvo.fId}</if>
+		<if test="customsAccountingStatisticsvo.consignNam != null and customsAccountingStatisticsvo.consignNam != ''">and consign_nam = #{customsAccountingStatisticsvo.consignNam} </if>
+		<if test="customsAccountingStatisticsvo.cargoNamCustoms != null and customsAccountingStatisticsvo.cargoNamCustoms != ''"> and cargo_nam_customs = #{customsAccountingStatisticsvo.cargoNamCustoms}</if>
+		<if test="customsAccountingStatisticsvo.cargoKindNam != null and customsAccountingStatisticsvo.cargoKindNam != ''"> and cargo_kind_nam = #{customsAccountingStatisticsvo.cargoKindNam}</if>
+		<if test="customsAccountingStatisticsvo.inDteStr != null "> and IN_DTE &gt;= to_date(#{customsAccountingStatisticsvo.inDteStr[0]},'yyyy-MM-dd') and IN_DTE &lt;= to_date(#{customsAccountingStatisticsvo.inDteStr[1]},'yyyy-MM-dd')</if>
+		<if test="customsAccountingStatisticsvo.outDteStr != null">and OUT_DTE >= to_date(#{customsAccountingStatisticsvo.outDteStr[0]},'yyyy-MM-dd') and OUT_DTE &lt;= to_date(#{customsAccountingStatisticsvo.outDteStr[1]},'yyyy-MM-dd')</if>
+		<if test="customsAccountingStatisticsvo.inCategory != null and customsAccountingStatisticsvo.inCategory != ''">and in_category = #{customsAccountingStatisticsvo.inCategory} </if>
+		<if test="customsAccountingStatisticsvo.outCategory != null and customsAccountingStatisticsvo.outCategory != ''">and out_category = #{customsAccountingStatisticsvo.outCategory} </if>
+		<if test="customsAccountingStatisticsvo.inCheckNum != null and customsAccountingStatisticsvo.inCheckNum != ''">and in_check_num = #{customsAccountingStatisticsvo.inCheckNum} </if>
+		<if test="customsAccountingStatisticsvo.outCheckNum != null and customsAccountingStatisticsvo.outCheckNum != ''">and out_check_num = #{customsAccountingStatisticsvo.outCheckNum} </if>
+		<if test="customsAccountingStatisticsvo.inCustomsDeclarationNum != null and customsAccountingStatisticsvo.inCustomsDeclarationNum != ''">and in_customs_declaration_num = #{customsAccountingStatisticsvo.inCustomsDeclarationNum} </if>
+		<if test="customsAccountingStatisticsvo.outCustomsDeclarationNum != null and customsAccountingStatisticsvo.outCustomsDeclarationNum != ''">and out_customs_declaration_num = #{customsAccountingStatisticsvo.outCustomsDeclarationNum} </if>
+		<if test="customsAccountingStatisticsvo.inWaybillNum != null and customsAccountingStatisticsvo.inWaybillNum != ''">and in_waybill_num = #{customsAccountingStatisticsvo.inWaybillNum} </if>
+		<if test="customsAccountingStatisticsvo.outWaybillNum != null and customsAccountingStatisticsvo.outWaybillNum != ''">and out_waybill_num = #{customsAccountingStatisticsvo.outWaybillNum} </if>
+		and DEL_TIM IS  NULL and DEL_NAM IS NULL
+		order by RECORD_TIM desc
+	</select>
+</mapper>

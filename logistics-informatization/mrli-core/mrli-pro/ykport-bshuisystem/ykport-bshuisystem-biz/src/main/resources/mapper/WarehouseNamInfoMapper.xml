@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.WarehouseNamInfoMapper">
+
+	<resultMap id="warehouseNamInfoMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.WarehouseNamInfo">
+                  <id property="fId" column="F_ID"/>
+                        <result property="inoutYardNam" column="INOUT_YARD_NAM"/>
+                        <result property="warehouseCod" column="WAREHOUSE_COD"/>
+                        <result property="warehouseNam" column="WAREHOUSE_NAM"/>
+                        <result property="electronicAccountNum" column="ELECTRONIC_ACCOUNT_NUM"/>
+                        <result property="exportCod" column="EXPORT_COD"/>
+                        <result property="exportNam" column="EXPORT_NAM"/>
+                        <result property="markTxt" column="MARK_TXT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+  	</resultMap>
+	<select id="selectOldWarehouseNamInfoList" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.WarehouseNamInfo" resultMap="warehouseNamInfoMap">
+		select * from warehouse_nam_info where 1=1
+		<if test="warehouseNamInfo.inOut != null and warehouseNamInfo.inOut != ''">and IN_OUT = #{warehouseNamInfo.inOut}</if>
+		<if test="warehouseNamInfo.inoutYardNam != null and warehouseNamInfo.inoutYardNam != ''"> and inout_yard_nam = #{warehouseNamInfo.inoutYardNam}</if>
+		<if test="warehouseNamInfo.warehouseNam != null and warehouseNamInfo.warehouseNam != ''"> and warehouse_nam = #{warehouseNamInfo.warehouseNam}</if>
+		<if test="warehouseNamInfo.electronicAccountNum != null and warehouseNamInfo.electronicAccountNum != ''"> and electronic_account_num = #{warehouseNamInfo.electronicAccountNum}</if>
+		 and del_tim is null
+	</select>
+</mapper>

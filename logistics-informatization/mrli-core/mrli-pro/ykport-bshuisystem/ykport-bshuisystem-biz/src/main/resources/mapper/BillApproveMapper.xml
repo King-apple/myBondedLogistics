@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software selectPageVowithout specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.BillApproveMapper">
+
+	<resultMap id="billApproveMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.BillApprove">
+		<id property="fId" column="F_ID"/>
+		<result property="fFid" column="F_FID"/>
+		<result property="billCod" column="BILL_COD"/>
+		<result property="billType" column="BILL_TYPE"/>
+		<result property="billDat" column="BILL_DAT"/>
+		<result property="firstNam" column="FIRST_NAM"/>
+		<result property="firstCod" column="FIRST_COD"/>
+		<result property="dept" column="DEPT"/>
+		<result property="operator" column="OPERATOR"/>
+		<result property="secondCod" column="SECOND_COD"/>
+		<result property="secondNam" column="SECOND_NAM"/>
+		<result property="contNo" column="CONT_NO"/>
+		<result property="shipNam" column="SHIP_NAM"/>
+		<result property="businessType" column="BUSINESS_TYPE"/>
+		<result property="cargoCod" column="CARGO_COD"/>
+		<result property="cargoNam" column="CARGO_NAM"/>
+		<result property="accountNam" column="ACCOUNT_NAM"/>
+		<result property="settleWgt" column="SETTLE_WGT"/>
+		<result property="money" column="MONEY"/>
+		<result property="advinceMoney" column="ADVINCE_MONEY"/>
+		<result property="markTxt" column="MARK_TXT"/>
+		<result property="operNam" column="OPER_NAM"/>
+		<result property="recordTim" column="RECORD_TIM"/>
+		<result property="updateNam" column="UPDATE_NAM"/>
+		<result property="updateTim" column="UPDATE_TIM"/>
+		<result property="delNam" column="DEL_NAM"/>
+		<result property="delTim" column="DEL_TIM"/>
+
+		<result property="checkStatus" column="CHECK_STATUS"/>
+		<result property="checkUser" column="CHECK_USER"/>
+		<result property="checkTime" column="CHECK_TIME"/>
+		<result property="deptId" column="DEPT_ID"/>
+	</resultMap>
+	<resultMap id="myMap" type="com.newweb.mrli.ykport.baoshuisystem.vo.BillApproveVo">
+		<id property="fId" column="F_ID"/>
+		<collection property="sysFileList"  ofType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile"
+					select="getFiles"
+					column="{fId=F_ID}">
+			<!-- property 表示com.domain.Class中的属性； column 表示表中的列名 -->
+			<result property="id" column="ID"/>
+			<result property="fileName" column="FILE_NAME"/>
+			<result property="original" column="ORIGINAL"/>
+			<result property="bucketName" column="BUCKET_NAME"/>
+			<result property="type" column="TYPE"/>
+			<result property="fileSize" column="FILE_SIZE"/>
+			<result property="delFlag" column="DEL_FLAG"/>
+			<result property="tableName" column="TABLE_NAME"/>
+			<result property="tableFid" column="TABLE_FID"/>
+			<result property="url" column="URL"/>
+		</collection>
+	</resultMap>
+	<select id="getFiles" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.BillApproveVo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.SysFile">
+			select * from BSWL.SYS_FILE where TABLE_FID = #{fId}
+	</select>
+	<select id="selectPageVo" resultMap="myMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.vo.BillApproveVo">
+		select  * from BILL_APPROVE
+		where 1 =1 and del_nam is null
+		<if test="billApprove.isCancel != null "> and IS_CANCEL = #{billApprove.isCancel}</if>
+		<if test="billApprove.operator != null "> and OPERATOR = #{billApprove.operator}</if>
+		<if test="billApprove.deptId != null "> and DEPT_ID = #{billApprove.deptId}</if>
+		<if test="billApprove.billType != null and billApprove.billType != ''"> and BILL_TYPE = #{billApprove.billType}</if>
+		<if test="billApprove.billCod != null and billApprove.billCod != ''"> and BILL_COD = #{billApprove.billCod}</if>
+		<if test="billApprove.secondNam != null and billApprove.secondNam != ''"> and SECOND_NAM = #{billApprove.secondNam}</if>
+		<if test="billApprove.cargoCod != null and billApprove.cargoCod != ''"> and CARGO_COD = #{billApprove.cargoCod}</if>
+		<if test="billApprove.contNo != null and billApprove.contNo != ''"> and CONT_NO = #{billApprove.contNo}</if>
+		<if test="billApprove.cargoNam != null and billApprove.cargoNam != ''"> and CARGO_NAM = #{billApprove.cargoNam}</if>
+		<if test="billApprove.approveStatus != null  "> and APPROVE_STATUS = #{billApprove.approveStatus}</if>
+		<if test="billApprove.checkUser != null and billApprove.checkUser != '' "> and CHECK_USER = #{billApprove.checkUser}</if>
+		<if test="billApprove.checkStatus != null and billApprove.checkStatus != '' "> and CHECK_STATUS = #{billApprove.checkStatus}</if>
+		<if test="billApprove.params != null "> and BILL_DAT &gt;= to_date(#{billApprove.params[0]},'yyyy-MM-dd') and BILL_DAT &lt;= to_date(#{billApprove.params[1]},'yyyy-MM-dd')</if>
+		order by RECORD_TIM desc
+	</select>
+</mapper>

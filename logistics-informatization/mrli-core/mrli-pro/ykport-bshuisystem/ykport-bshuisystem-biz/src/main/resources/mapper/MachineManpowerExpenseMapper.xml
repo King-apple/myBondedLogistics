@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.MachineManpowerExpenseMapper">
+
+  <resultMap id="machineManpowerExpenseMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.MachineManpowerExpense">
+                  <id property="fId" column="F_ID"/>
+                        <result property="workbillNo" column="WORKBILL_NO"/>
+                        <result property="workDte" column="WORK_DTE"/>
+                        <result property="subunitNam" column="SUBUNIT_NAM"/>
+                        <result property="machTypeNam" column="MACH_TYPE_NAM"/>
+                        <result property="machKndCod" column="MACH_KND_COD"/>
+                        <result property="workTypeNam" column="WORK_TYPE_NAM"/>
+                        <result property="hours" column="HOURS"/>
+                        <result property="unitPrice" column="UNIT_PRICE"/>
+                        <result property="sum" column="SUM"/>
+                        <result property="checkDte" column="CHECK_DTE"/>
+                        <result property="settleDte" column="SETTLE_DTE"/>
+                        <result property="receiptInvoiceDte" column="RECEIPT_INVOICE_DTE"/>
+                        <result property="settledAmount" column="SETTLED_AMOUNT"/>
+                        <result property="outstandingAmount" column="OUTSTANDING_AMOUNT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+            </resultMap>
+
+	<select id="getList" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.MachineManpowerExpense">
+	select lo.work_dte,
+		   lo.subunit_nam,
+		   lo.workbill_no,
+		   lo.mach_type_nam,
+		   lo.mach_knd_cod,
+		   lo.work_typ_nam as work_type_nam,
+		   lo.hours,
+		   li.UNIT_PRICE,
+		   nvl(lo.hours,0)*nvl(li.unit_price,0) as SUM,
+		   li.check_dte,
+		   li.settle_dte,
+		   li.receipt_invoice_dte,
+		   li.settled_amount,
+		   li.outstanding_amount,
+		   li.f_id
+	 from
+	(
+	SELECT a.workbill_no ,
+		   a.work_typ_nam ,
+		   b.work_dte ,
+		   b.subunit_nam ,
+		   b.mach_type_nam ,
+		   b.mach_knd_cod ,
+		   (b.END_TIM - b.BEGIN_TIM)*24 hours
+		   ,b.spec_work_nam
+	  FROM send_work_body@ykport_nw410_link a, work_driver@ykport_nw410_link b
+	 WHERE     a.workbill_no = B.WORKBILL_NO
+		   AND a.line_no = b.line_no
+		   AND a.work_place LIKE '%保税%'
+		   AND a.work_typ_nam = '杂作业'
+		   and a.work_type=b.work_type
+		   and TO_CHAR (a.WORK_DTE, 'yyyy-mm-dd')=TO_CHAR (b.WORK_DTE, 'yyyy-mm-dd')
+		   AND TO_CHAR (b.WORK_DTE, 'yyyy-mm-dd') between #{machineManpowerExpense.startTime} and #{machineManpowerExpense.endTime}
+		   <if test="machineManpowerExpense.subunitNam!=null">
+		   AND b.subunit_nam like CONCAT('%',concat(#{machineManpowerExpense.subunitNam},'%'))
+		   </if>
+	) lo
+	left join
+	machine_manpower_expense li on li.workbill_no =lo.workbill_no
+								 and li.SUBUNIT_NAM=lo.SUBUNIT_NAM
+								 and li.mach_type_nam = lo.mach_type_nam
+								 and li.mach_knd_cod = lo.mach_knd_cod
+								 and li.hours = lo.hours
+								 and li.del_nam is null
+	</select>
+
+
+	<select id="getMachineManpowerExcel" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.MachineManpowerExpense">
+		select lo.work_dte,
+		lo.subunit_nam,
+		lo.workbill_no,
+		lo.mach_type_nam,
+		lo.mach_knd_cod,
+		lo.work_typ_nam as work_type_nam,
+		lo.hours,
+		li.UNIT_PRICE,
+		nvl(lo.hours,0)*nvl(li.unit_price,0) as SUM,
+		li.check_dte,
+		li.settle_dte,
+		li.receipt_invoice_dte,
+		li.settled_amount,
+		li.outstanding_amount,
+		li.f_id
+		from
+		(
+		SELECT a.workbill_no ,
+		a.work_typ_nam ,
+		b.work_dte ,
+		b.subunit_nam ,
+		b.mach_type_nam ,
+		b.mach_knd_cod ,
+		(b.END_TIM - b.BEGIN_TIM)*24 hours
+		,b.spec_work_nam
+		FROM send_work_body@ykport_nw410_link a, work_driver@ykport_nw410_link b
+		WHERE     a.workbill_no = B.WORKBILL_NO
+		AND a.line_no = b.line_no
+		AND a.work_place LIKE '%保税%'
+		AND a.work_typ_nam = '杂作业'
+		and a.work_type=b.work_type
+		and TO_CHAR (a.WORK_DTE, 'yyyy-mm-dd')=TO_CHAR (b.WORK_DTE, 'yyyy-mm-dd')
+		AND TO_CHAR (b.WORK_DTE, 'yyyy-mm-dd') between #{machineManpowerExpense.startTime} and #{machineManpowerExpense.endTime}
+		<if test="machineManpowerExpense.subunitNam!=null">
+			AND b.subunit_nam like CONCAT('%',concat(#{machineManpowerExpense.subunitNam},'%'))
+		</if>
+		) lo
+		left join
+		machine_manpower_expense li on li.workbill_no =lo.workbill_no
+		and li.SUBUNIT_NAM=lo.SUBUNIT_NAM
+		and li.mach_type_nam = lo.mach_type_nam
+		and li.mach_knd_cod = lo.mach_knd_cod
+		and li.hours = lo.hours
+		and li.del_nam is null
+	</select>
+
+
+
+</mapper>

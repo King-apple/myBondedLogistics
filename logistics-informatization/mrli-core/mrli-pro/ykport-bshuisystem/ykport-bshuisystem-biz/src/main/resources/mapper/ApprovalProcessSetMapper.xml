@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.ApprovalProcessSetMapper">
+
+  <resultMap id="approvalProcessSetMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.ApprovalProcessSet">
+                  <id property="fId" column="F_ID"/>
+                        <result property="processFid" column="PROCESS_FID"/>
+                        <result property="processNo" column="PROCESS_NO"/>
+                        <result property="orderBy" column="ORDER_BY"/>
+                        <result property="linkNam" column="LINK_NAM"/>
+                        <result property="roleNam" column="ROLE_NAM"/>
+                        <result property="billFid" column="BILL_FID"/>
+                        <result property="userId" column="USER_ID"/>
+                        <result property="username" column="USERNAME"/>
+                        <result property="manName" column="MAN_NAME"/>
+                        <result property="opinion" column="OPINION"/>
+                        <result property="opinionExplain" column="OPINION_EXPLAIN"/>
+                        <result property="isAgree" column="IS_AGREE"/>
+                        <result property="approver" column="APPROVER"/>
+                        <result property="approvalTim" column="APPROVAL_TIM"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+            </resultMap>
+
+
+	<select id="getOpearAudit" resultType="map">
+		select process_fid ,listagg(user_id, ',') within group( order by process_fid) as name
+		from APPROVAL_PROCESS_SET
+		where BILL_FID=#{billFid}
+		group by process_fid
+	</select>
+
+
+	<select id="getBillIdList" resultMap="approvalProcessSetMap">
+		select t.bill_fid
+		from APPROVAL_PROCESS_SET t
+		where t.user_id=#{userId}
+		 and process_no = #{processNo}/*and t.IS_AGREE is null*/
+<!--		<if test="isAgree != null and isAgree != ''"> and bill_Fid =  #{billFid}</if>-->
+		group by t.bill_fid
+	</select>
+
+
+	<select id="getApprovalProcessSetList" resultMap="approvalProcessSetMap">
+		select * from
+		(
+		select t.*
+		from APPROVAL_PROCESS_SET t
+		where t.user_id=#{userId} and t.IS_AGREE = '0' and t.bill_fid=#{billFid}
+		order by t.order_by
+		)
+		WHERE ROWNUM = 1;
+	</select>
+
+	<select id="getApprovalProcessSetCheck" resultMap="approvalProcessSetMap">
+		select * from
+		(
+		select t.*
+		from APPROVAL_PROCESS_SET t
+		where t.IS_AGREE = '0' and t.bill_fid=#{billFid}  and t.order_by=#{orderBy}
+		order by t.order_by
+		)
+		WHERE ROWNUM = 1;
+	</select>
+
+
+	<select id="getBillApproveList" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.BillApproveAppProSetVo">
+		select f.*,t.is_agree, t.f_id as approvalProcessSetFid
+		from APPROVAL_PROCESS_SET t
+		inner join bill_approve f on t.bill_fid = f.f_id and (f.is_cancel =0 or f.is_cancel is null) /*and f.APPROVE_STATUS = 1*/
+		<where>
+			<if test="billApprove.approveStatus!=null">
+				f.APPROVE_STATUS = #{billApprove.approveStatus}
+			</if>
+
+			<if test="billApprove.billType!=null">
+				and f.BILL_TYPE = #{billApprove.billType}
+			</if>
+
+			<if test="billApprove.billCod!=null">
+				and f.BILL_COD = #{billApprove.billCod}
+			</if>
+
+			<if test="billApprove.secondNam!=null">
+				and f.SECOND_NAM= #{billApprove.secondNam}
+			</if>
+
+			<if test="billApprove.contNo!=null">
+				and f.CONT_NO= #{billApprove.contNo}
+			</if>
+
+			<if test="billApprove.cargoNam!=null">
+				and f.CARGO_NAM= #{billApprove.cargoNam}
+			</if>
+
+			<if test="billApprove.params != null and billApprove.params.length>0">and bill_dat &gt;= to_date(#{billApprove.params[0]},'yyyy-MM-dd
+				HH24:mi:ss') and bill_dat &lt;= to_date(#{billApprove.params[1]},'yyyy-MM-dd HH24:mi:ss')
+			</if>
+
+			<if test="ids.size>0">
+			and	t.f_id in
+				<foreach collection="ids" item="id" index="index"
+						 open="(" close=")" separator=",">
+					#{id}
+				</foreach>
+			</if>
+
+			<if test="ids.size==0">
+				and process_no = '999'
+			</if>
+
+		</where>
+
+
+
+	</select>
+
+
+	<select id="getBillApproveListForSuccess" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.BillApproveAppProSetVo">
+
+	select lp.*,f.*
+	from
+	(
+	select  t.BILL_FID,
+	t.username,
+	max(t.user_id) as USER_ID,
+	max(t.MAN_NAME) as MAN_NAME
+	from APPROVAL_PROCESS_SET t
+	where t.is_agree = 1 and t.username=#{billApprove.username}
+	group by t.bill_fid,t.username
+	) lp
+	inner join bill_approve f on lp.bill_fid = f.f_id and (f.is_cancel =0 or f.is_cancel is null)
+	<where>
+
+		<if test="billApprove.billType!=null">
+			and f.BILL_TYPE = #{billApprove.billType}
+		</if>
+
+		<if test="billApprove.billCod!=null">
+			and f.BILL_COD = #{billApprove.billCod}
+		</if>
+
+		<if test="billApprove.secondNam!=null">
+			and f.SECOND_NAM= #{billApprove.secondNam}
+		</if>
+
+		<if test="billApprove.contNo!=null">
+			and f.CONT_NO= #{billApprove.contNo}
+		</if>
+
+		<if test="billApprove.cargoNam!=null">
+			and f.CARGO_NAM= #{billApprove.cargoNam}
+		</if>
+
+		<if test="billApprove.params != null and billApprove.params.length>0">and bill_dat &gt;= to_date(#{billApprove.params[0]},'yyyy-MM-dd
+			HH24:mi:ss') and bill_dat &lt;= to_date(#{billApprove.params[1]},'yyyy-MM-dd HH24:mi:ss')
+		</if>
+
+<!--		<if test="ids.size>0">-->
+<!--			and	lp.f_id in-->
+<!--			<foreach collection="ids" item="id" index="index"-->
+<!--					 open="(" close=")" separator=",">-->
+<!--				#{id}-->
+<!--			</foreach>-->
+<!--		</if>-->
+
+<!--		<if test="ids.size==0">-->
+<!--			and process_no = '999'-->
+<!--		</if>-->
+
+	</where>
+	</select>
+
+
+
+	<select id="getBillApproveListSecond" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.BillApproveAppProSetVo">
+		select f.*,t.f_id as approvalProcessSetFid
+		from APPROVAL_PROCESS_SET t
+		inner join bill_approve f on t.bill_fid = f.f_id and f.is_cancel is null /*and f.APPROVE_STATUS = 1*/
+		<where>
+			<if test="billApprove.approveStatus!=null">
+				f.APPROVE_STATUS = #{billApprove.approveStatus}
+			</if>
+
+			<if test="ids!=null">
+				and	t.f_id in
+				<foreach collection="ids" item="id" index="index"
+						 open="(" close=")" separator=",">
+					#{id}
+				</foreach>
+			</if>
+
+		</where>
+
+	</select>
+
+
+
+
+	<update id="updateByIdForNull" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.ApprovalProcessSet">
+		update APPROVAL_PROCESS_SET set OPINION=null, OPINION_EXPLAIN=null, IS_AGREE=null, APPROVER=null, APPROVAL_TIM=null
+		where BILL_FID = #{billFid}
+	</update>
+
+
+
+
+	<select id="selectApprovalProcessSetGroup" resultMap="approvalProcessSetMap" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.ApprovalProcessSet">
+		select * from (SELECT
+		ORDER_BY,
+		wm_concat ( LINK_NAM ) LINK_NAM,
+		wm_concat ( IS_AGREE ) IS_AGREE,
+		wm_concat ( OPINION_EXPLAIN ) OPINION_EXPLAIN
+		FROM
+		BSWL.APPROVAL_PROCESS_SET
+		WHERE
+		1=1
+		<if test="billFid != null and billFid != ''"> and bill_Fid =  #{billFid}</if>
+		<if test="processNo != null and processNo != ''"> and process_No =  #{processNo}</if>
+		GROUP BY
+		ORDER_BY) a order by a.ORDER_BY asc
+	</select>
+
+
+	<select id="getMessageMerge" resultMap="approvalProcessSetMap" >
+		SELECT  process_fid,link_nam,
+		to_char(wm_concat( CONCAT(CONCAT(man_name,(':'||opinion)),to_char(Approval_tim,'yyyy-MM-dd HH24:mm:ss')))) AS opinion
+		FROM approval_process_set WHERE bill_fid = #{fID} group by process_fid,link_nam
+	</select>
+
+	<select id="getApprovalSetList" resultMap="approvalProcessSetMap" >
+		SELECT
+			a1.*
+		FROM
+			APPROVAL_PROCESS_SET a1
+			left join (select
+								bill_fid, min(is_agree) is_agree,order_by from APPROVAL_PROCESS_SET
+								where 1=1
+								group by order_by,bill_fid) a2 on a1.bill_fid = a2.bill_fid
+		WHERE
+			((a1.is_Agree = 0
+			and a2.ORDER_BY = TO_NUMBER(a1.ORDER_BY )-1
+			and a2.IS_AGREE = 1)
+			or (a1.IS_AGREE = 0 and a2.ORDER_BY = 1))
+
+		<if test="billFid != null and billFid != ''"> and a1.bill_Fid =  #{billFid}</if>
+		<if test="processNo != null and processNo != ''"> and a1.process_No =  #{processNo}</if>
+		<if test="username != null and username != ''"> and a1.username =  #{username}</if>
+	</select>
+</mapper>

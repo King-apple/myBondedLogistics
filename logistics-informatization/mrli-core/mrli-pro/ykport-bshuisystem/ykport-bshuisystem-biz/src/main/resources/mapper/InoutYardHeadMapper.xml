@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.InoutYardHeadMapper">
+
+  <resultMap id="inoutYardHeadMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardHead">
+                  <id property="fId" column="F_ID"/>
+                        <result property="inOut" column="IN_OUT"/>
+                        <result property="inoutYardKnd" column="INOUT_YARD_KND"/>
+                        <result property="businessKnd" column="BUSINESS_KND"/>
+                        <result property="inoutYardNam" column="INOUT_YARD_NAM"/>
+                        <result property="inoutYardNo" column="INOUT_YARD_NO"/>
+                        <result property="settledCompany" column="SETTLED_COMPANY"/>
+                        <result property="warehouseNam" column="WAREHOUSE_NAM"/>
+                        <result property="inCustomsDeclaration" column="IN_CUSTOMS_DECLARATION"/>
+                        <result property="inCheckNum" column="IN_CHECK_NUM"/>
+                        <result property="electronicAccountNum" column="ELECTRONIC_ACCOUNT_NUM"/>
+                        <result property="inCategory" column="IN_CATEGORY"/>
+                        <result property="customsBroker" column="CUSTOMS_BROKER"/>
+                        <result property="consignCod" column="CONSIGN_COD"/>
+                        <result property="consignNam" column="CONSIGN_NAM"/>
+                        <result property="outCheckNum" column="OUT_CHECK_NUM"/>
+                        <result property="outCategory" column="OUT_CATEGORY"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="updateNam" column="UPDATE_NAM"/>
+                        <result property="updateTim" column="UPDATE_TIM"/>
+                        <result property="delNam" column="DEL_NAM"/>
+                        <result property="delTim" column="DEL_TIM"/>
+                        <result property="customsBrokerCod" column="CUSTOMS_BROKER_COD"/>
+                        <result property="settledCod" column="SETTLED_COD"/>
+                        <result property="warehouseCod" column="WAREHOUSE_COD"/>
+            </resultMap>
+
+	<select id="getInoutYardNo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardHead">
+		SELECT * FROM (SELECT * FROM BSWL.INOUT_YARD_HEAD where INOUT_YARD_NO like CONCAT(CONCAT('%',#{inoutYardHead}),'%')  ORDER BY INOUT_YARD_NO desc) WHERE ROWNUM = 1;
+	</select>
+
+
+<!--	<select id="getOneDay" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.InoutYardHeadVo">-->
+<!--		select t.*, li.sum_net_wet,li.sum_total_price-->
+<!--		from INOUT_YARD_HEAD t-->
+<!--		left join-->
+<!--		(-->
+<!--			select w.h_fid,nvl(sum(w.net_wet),0) as sum_net_wet,nvl(sum(w.total_price),0) as sum_total_price-->
+<!--			from inout_yard_body w-->
+<!--			where w.DEL_NAM is null-->
+<!--			group by w.h_fid-->
+<!--		) li on li.h_fid = t.f_id-->
+<!--		where t.del_nam is null-->
+<!--		 and t.business_knd = '一日游业务'-->
+<!--		 /*and t.in_out=0*/-->
+<!--		 and t.BUSINESS_CHECK_STATUS = 1-->
+<!--		 and t.OPER_CHECK_STATUS = 1-->
+<!--		 order by t.record_tim-->
+<!--	</select>-->
+
+	<select id="getOneDay" resultType="com.newweb.mrli.ykport.baoshuisystem.vo.InoutYardHeadVo">
+
+<!--select  h.record_tim as in_record_tim,-->
+<!--		h.in_check_num,-->
+<!--		nvl(h.sum_net_wet,0) as in_sum_net_wet,-->
+<!--		h.sum_total_price as in_sum_total_price,-->
+<!--		h.consign_nam,-->
+<!--		nvl(o.record_tim,'') as out_record_tim,-->
+<!--		o.out_check_num as out_out_check_num,-->
+<!--		nvl(o.sum_net_wet,0) as out_sum_net_wet,-->
+<!--		o.sum_total_price as out_sum_total_price,-->
+<!--		o.consign_nam as out_consign_nam-->
+<!--from-->
+<!--(-->
+<!--select t.*, li.sum_net_wet,li.sum_total_price-->
+<!--    from INOUT_YARD_HEAD t-->
+<!--    left join-->
+<!--    (-->
+<!--      select w.h_fid,nvl(sum(w.net_wet),0) as sum_net_wet,nvl(sum(w.total_price),0) as sum_total_price-->
+<!--      from inout_yard_body w-->
+<!--      inner join INOUT_YARD_HEAD s on s.f_id = w.h_fid and s.business_knd = '一日游业务' and s.DEL_NAM is null-->
+<!--      where w.DEL_NAM is null and trim(translate(w.net_wet,'0123456789.',' ')) is null-->
+<!--      group by w.h_fid-->
+<!--    ) li on li.h_fid = t.f_id-->
+<!--    where t.del_nam is null-->
+<!--     and t.business_knd = '一日游业务'-->
+<!--     and t.in_out=1-->
+<!--     and t.BUSINESS_CHECK_STATUS = 1-->
+<!--     and t.OPER_CHECK_STATUS = 1-->
+<!--     order by t.record_tim-->
+<!--) h-->
+<!--left join-->
+<!--(-->
+<!--select t.*, li.sum_net_wet,li.sum_total_price-->
+<!--    from INOUT_YARD_HEAD t-->
+<!--    left join-->
+<!--    (-->
+<!--      select w.h_fid,nvl(sum(w.net_wet),0) as sum_net_wet,nvl(sum(w.total_price),0) as sum_total_price-->
+<!--      from inout_yard_body w-->
+<!--      inner join INOUT_YARD_HEAD s on s.f_id = w.h_fid and s.business_knd = '一日游业务' and s.DEL_NAM is null-->
+<!--      where w.DEL_NAM is null and trim(translate(w.net_wet,'0123456789.',' ')) is null-->
+<!--      group by w.h_fid-->
+<!--    ) li on li.h_fid = t.f_id-->
+<!--    where t.del_nam is null-->
+<!--     and t.business_knd = '一日游业务'-->
+<!--     and t.in_out=0-->
+<!--     and t.BUSINESS_CHECK_STATUS = 1-->
+<!--     and t.OPER_CHECK_STATUS = 1-->
+<!--     order by t.record_tim-->
+<!--) o on h.IN_CHECK_NUM = o.IN_CHECK_NUM-->
+<!--	<where>-->
+<!--		<if test="inoutYardHeadVo.startTime!=null and inoutYardHeadVo.startTime!=''" >-->
+<!--			to_char(h.record_tim,'yyyy-mm-dd') between #{inoutYardHeadVo.startTime} and #{inoutYardHeadVo.endTime}-->
+<!--		</if>-->
+<!--	</where>-->
+
+
+
+		select  h.record_tim as in_record_tim,
+		h.in_check_num,
+		nvl(h.net_wet,0) as in_sum_net_wet,
+		h.total_price as in_sum_total_price,
+		h.h_fid as h_fid_in, h.customs_broker,
+		(select consign_nam from inout_yard_head g where g.f_id=h.h_fid) as consign_nam,
+		--h.consign_nam,
+		nvl(o.record_tim,'') as out_record_tim,
+		o.out_check_num as out_out_check_num,
+		nvl(o.net_wet,0) as out_sum_net_wet,
+		o.total_price as out_sum_total_price,
+		o.h_fid as h_fid_out,
+		(select consign_nam from inout_yard_head g where g.f_id=o.h_fid) as out_consign_nam
+		-- o.consign_nam as out_consign_nam
+		from
+		(
+		select t.*
+		from inout_yard_body t
+		where t.in_out='1'
+		and t.h_fid in
+		(
+		select f.f_id
+		from inout_yard_head f
+		where f.business_knd like '%一日游%'
+		and f.del_nam is null
+		and f.in_out=1
+		)
+
+		order by t.record_tim
+		) h left join
+		(
+		select t.*
+		from inout_yard_body t
+		where t.in_out='0'
+		and t.h_fid in
+		(
+		select f.f_id
+		from inout_yard_head f
+		where f.business_knd like '%一日游%'
+		and f.del_nam is null
+		and f.in_out=0
+		)
+
+		) o on h.IN_CHECK_NUM = o.IN_CHECK_NUM
+
+		<where>
+			<if test="inoutYardHeadVo.startTime!=null and inoutYardHeadVo.startTime!=''" >
+				to_char(h.record_tim,'yyyy-mm-dd') between #{inoutYardHeadVo.startTime} and #{inoutYardHeadVo.endTime}
+			</if>
+		</where>
+
+
+
+
+
+	</select>
+
+
+
+	<select id="getOneDayCount" resultType="java.util.HashMap">
+		select a.m_cnt,b.y_cnt
+		from(
+		select count(1) as m_cnt
+		from
+		(
+		select t.business_knd, t.F_ID, t.in_category, t.in_check_num
+		from INOUT_YARD_HEAD t
+		where t.business_knd like '%一日游%'
+		and t.in_out = '1'
+		and to_char(t.record_tim, 'yyyy-mm') = #{mTime}
+		and t.del_nam is null
+		) lp inner join
+		(
+		select t.business_knd,t.F_ID, t.out_category,t.in_check_num
+		from INOUT_YARD_HEAD t
+		where t.business_knd like '%一日游%'
+		and t.in_out = '0'
+		and to_char(t.record_tim, 'yyyy-mm') = #{mTime}
+		and t.del_nam is null
+		) li on lp.in_check_num = li.in_check_num
+		) a
+		,
+		(
+		select count(1) as y_cnt
+		from
+		(
+		select t.business_knd, t.F_ID, t.in_category, t.in_check_num
+		from INOUT_YARD_HEAD t
+		where t.business_knd like '%一日游%'
+		and t.in_out = '1'
+		and to_char(t.record_tim, 'yyyy-mm') between #{yOldStartTime} and #{yOldEndTime}
+		and t.del_nam is null
+		) lp inner join
+		(
+		select t.business_knd,t.F_ID, t.out_category,t.in_check_num
+		from INOUT_YARD_HEAD t
+		where t.business_knd like '%一日游%'
+		and t.in_out = '0'
+		and to_char(t.record_tim, 'yyyy-mm') between #{yOldStartTime} and #{yOldEndTime}
+		and t.del_nam is null
+		) li on lp.in_check_num = li.in_check_num
+		) b
+	</select>
+
+	<select id="getHeadList" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardHead" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardHead">
+
+		<choose>
+			<when test="inoutYardHead.inCustomsDeclarationStatus != null and inoutYardHead.inCustomsDeclarationStatus != ''">
+				<choose>
+				<when test="inoutYardHead.inCustomsDeclarationStatus == 'success'">
+					select t.F_ID,
+					t.IN_OUT,
+					t.INOUT_YARD_KND,
+					t.BUSINESS_KND,
+					t.INOUT_YARD_NAM,
+					t.INOUT_YARD_NO,
+					t.SETTLED_COMPANY,
+					t.WAREHOUSE_NAM,
+					t.ELECTRONIC_ACCOUNT_NUM,
+					t.IN_CATEGORY,
+					t.CUSTOMS_BROKER,
+					t.CONSIGN_COD,
+					t.CONSIGN_NAM,
+					t.OUT_CATEGORY,
+					t.OPER_NAM,
+					t.RECORD_TIM,
+					t.UPDATE_NAM,
+					t.UPDATE_TIM,
+					t.DEL_NAM,
+					t.DEL_TIM,
+					t.CUSTOMS_BROKER_COD,
+					t.SETTLED_COD,
+					t.WAREHOUSE_COD,
+					t.cont_no,
+					t.BUSINESS_CHECK_STATUS,
+					t.BUSINESS_CHECKER,
+					t.BUSINESS_CHECK_TIM,
+					t.OPER_CHECK_STATUS,
+					t.OPER_CHECKER,
+					t.OPER_CHECK_TIM,
+					t.BUSINESS_TYPE,
+					t.EXPORT_COD,
+					t.c_fid,
+					t.net_wet_sum,
+					s.IN_CUSTOMS_DECLARATION,
+					s.IN_CHECK_NUM,
+					s.OUT_CHECK_NUM,
+					s.countAll,
+
+					b.IN_CUSTOMS_DECLARATION as IN_CUSTOMS_DECLARATION_S,
+					b.IN_CHECK_NUM as IN_CHECK_NUM_S,
+					b.OUT_CHECK_NUM as OUT_CHECK_NUM_S,
+					b.countSecond
+
+					from INOUT_YARD_HEAD t
+					<choose>
+						<when test="(inoutYardHead.inCheckNum!=null and inoutYardHead.inCheckNum!='') || (inoutYardHead.outCheckNum!=null and inoutYardHead.outCheckNum!='') ">
+							inner join
+						</when>
+						<otherwise>
+							left join
+						</otherwise>
+					</choose>
+
+					(
+					select a.f_id ,
+					wm_concat(b.IN_CUSTOMS_DECLARATION) as IN_CUSTOMS_DECLARATION,
+					wm_concat(b.IN_CHECK_NUM) as IN_CHECK_NUM,
+					wm_concat(b.OUT_CHECK_NUM) as OUT_CHECK_NUM,
+					count(1) countAll
+
+					from INOUT_YARD_HEAD a
+					<choose>
+						<when test="(inoutYardHead.inCheckNum!=null and inoutYardHead.inCheckNum!='') || (inoutYardHead.outCheckNum!=null and inoutYardHead.outCheckNum!='') ">
+							inner join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null
+						</when>
+						<otherwise>
+							left join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null
+						</otherwise>
+					</choose>
+
+					<if test="inoutYardHead.inCheckNum != null and inoutYardHead.inCheckNum != ''">
+						and b.IN_CHECK_NUM like concat(concat('%', #{inoutYardHead.inCheckNum}),'%')
+					</if>
+
+					<if test="inoutYardHead.outCheckNum != null and inoutYardHead.outCheckNum != ''">
+						and b.OUT_CHECK_NUM like concat(concat('%', #{inoutYardHead.outCheckNum}),'%')
+					</if>
+
+
+					where a.del_tim is null
+					<if test="inoutYardHead.settledCompany != null">
+						and a.settled_company like concat(concat('%', #{inoutYardHead.settledCompany}),'%')
+					</if>
+
+					<if test="inoutYardHead.inoutYardNo != null">
+						and a.inout_yard_no like concat(concat('%', #{inoutYardHead.inoutYardNo}),'%')
+					</if>
+
+					<if test="inoutYardHead.consignNam != null">
+						and a.consign_nam like concat(concat('%', #{inoutYardHead.consignNam}),'%')
+					</if>
+
+					<if test="inoutYardHead.inOut != null">
+						and a.in_out = #{inoutYardHead.inOut}
+					</if>
+
+					<if test="inoutYardHead.inoutYardKnd != null">
+						and a.INOUT_YARD_KND = #{inoutYardHead.inoutYardKnd}
+					</if>
+
+					<if test="inoutYardHead.startTime != null and inoutYardHead.startTime != ''">
+						and to_char(a.record_tim, 'yyyy-mm-dd') between #{inoutYardHead.startTime} and #{inoutYardHead.endTime}
+					</if>
+
+					<if test="inoutYardHead.businessKnd != null and inoutYardHead.businessKnd != '' ">
+						a.BUSINESS_KND like #{inoutYardHead.businessKnd}
+<!--						<choose>-->
+<!--							<when test="(inoutYardHead.businessKnd == '仓储') ">-->
+<!--								and a.BUSINESS_KND = #{inoutYardHead.businessKnd}-->
+<!--							</when>-->
+<!--							<otherwise>-->
+<!--								and a.BUSINESS_KND like '%一日游%'-->
+<!--							</otherwise>-->
+<!--						</choose>-->
+					</if>
+
+					group by a.f_id
+					) s on s.f_id=t.f_id
+
+					left join
+					(
+					select a.f_id ,
+					wm_concat(b.IN_CUSTOMS_DECLARATION) as IN_CUSTOMS_DECLARATION,
+					wm_concat(b.IN_CHECK_NUM) as IN_CHECK_NUM,
+					wm_concat(b.OUT_CHECK_NUM) as OUT_CHECK_NUM,
+					count(b.CUSTOMS_DECLARATION_USER) countSecond
+
+					from INOUT_YARD_HEAD a
+
+					<choose>
+						<when test="(inoutYardHead.inCheckNum!=null and inoutYardHead.inCheckNum!='') || (inoutYardHead.outCheckNum!=null and inoutYardHead.outCheckNum!='') ">
+							inner join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null and b.CUSTOMS_DECLARATION_USER is not null
+						</when>
+						<otherwise>
+							left join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null and b.CUSTOMS_DECLARATION_USER is not null
+						</otherwise>
+					</choose>
+
+					<if test="inoutYardHead.inCheckNum != null and inoutYardHead.inCheckNum != ''">
+						and b.IN_CHECK_NUM like concat(concat('%', #{inoutYardHead.inCheckNum}),'%')
+					</if>
+
+					<if test="inoutYardHead.outCheckNum != null and inoutYardHead.outCheckNum != ''">
+						and b.OUT_CHECK_NUM like concat(concat('%', #{inoutYardHead.outCheckNum}),'%')
+					</if>
+
+
+
+					where a.del_tim is null
+					<if test="inoutYardHead.settledCompany != null">
+						and a.settled_company like concat(concat('%', #{inoutYardHead.settledCompany}),'%')
+					</if>
+
+					<if test="inoutYardHead.inoutYardNo != null">
+						and a.inout_yard_no like concat(concat('%', #{inoutYardHead.inoutYardNo}),'%')
+					</if>
+
+					<if test="inoutYardHead.consignNam != null">
+						and a.consign_nam like concat(concat('%', #{inoutYardHead.consignNam}),'%')
+					</if>
+
+					<if test="inoutYardHead.inOut != null">
+						and a.in_out = #{inoutYardHead.inOut}
+					</if>
+
+					<if test="inoutYardHead.inoutYardKnd != null">
+						and a.INOUT_YARD_KND = #{inoutYardHead.inoutYardKnd}
+					</if>
+
+					<if test="inoutYardHead.startTime != null and inoutYardHead.startTime != ''">
+						and to_char(a.record_tim, 'yyyy-mm-dd') between #{inoutYardHead.startTime} and #{inoutYardHead.endTime}
+					</if>
+
+					<if test="inoutYardHead.businessKnd != null and inoutYardHead.businessKnd != '' ">
+						a.BUSINESS_KND like #{inoutYardHead.businessKnd}
+<!--						<choose>-->
+<!--							<when test="(inoutYardHead.businessKnd == '仓储') ">-->
+<!--								and a.BUSINESS_KND = #{inoutYardHead.businessKnd}-->
+<!--							</when>-->
+<!--							<otherwise>-->
+<!--								and a.BUSINESS_KND like '%一日游%'-->
+<!--							</otherwise>-->
+<!--						</choose>-->
+					</if>
+
+					group by a.f_id , b.CUSTOMS_DECLARATION_USER
+					) b on b.f_id=t.f_id
+
+
+					where t.del_tim is null and  s.countAll = b.countSecond
+					<if test="inoutYardHead.settledCompany != null">
+						and t.settled_company like concat(concat('%', #{inoutYardHead.settledCompany}),'%')
+					</if>
+
+					<if test="inoutYardHead.inoutYardNo != null">
+						and t.inout_yard_no like concat(concat('%', #{inoutYardHead.inoutYardNo}),'%')
+					</if>
+
+					<if test="inoutYardHead.consignNam != null">
+						and t.consign_nam like concat(concat('%', #{inoutYardHead.consignNam}),'%')
+					</if>
+
+					<if test="inoutYardHead.inOut != null">
+						and t.in_out = #{inoutYardHead.inOut}
+					</if>
+
+					<if test="inoutYardHead.inoutYardKnd != null">
+						and t.INOUT_YARD_KND = #{inoutYardHead.inoutYardKnd}
+					</if>
+
+					<if test="inoutYardHead.startTime != null and inoutYardHead.startTime != ''">
+						and to_char(t.record_tim, 'yyyy-mm-dd') between #{inoutYardHead.startTime} and #{inoutYardHead.endTime}
+					</if>
+
+					<if test="inoutYardHead.businessKnd != null and inoutYardHead.businessKnd != '' ">
+						t.BUSINESS_KND like #{inoutYardHead.businessKnd}
+<!--						<choose>-->
+<!--							<when test="(inoutYardHead.businessKnd == '仓储') ">-->
+<!--								and t.BUSINESS_KND = #{inoutYardHead.businessKnd}-->
+<!--							</when>-->
+<!--							<otherwise>-->
+<!--								and t.BUSINESS_KND like '%一日游%'-->
+<!--							</otherwise>-->
+<!--						</choose>-->
+					</if>
+
+					order by t.record_tim desc
+				</when>
+				<otherwise>
+					select t.F_ID,
+					t.IN_OUT,
+					t.INOUT_YARD_KND,
+					t.BUSINESS_KND,
+					t.INOUT_YARD_NAM,
+					t.INOUT_YARD_NO,
+					t.SETTLED_COMPANY,
+					t.WAREHOUSE_NAM,
+					t.ELECTRONIC_ACCOUNT_NUM,
+					t.IN_CATEGORY,
+					t.CUSTOMS_BROKER,
+					t.CONSIGN_COD,
+					t.CONSIGN_NAM,
+					t.OUT_CATEGORY,
+					t.OPER_NAM,
+					t.RECORD_TIM,
+					t.UPDATE_NAM,
+					t.UPDATE_TIM,
+					t.DEL_NAM,
+					t.DEL_TIM,
+					t.CUSTOMS_BROKER_COD,
+					t.SETTLED_COD,
+					t.WAREHOUSE_COD,
+					t.cont_no,
+					t.BUSINESS_CHECK_STATUS,
+					t.BUSINESS_CHECKER,
+					t.BUSINESS_CHECK_TIM,
+					t.OPER_CHECK_STATUS,
+					t.OPER_CHECKER,
+					t.OPER_CHECK_TIM,
+					t.BUSINESS_TYPE,
+					t.EXPORT_COD,
+					t.c_fid,
+					t.net_wet_sum,
+					s.IN_CUSTOMS_DECLARATION,
+					s.IN_CHECK_NUM,
+					s.OUT_CHECK_NUM
+
+					from INOUT_YARD_HEAD t
+					<choose>
+						<when test="(inoutYardHead.inCheckNum!=null and inoutYardHead.inCheckNum!='') || (inoutYardHead.outCheckNum!=null and inoutYardHead.outCheckNum!='') ">
+							inner join
+						</when>
+						<otherwise>
+							left join
+						</otherwise>
+					</choose>
+
+					(
+					select a.f_id ,
+					wm_concat(b.IN_CUSTOMS_DECLARATION) as IN_CUSTOMS_DECLARATION,
+					wm_concat(b.IN_CHECK_NUM) as IN_CHECK_NUM,
+					wm_concat(b.OUT_CHECK_NUM) as OUT_CHECK_NUM
+					from INOUT_YARD_HEAD a
+					<choose>
+						<when test="(inoutYardHead.inCheckNum!=null and inoutYardHead.inCheckNum!='') || (inoutYardHead.outCheckNum!=null and inoutYardHead.outCheckNum!='') ">
+							inner join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null and b.customs_declaration_user is null
+						</when>
+						<otherwise>
+							left join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null and b.customs_declaration_user is null
+						</otherwise>
+					</choose>
+
+					<if test="inoutYardHead.inCheckNum != null and inoutYardHead.inCheckNum != ''">
+						and b.IN_CHECK_NUM like concat(concat('%', #{inoutYardHead.inCheckNum}),'%')
+					</if>
+
+					<if test="inoutYardHead.outCheckNum != null and inoutYardHead.outCheckNum != ''">
+						and b.OUT_CHECK_NUM like concat(concat('%', #{inoutYardHead.outCheckNum}),'%')
+					</if>
+
+
+					where a.del_tim is null
+					<if test="inoutYardHead.settledCompany != null">
+						and a.settled_company like concat(concat('%', #{inoutYardHead.settledCompany}),'%')
+					</if>
+
+					<if test="inoutYardHead.inoutYardNo != null">
+						and a.inout_yard_no like concat(concat('%', #{inoutYardHead.inoutYardNo}),'%')
+					</if>
+
+					<if test="inoutYardHead.consignNam != null">
+						and a.consign_nam like concat(concat('%', #{inoutYardHead.consignNam}),'%')
+					</if>
+
+					<if test="inoutYardHead.inOut != null">
+						and a.in_out = #{inoutYardHead.inOut}
+					</if>
+
+					<if test="inoutYardHead.inoutYardKnd != null">
+						and a.INOUT_YARD_KND = #{inoutYardHead.inoutYardKnd}
+					</if>
+
+					<if test="inoutYardHead.businessKnd != null and inoutYardHead.businessKnd != '' ">
+						a.BUSINESS_KND like #{inoutYardHead.businessKnd}
+<!--						<choose>-->
+<!--							<when test="(inoutYardHead.businessKnd == '仓储') ">-->
+<!--								and a.BUSINESS_KND = #{inoutYardHead.businessKnd}-->
+<!--							</when>-->
+<!--							<otherwise>-->
+<!--								and a.BUSINESS_KND like '%一日游%'-->
+<!--							</otherwise>-->
+<!--						</choose>-->
+					</if>
+
+					<if test="inoutYardHead.startTime != null and inoutYardHead.startTime != ''">
+						and to_char(a.record_tim, 'yyyy-mm-dd') between #{inoutYardHead.startTime} and #{inoutYardHead.endTime}
+					</if>
+
+					group by a.f_id
+					) s on s.f_id=t.f_id
+					where t.del_tim is null
+					<if test="inoutYardHead.settledCompany != null">
+						and t.settled_company like concat(concat('%', #{inoutYardHead.settledCompany}),'%')
+					</if>
+
+					<if test="inoutYardHead.inoutYardNo != null">
+						and t.inout_yard_no like concat(concat('%', #{inoutYardHead.inoutYardNo}),'%')
+					</if>
+
+					<if test="inoutYardHead.consignNam != null">
+						and t.consign_nam like concat(concat('%', #{inoutYardHead.consignNam}),'%')
+					</if>
+
+					<if test="inoutYardHead.inOut != null">
+						and t.in_out = #{inoutYardHead.inOut}
+					</if>
+
+					<if test="inoutYardHead.inoutYardKnd != null">
+						and t.INOUT_YARD_KND = #{inoutYardHead.inoutYardKnd}
+					</if>
+
+					<if test="inoutYardHead.businessKnd != null and inoutYardHead.businessKnd != '' ">
+						and t.BUSINESS_KND like #{inoutYardHead.businessKnd}
+<!--						<choose>-->
+<!--							<when test="(inoutYardHead.businessKnd == '仓储') ">-->
+<!--								and t.BUSINESS_KND = #{inoutYardHead.businessKnd}-->
+<!--							</when>-->
+<!--							<otherwise>-->
+<!--								and t.BUSINESS_KND like '%一日游%'-->
+<!--							</otherwise>-->
+<!--						</choose>-->
+					</if>
+
+					<if test="inoutYardHead.startTime != null and inoutYardHead.startTime != ''">
+						and to_char(t.record_tim, 'yyyy-mm-dd') between #{inoutYardHead.startTime} and #{inoutYardHead.endTime}
+					</if>
+
+					order by t.record_tim desc
+				</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				select t.F_ID,
+				t.IN_OUT,
+				t.INOUT_YARD_KND,
+				t.BUSINESS_KND,
+				t.INOUT_YARD_NAM,
+				t.INOUT_YARD_NO,
+				t.SETTLED_COMPANY,
+				t.WAREHOUSE_NAM,
+				t.ELECTRONIC_ACCOUNT_NUM,
+				t.IN_CATEGORY,
+				t.CUSTOMS_BROKER,
+				t.CONSIGN_COD,
+				t.CONSIGN_NAM,
+				t.OUT_CATEGORY,
+				t.OPER_NAM,
+				t.RECORD_TIM,
+				t.UPDATE_NAM,
+				t.UPDATE_TIM,
+				t.DEL_NAM,
+				t.DEL_TIM,
+				t.CUSTOMS_BROKER_COD,
+				t.SETTLED_COD,
+				t.WAREHOUSE_COD,
+				t.cont_no,
+				t.BUSINESS_CHECK_STATUS,
+				t.BUSINESS_CHECKER,
+				t.BUSINESS_CHECK_TIM,
+				t.OPER_CHECK_STATUS,
+				t.OPER_CHECKER,
+				t.OPER_CHECK_TIM,
+				t.BUSINESS_TYPE,
+				t.EXPORT_COD,
+				t.c_fid,
+				t.net_wet_sum,
+				s.IN_CUSTOMS_DECLARATION,
+				s.IN_CHECK_NUM,
+				s.OUT_CHECK_NUM
+
+				from INOUT_YARD_HEAD t
+				<choose>
+					<when test="(inoutYardHead.inCheckNum!=null and inoutYardHead.inCheckNum!='') || (inoutYardHead.outCheckNum!=null and inoutYardHead.outCheckNum!='') ">
+						inner join
+					</when>
+					<otherwise>
+						left join
+					</otherwise>
+				</choose>
+
+				(
+				select a.f_id ,
+				wm_concat(b.IN_CUSTOMS_DECLARATION) as IN_CUSTOMS_DECLARATION,
+				wm_concat(b.IN_CHECK_NUM) as IN_CHECK_NUM,
+				wm_concat(b.OUT_CHECK_NUM) as OUT_CHECK_NUM
+				from INOUT_YARD_HEAD a
+				<choose>
+					<when test="(inoutYardHead.inCheckNum!=null and inoutYardHead.inCheckNum!='') || (inoutYardHead.outCheckNum!=null and inoutYardHead.outCheckNum!='') ">
+						inner join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null
+					</when>
+					<otherwise>
+						left join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0 and b.del_nam is null
+					</otherwise>
+				</choose>
+
+				<if test="inoutYardHead.inCheckNum != null and inoutYardHead.inCheckNum != ''">
+					and b.IN_CHECK_NUM like concat(concat('%', #{inoutYardHead.inCheckNum}),'%')
+				</if>
+
+				<if test="inoutYardHead.outCheckNum != null and inoutYardHead.outCheckNum != ''">
+					and b.OUT_CHECK_NUM like concat(concat('%', #{inoutYardHead.outCheckNum}),'%')
+				</if>
+
+
+				where a.del_tim is null
+				<if test="inoutYardHead.settledCompany != null">
+					and a.settled_company like concat(concat('%', #{inoutYardHead.settledCompany}),'%')
+				</if>
+
+				<if test="inoutYardHead.inoutYardNo != null">
+					and a.inout_yard_no like concat(concat('%', #{inoutYardHead.inoutYardNo}),'%')
+				</if>
+
+				<if test="inoutYardHead.consignNam != null">
+					and a.consign_nam like concat(concat('%', #{inoutYardHead.consignNam}),'%')
+				</if>
+
+				<if test="inoutYardHead.inOut != null">
+					and a.in_out = #{inoutYardHead.inOut}
+				</if>
+
+				<if test="inoutYardHead.inoutYardKnd != null">
+					and a.INOUT_YARD_KND = #{inoutYardHead.inoutYardKnd}
+				</if>
+
+				<if test="inoutYardHead.businessKnd != null and inoutYardHead.businessKnd != '' ">
+					and a.BUSINESS_KND like #{inoutYardHead.businessKnd}
+<!--					<choose>-->
+<!--						<when test="(inoutYardHead.businessKnd == '仓储') ">-->
+<!--							and a.BUSINESS_KND = #{inoutYardHead.businessKnd}-->
+<!--						</when>-->
+<!--						<otherwise>-->
+<!--							and a.BUSINESS_KND like '%一日游%'-->
+<!--						</otherwise>-->
+<!--					</choose>-->
+				</if>
+
+				<if test="inoutYardHead.startTime != null and inoutYardHead.startTime != ''">
+					and to_char(a.record_tim, 'yyyy-mm-dd') between #{inoutYardHead.startTime} and #{inoutYardHead.endTime}
+				</if>
+
+				group by a.f_id
+				) s on s.f_id=t.f_id
+				where t.del_tim is null
+				<if test="inoutYardHead.settledCompany != null">
+					and t.settled_company like concat(concat('%', #{inoutYardHead.settledCompany}),'%')
+				</if>
+
+				<if test="inoutYardHead.inoutYardNo != null">
+					and t.inout_yard_no like concat(concat('%', #{inoutYardHead.inoutYardNo}),'%')
+				</if>
+
+				<if test="inoutYardHead.consignNam != null">
+					and t.consign_nam like concat(concat('%', #{inoutYardHead.consignNam}),'%')
+				</if>
+
+				<if test="inoutYardHead.inOut != null">
+					and t.in_out = #{inoutYardHead.inOut}
+				</if>
+
+				<if test="inoutYardHead.inoutYardKnd != null">
+					and t.INOUT_YARD_KND = #{inoutYardHead.inoutYardKnd}
+				</if>
+
+				<if test="inoutYardHead.businessKnd != null and inoutYardHead.businessKnd != '' ">
+					and t.BUSINESS_KND like #{inoutYardHead.businessKnd}
+<!--					<choose>-->
+<!--						<when test="(inoutYardHead.businessKnd == '仓储') ">-->
+<!--							and t.BUSINESS_KND = #{inoutYardHead.businessKnd}-->
+<!--						</when>-->
+<!--						<otherwise>-->
+<!--							and t.BUSINESS_KND like '%一日游%'-->
+<!--						</otherwise>-->
+<!--					</choose>-->
+				</if>
+
+				<if test="inoutYardHead.startTime != null and inoutYardHead.startTime != ''">
+					and to_char(t.record_tim, 'yyyy-mm-dd') between #{inoutYardHead.startTime} and #{inoutYardHead.endTime}
+				</if>
+
+				order by t.record_tim desc
+			</otherwise>
+		</choose>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</select>
+
+	<select id="getHeadForDetail" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardHead" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.InoutYardHead">
+
+		select t.F_ID,
+		t.IN_OUT,
+		t.INOUT_YARD_KND,
+		t.BUSINESS_KND,
+		t.INOUT_YARD_NAM,
+		t.INOUT_YARD_NO,
+		t.SETTLED_COMPANY,
+		t.WAREHOUSE_NAM,
+		t.ELECTRONIC_ACCOUNT_NUM,
+		t.IN_CATEGORY,
+		t.CUSTOMS_BROKER,
+		t.CONSIGN_COD,
+		t.CONSIGN_NAM,
+		t.OUT_CATEGORY,
+		t.OPER_NAM,
+		t.RECORD_TIM,
+		t.UPDATE_NAM,
+		t.UPDATE_TIM,
+		t.DEL_NAM,
+		t.DEL_TIM,
+		t.CUSTOMS_BROKER_COD,
+		t.SETTLED_COD,
+		t.WAREHOUSE_COD,
+		t.cont_no,
+		t.BUSINESS_CHECK_STATUS,
+		t.BUSINESS_CHECKER,
+		t.BUSINESS_CHECK_TIM,
+		t.OPER_CHECK_STATUS,
+		t.OPER_CHECKER,
+		t.OPER_CHECK_TIM,
+		t.BUSINESS_TYPE,
+		t.EXPORT_COD,
+
+		t.UNIT_PRICE_KND,
+		t.UNIT,
+		t.NET_WET_UNIT,
+
+		t.c_fid,
+		s.IN_CUSTOMS_DECLARATION,
+		s.IN_CHECK_NUM,
+		s.OUT_CHECK_NUM
+
+		from INOUT_YARD_HEAD t
+		left join
+		(
+		select a.f_id ,
+		wm_concat(b.IN_CUSTOMS_DECLARATION) as IN_CUSTOMS_DECLARATION,
+		wm_concat(b.IN_CHECK_NUM) as IN_CHECK_NUM,
+		wm_concat(b.OUT_CHECK_NUM) as OUT_CHECK_NUM
+		from INOUT_YARD_HEAD a
+		left join INOUT_YARD_BODY b on INSTR(a.f_id, b.h_fid) > 0
+		where a.del_tim is null and a.f_id=#{inoutYardHead.fId}
+
+
+		group by a.f_id
+		) s on s.f_id=t.f_id
+		where t.del_tim is null and t.f_id=#{inoutYardHead.fId}
+
+
+		order by t.record_tim desc
+	</select>
+
+
+</mapper>

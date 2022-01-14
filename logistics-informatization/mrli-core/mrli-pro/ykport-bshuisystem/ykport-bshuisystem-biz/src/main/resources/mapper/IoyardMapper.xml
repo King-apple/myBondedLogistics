@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~
+  ~      Copyright (c) 2018-2025, mrli All rights reserved.
+  ~
+  ~  Redistribution and use in source and binary forms, with or without
+  ~  modification, are permitted provided that the following conditions are met:
+  ~
+  ~ Redistributions of source code must retain the above copyright notice,
+  ~  this list of conditions and the following disclaimer.
+  ~  Redistributions in binary form must reproduce the above copyright
+  ~  notice, this list of conditions and the following disclaimer in the
+  ~  documentation and/or other materials provided with the distribution.
+  ~  Neither the name of the pig4cloud.com developer nor the names of its
+  ~  contributors may be used to endorse or promote products derived from
+  ~  this software without specific prior written permission.
+  ~  Author: mrli
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.newweb.mrli.ykport.baoshuisystem.mapper.IoyardMapper">
+
+  <resultMap id="ioyardMap" type="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+                  <id property="unitCod" column="UNIT_COD"/>
+                        <result property="ioyardDte" column="IOYARD_DTE"/>
+                        <result property="classId" column="CLASS_ID"/>
+                        <result property="ioyardNo" column="IOYARD_NO"/>
+                        <result property="tallySeqNo" column="TALLY_SEQ_NO"/>
+                        <result property="inoutYardNo" column="INOUT_YARD_NO"/>
+                        <result property="subunitCod" column="SUBUNIT_COD"/>
+                        <result property="subunitNam" column="SUBUNIT_NAM"/>
+                        <result property="shipNo" column="SHIP_NO"/>
+                        <result property="shipNam" column="SHIP_NAM"/>
+                        <result property="billNo" column="BILL_NO"/>
+                        <result property="inShipNo" column="IN_SHIP_NO"/>
+                        <result property="inShipNam" column="IN_SHIP_NAM"/>
+                        <result property="inoutId" column="INOUT_ID"/>
+                        <result property="tradeId" column="TRADE_ID"/>
+                        <result property="trainNo" column="TRAIN_NO"/>
+                        <result property="trainCod" column="TRAIN_COD"/>
+                        <result property="ioyardId" column="IOYARD_ID"/>
+                        <result property="inYardWay" column="IN_YARD_WAY"/>
+                        <result property="inPortWay" column="IN_PORT_WAY"/>
+                        <result property="firstInDte" column="FIRST_IN_DTE"/>
+                        <result property="outYardWay" column="OUT_YARD_WAY"/>
+                        <result property="outPortWay" column="OUT_PORT_WAY"/>
+                        <result property="yardNo" column="YARD_NO"/>
+                        <result property="yardNam" column="YARD_NAM"/>
+                        <result property="locNo" column="LOC_NO"/>
+                        <result property="consignCod" column="CONSIGN_COD"/>
+                        <result property="consignNam" column="CONSIGN_NAM"/>
+                        <result property="shipperCod" column="SHIPPER_COD"/>
+                        <result property="shipperDoc" column="SHIPPER_DOC"/>
+                        <result property="cargoNo" column="CARGO_NO"/>
+                        <result property="cargoKindCod" column="CARGO_KIND_COD"/>
+                        <result property="cargoKindNam" column="CARGO_KIND_NAM"/>
+                        <result property="cargoNamCod" column="CARGO_NAM_COD"/>
+                        <result property="cargoNam" column="CARGO_NAM"/>
+                        <result property="pkgKindCod" column="PKG_KIND_COD"/>
+                        <result property="cPkgKindNam" column="C_PKG_KIND_NAM"/>
+                        <result property="format" column="FORMAT"/>
+                        <result property="piecesNum" column="PIECES_NUM"/>
+                        <result property="piecesWgt" column="PIECES_WGT"/>
+                        <result property="weightWgt" column="WEIGHT_WGT"/>
+                        <result property="cargoVol" column="CARGO_VOL"/>
+                        <result property="oldYardNo" column="OLD_YARD_NO"/>
+                        <result property="oldYardNam" column="OLD_YARD_NAM"/>
+                        <result property="oldLocNo" column="OLD_LOC_NO"/>
+                        <result property="oldPkgKindCod" column="OLD_PKG_KIND_COD"/>
+                        <result property="oldCPkgKindNam" column="OLD_C_PKG_KIND_NAM"/>
+                        <result property="oldFormat" column="OLD_FORMAT"/>
+                        <result property="oldPiecesNum" column="OLD_PIECES_NUM"/>
+                        <result property="oldPiecesWgt" column="OLD_PIECES_WGT"/>
+                        <result property="oldWeightWgt" column="OLD_WEIGHT_WGT"/>
+                        <result property="oldCargoVol" column="OLD_CARGO_VOL"/>
+                        <result property="feeId" column="FEE_ID"/>
+                        <result property="ifendId" column="IFEND_ID"/>
+                        <result property="endTim" column="END_TIM"/>
+                        <result property="remarkTxt" column="REMARK_TXT"/>
+                        <result property="operNam" column="OPER_NAM"/>
+                        <result property="recordTim" column="RECORD_TIM"/>
+                        <result property="proveNo" column="PROVE_NO"/>
+                        <result property="inProveNo" column="IN_PROVE_NO"/>
+                        <result property="changeId" column="CHANGE_ID"/>
+                        <result property="outTrainCod" column="OUT_TRAIN_COD"/>
+                        <result property="inTrainNo" column="IN_TRAIN_NO"/>
+                        <result property="inTrainCod" column="IN_TRAIN_COD"/>
+                        <result property="teleNo" column="TELE_NO"/>
+                        <result property="sanothNam" column="SANOTH_NAM"/>
+                        <result property="stationNam" column="STATION_NAM"/>
+                        <result property="contNo" column="CONT_NO"/>
+                        <result property="inYardNo" column="IN_YARD_NO"/>
+                        <result property="inInoutId" column="IN_INOUT_ID"/>
+                        <result property="inTradeId" column="IN_TRADE_ID"/>
+                        <result property="inContNo" column="IN_CONT_NO"/>
+                        <result property="inBillNo" column="IN_BILL_NO"/>
+                        <result property="washId" column="WASH_ID"/>
+                        <result property="modiPortTxt" column="MODI_PORT_TXT"/>
+                        <result property="carNo" column="CAR_NO"/>
+                        <result property="steelNo" column="STEEL_NO"/>
+                        <result property="colorId" column="COLOR_ID"/>
+                        <result property="material" column="MATERIAL"/>
+                        <result property="tradeContNo" column="TRADE_CONT_NO"/>
+                        <result property="steelSeqNo" column="STEEL_SEQ_NO"/>
+                        <result property="jfDteIn" column="JF_DTE_IN"/>
+                        <result property="jfDteOut" column="JF_DTE_OUT"/>
+	  					<result property="detailFlag" column="DETAIL_FLAG"/>
+            </resultMap>
+
+	<insert id="insertOutStroge" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		INSERT INTO ioyard
+		(
+			SELECT
+				*
+			FROM
+				ioyard
+		WHERE
+			INOUT_YARD_NO = #{inStrogeCode}
+			)
+	</insert>
+
+	<select id="getIoyardVo" parameterType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard"
+			resultType="com.newweb.mrli.ykport.baoshuisystem.vo.IoyardVo">
+		SELECT
+			i.IOYARD_ID inIoyardId,
+			o.IOYARD_ID outIoyardId,
+			i.IOYARD_DTE inIoyardDte,
+			i.PIECES_NUM inPiecesNum,
+			i.WEIGHT_WGT inWeightWgt,
+			i.IOYARD_NO inIoyardNo,
+			o.IOYARD_DTE outIoyardDte,
+			o.PIECES_NUM outPiecesNum,
+			o.WEIGHT_WGT outWeightWgt,
+			o.IOYARD_NO outIoyardNo,
+			i.CONSIGN_NAM,
+			i.CARGO_NAM,
+			i.C_PKG_KIND_NAM,
+			i.yard_no,
+			o.REMARK_TXT,
+			o.RECORD_TIM,
+			o.OPER_NAM,
+			o.INOUT_YARD_NO,
+			i.in_yard_way inYardWay,
+			o.out_yard_way outYardWay,
+			i.SHIP_NAM shipNam
+		FROM
+			IOYARD i
+			LEFT JOIN IOYARD o ON i.INOUT_YARD_NO = o.IN_YARD_NO
+		WHERE
+			i.IOYARD_ID = 1
+			AND o.IOYARD_ID = 0
+			and o.detail_flag is null
+			and o.CONT_NO = #{contNo}
+	</select>
+	<select id="getContNo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		select DISTINCT CONT_NO from ioyard t WHERE CONT_NO IS NOT NULL
+	</select>
+	<select id="getShip" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		select distinct SHIP_NAM from ioyard t WHERE SHIP_NAM IS NOT NULL
+	</select>
+	<select id="getCargo" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		select DISTINCT CARGO_NAM from ioyard t WHERE CARGO_NAM IS NOT NULL
+	</select>
+
+	<select id="getConSign" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		select DISTINCT CONSIGN_NAM from ioyard t WHERE CONSIGN_NAM IS NOT NULL
+	</select>
+
+	<select id="getBillNO" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		select DISTINCT BILL_NO from ioyard t WHERE BILL_NO IS NOT NULL
+	</select>
+	<select id="getCustomsDeclaration" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		select DISTINCT CUSTOMS_DECLARATION from ioyard t WHERE CUSTOMS_DECLARATION IS NOT NULL
+	</select>
+
+	<select id="getAll" resultType="com.newweb.mrli.ykport.baoshuisystem.entity.Ioyard">
+		select SUM(WEIGHT_WGT) AS WEIGHT_WGT,
+		SUM(pieces_Num) AS pieces_Num ,
+		SUM(SURPLUS_WEIGHT) SURPLUS_WEIGHT,
+		SUM(SURPLUS_PIECE_NUM)  SURPLUS_PIECE_NUM
+		from ioyard t WHERE 1=1 AND IOYARD_ID = '1'
+		<if test="ioYard.contNo != null and ioYard.contNo != ''">
+			and cont_no = #{ioYard.contNo}
+		</if>
+		<if test="ioYard.cargoNam != null and ioYard.cargoNam != ''">
+			and cargo_nam = #{ioYard.cargoNam}
+		</if>
+		<if test="ioYard.consignNam != null and ioYard.consignNam != ''">
+			and consign_nam = #{ioYard.consignNam}
+		</if>
+		<if test="ioYard.shipNam != null and ioYard.shipNam != ''">
+			and ship_nam = #{ioYard.shipNam}
+		</if>
+		<if test="ioYard.customsDeclaration != null and ioYard.customsDeclaration != ''">
+			and CUSTOMS_DECLARATION = #{ioYard.customsDeclaration}
+		</if>
+		<if test="ioYard.billNO != null and ioYard.billNO != ''">
+			and BILL_NO = #{ioYard.billNO}
+		</if>
+		<if test="parse != null ">
+			and IOYARD_DTE >= to_timestamp(#{parse},'yyyy-MM-dd HH24:mi:ss:ff6') and IOYARD_DTE &lt;= to_timestamp(#{parse1},'yyyy-MM-dd HH24:mi:ss:ff6')
+		</if>
+
+	</select>
+</mapper>
